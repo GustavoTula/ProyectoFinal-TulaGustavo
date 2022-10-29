@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import aceites, inicio, lista_personal, nosotros, noticias, personal, vino , lista_vino , espumante , lista_espumante , aceite , lista_aceite, vinos, espumantes
+from .views import aceites, equipo, inicio, lista_personal, nosotros, noticias, personal, vino , lista_vino , espumante , lista_espumante , aceite , lista_aceite, vinos, espumantes
 
 urlpatterns = [
     path('agrega-vino/<nombre>/<varietal>/<añada>', vino),
@@ -16,7 +16,7 @@ urlpatterns = [
     path('vinos/', vinos, name="Vinos"),
     path('espumantes/', espumantes, name="Espumantes"),
     path('aceites/', aceites, name="Aceites"),
-    path('equipo/', personal, name="Personal"),
+    path('equipo/', equipo, name="Equipo"),
     path('noticias/', noticias, name="Noticias"),
 
 ]
