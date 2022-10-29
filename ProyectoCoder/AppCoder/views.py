@@ -9,31 +9,31 @@ def vino (request,nombre,varietal,añada):
 
 def lista_vino(request):
     lista= Vino.objects.all()
-    return render(request, "Lista_vinos.html", {"lista_vinos": lista})
+    return render(request, "Lista_vino.html", {"lista_vino": lista})
 
 
 
 
-def espumantes(request,nombre,varietal,añada):
-    espumantes = Espumantes(nombre=nombre, varietal=varietal,añada=añada)
-    espumantes.save()
-    return render (request,"espumantes.html")
+def espumante(request,nombre,varietal,añada):
+    espumante = Espumantes(nombre=nombre, varietal=varietal,añada=añada)
+    espumante.save()
+    return render (request,"espumante.html")
 
-def lista_espumantes(request):
+def lista_espumante(request):
     lista1 = Espumantes.objects.all()
-    return render(request, "Lista_espumantes.html", {"lista_espumantes": lista1})
+    return render(request, "Lista_espumante.html", {"lista_espumante": lista1})
 
 
 
 
-def aceites(request,nombre,varietal):
-    aceites = Aceite(nombre=nombre, varietal=varietal)
-    aceites.save()
+def aceite(request,nombre,varietal):
+    aceite = Aceite(nombre=nombre, varietal=varietal)
+    aceite.save()
     return render (request,"aceite.html")
 
-def lista_aceites(request):
+def lista_aceite(request):
     lista2 = Aceite.objects.all()
-    return render(request, "Lista_aceites.html", {"lista_aceites": lista2})
+    return render(request, "Lista_aceite.html", {"lista_aceite": lista2})
 
 
 
@@ -45,3 +45,26 @@ def personal(request,nombre,apellido,cargo,email):
 def lista_personal(request):
     lista3 = Personal.objects.all()
     return render(request,"Lista_personal", {"lista_personal":lista3})
+
+
+def inicio(request):
+    return render(request, "inicio.html")
+
+def nosotros(request):
+    return render(request, "nosotros.html")
+
+def vinos(request):
+    return render(request, "vinos.html")
+
+def espumantes(request):
+    return render(request, "espumantes.html")
+
+def aceites(request):
+    return render(request, "aceites.html")
+
+def equipo(request):
+    return render(request, "miembros.html")
+
+def noticias(request):
+    return noticias(request,"noticias.html")
+

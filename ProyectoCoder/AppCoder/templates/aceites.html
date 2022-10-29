@@ -1,0 +1,34 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h1>Un Aceite que deleita nuestras sentidos</h1>    
+
+<h2>Informacion sobre el Aceite</h2>    
+
+<h5>Su nivel de acidez es muy reducido, 
+un máximo de 0.8 gramos de ácido oleico por cada 100 gramos de aceite. 
+Suele tener un sabor afrutado medio o intenso con un leve toque amargo y picante;
+al fin y al cabo estos son los tres atributos positivos del aceite. 
+Su color suele ser de un verde intenso.</h5>
+
+
+<ul>
+
+    {% for aceite in lista_aceite %}
+     <li>{{vino.nombre}} - {{vino.varietal}}</li> 
+    {% endfor %}
+
+</ul>
+
+        
+{% endblock contenidoQueCambia %}
+
+
+
+
+
+
+
+    

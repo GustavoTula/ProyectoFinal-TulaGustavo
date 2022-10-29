@@ -1,0 +1,18 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h1>Vinos para olvidar las penas</h1>
+<h2>Lista de Vinos con sus respectivas caracteristicas</h2>
+
+<ul>
+    
+    {% for vino in lista_vino %}
+     <li>{{vino.nombre}} - {{vino.varietal}} - {{vino.añada}}</li> 
+    {% endfor %}
+        
+</ul>
+
+        
+{% endblock contenidoQueCambia %}
