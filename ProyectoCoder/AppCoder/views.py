@@ -63,8 +63,8 @@ def aceites(request):
     return render(request, "aceites.html")
 
 def equipo(request):
-    return render(request, "miembros.html")
+    return render(request, "equipo.html")
 
 def noticias(request):
-    return noticias(request,"noticias.html")
+    return render(request,"noticias.html")
 
