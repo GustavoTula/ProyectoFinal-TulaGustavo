@@ -12,9 +12,10 @@ que nos motiva a seguir trabajando por nuestros objetivos, gracias.<h3>
 <ul>
     
     {% for personal in lista_personal  %}
-    <li>{{personal.nombre}} - {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li>
+    <li>{{personal.nombre}} {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li>
     {% endfor %}
         
 </ul>
-        
+<a href="{% url 'EquipoFormulario' %}">Agregar Equipo</a>
+
 {% endblock contenidoQueCambia %}

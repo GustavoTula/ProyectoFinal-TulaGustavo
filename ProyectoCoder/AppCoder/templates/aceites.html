@@ -12,11 +12,11 @@ Casa del padre, viña del abuelo y olivar del bisabuelo</h2>
 <ul>
 
     {% for aceite in lista_aceite %}
-     <li>{{vino.nombre}} - {{vino.varietal}}</li> 
+     <li>{{aceite.nombre}} - {{aceite.varietal}}</li> 
     {% endfor %}
 
 </ul>
-
+<a href="{% url 'AceiteFormulario' %}">Agregar Aceite</a>
         
 {% endblock contenidoQueCambia %}
 

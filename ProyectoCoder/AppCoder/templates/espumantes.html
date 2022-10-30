@@ -11,12 +11,13 @@ cuando estoy enamorada y cuando no lo estoy</h4>
     
 <ul>
     
-    {% for espumante in lista_espumante  %}
+    {% for espumante in lista_espumante %}
         <li>{{espumante.nombre}} - {{espumante.varietal}} - {{espumante.añada}}</li>
     {% endfor %}
         
 </ul>
 
+<a href="{% url 'EspumanteFormulario' %}">Agregar Espumante</a>
 
         
 {% endblock contenidoQueCambia %}

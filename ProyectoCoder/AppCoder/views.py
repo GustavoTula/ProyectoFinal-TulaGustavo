@@ -55,16 +55,20 @@ def nosotros(request):
     return render(request, "nosotros.html")
 
 def vinos(request):
-    return render(request, "vinos.html")
+    lista= Vino.objects.all()
+    return render(request, "vinos.html", {"lista_vinos":lista})
 
 def espumantes(request):
-    return render(request, "espumantes.html")
+    lista1 = Espumante.objects.all()
+    return render(request, "espumantes.html",{"lista_espumante":lista1})
 
 def aceites(request):
-    return render(request, "aceites.html")
+    lista2 = Aceite.objects.all()
+    return render(request, "aceites.html", {"lista_aceite":lista2})
 
 def equipo(request):
-    return render(request, "equipo.html")
+    lista3 = Personal.objects.all()
+    return render(request, "equipo.html", {"lista_personal":lista3})
 
 def noticias(request):
     return render(request,"noticias.html")

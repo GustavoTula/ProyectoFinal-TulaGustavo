@@ -8,11 +8,11 @@
 
 <ul>
     
-    {% for vino in lista_vino %}
+    {% for vino in lista_vinos %}
      <li>{{vino.nombre}} - {{vino.varietal}} - {{vino.añada}}</li> 
     {% endfor %}
         
 </ul>
-
+<a href="{% url 'VinoFormulario' %}">Agregar Vino</a>
         
 {% endblock contenidoQueCambia %}
