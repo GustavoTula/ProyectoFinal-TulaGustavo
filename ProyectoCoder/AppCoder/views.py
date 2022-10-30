@@ -127,7 +127,7 @@ def espumanteFormulario(request):
             espumante.save()
             return redirect("Espumantes")
     else:
-        miFormulario=AceiteFormulario()
+        miFormulario=EspumanteFormulario()
 
     return render(request, "espumanteFormulario.html", {"miFormulario":miFormulario})
 
