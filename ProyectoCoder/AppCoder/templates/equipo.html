@@ -4,18 +4,20 @@
 {% block contenidoQueCambia %}
 
 
-<h3>Tu equipo ve en ti una persona de confianza 
-que nos motiva a seguir trabajando por nuestros objetivos, gracias.<h3>
+<h1>Tu equipo ve en ti una persona de confianza 
+que nos motiva a seguir trabajando por nuestros objetivos, gracias.<h1>
+<h3>Añadir al grupo de trabajo a quienes correspondan: </h3>
 
-<h4>Miembros que conforman este grandioso equipo:</h4>
 
-<ul>
-    
-    {% for personal in lista_personal  %}
-    <li>{{personal.nombre}} {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li>
-    {% endfor %}
+<form action= "{% url 'Equipo' %}" method="POST">{% csrf_token %}
         
-</ul>
-<a href="{% url 'EquipoFormulario' %}">Agregar Equipo</a>
+        {{ miFormulario.as_p }}
+    
+        <input type="submit" value="Enviar"/>
+    
+    
+ </form>
+
+<a href="{% url 'Lista-Personal' %}">Verificar personal</a>
 
 {% endblock contenidoQueCambia %}

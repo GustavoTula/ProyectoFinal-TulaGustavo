@@ -4,15 +4,16 @@
 {% block contenidoQueCambia %}
 
 <h1>Vinos para olvidar las penas</h1>
-<h2>Lista de Vinos con sus respectivas caracteristicas:</h2>
+<h2>Podra agregar vinos a su cava con el siguiente formulario:</h2>
 
-<ul>
-    
-    {% for vino in lista_vinos %}
-     <li>{{vino.nombre}} - {{vino.varietal}} - {{vino.añada}}</li> 
-    {% endfor %}
+<form action= "{% url 'Vinos' %}" method="POST">{% csrf_token %}
         
-</ul>
-<a href="{% url 'VinoFormulario' %}">Agregar Vino</a>
-        
+    {{ miFormulario.as_p }}
+
+    <input type="submit" value="Enviar"/>
+
+
+</form>
+
+<a href="{% url 'Lista-Vinos' %}">Vinos en Cava</a>        
 {% endblock contenidoQueCambia %}

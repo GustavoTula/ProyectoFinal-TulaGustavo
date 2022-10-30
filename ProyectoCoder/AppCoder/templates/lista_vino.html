@@ -3,8 +3,9 @@
 
 {% block contenidoQueCambia %}
 
+<h1>Vinos para olvidar las penas</h1>
+<h5> A continuacion vera reflejado los vinos en disposicion: </h5>
 
-   <h1>Vinos para olvidar las penas</h1>
 <ul>
     
     {% for vino in lista_vino  %}
@@ -12,5 +13,5 @@
     {% endfor %}
 
 </ul>
-        
+<a href="{% url 'Vinos' %}">Agregar vino</a>      
 {% endblock contenidoQueCambia %}

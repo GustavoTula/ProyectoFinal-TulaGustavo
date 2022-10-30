@@ -3,21 +3,23 @@
 
 {% block contenidoQueCambia %}
 
-<h1>Informacion sobre los Espumantes</h1>
+<h1>Solo bebo champagne en dos ocasiones, cuando estoy enamorada y cuando no lo estoy</h1>
+<h4>Sume a su coleccion de espumantes a traves del siguiente formulario:</h4>
 
-<h4>Solo bebo champagne en dos ocasiones: 
-cuando estoy enamorada y cuando no lo estoy</h4>
-<h5>Lista de espumantes para enamorarse: </h5>
-    
-<ul>
-    
-    {% for espumante in lista_espumante %}
-        <li>{{espumante.nombre}} - {{espumante.varietal}} - {{espumante.añada}}</li>
-    {% endfor %}
+
+<form action= "{% url 'Espumantes' %}" method="POST">{% csrf_token %}
         
-</ul>
+    {{ miFormulario.as_p }}
 
-<a href="{% url 'EspumanteFormulario' %}">Agregar Espumante</a>
+    <input type="submit" value="Enviar"/>
+
+
+</form>
+
+    
+
+
+<a href="{% url 'Lista-Espumantes' %}">Espumantes disponibles</a>
 
         
 {% endblock contenidoQueCambia %}

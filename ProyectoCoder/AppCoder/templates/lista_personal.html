@@ -4,8 +4,9 @@
 {% block contenidoQueCambia %}
 
 
-<h4>Gracias a tu buena toma de decisiones y la eficiencia de tu trabajo, 
-este equipo ha crecido y hemos impulsado a la empresa a nuevos niveles<h4>
+<h1>Gracias a tu buena toma de decisiones y la eficiencia de tu trabajo, 
+este equipo ha crecido y hemos impulsado a la empresa a nuevos niveles<h1>
+<h3>Miembros que conforman este grandioso equipo:</h3>
 
 <ul>
     
@@ -14,5 +15,5 @@ este equipo ha crecido y hemos impulsado a la empresa a nuevos niveles<h4>
     {% endfor %}
         
 </ul>
-        
+<a href="{% url 'Equipo' %}">Agregar mas miembros</a>       
 {% endblock contenidoQueCambia %}
