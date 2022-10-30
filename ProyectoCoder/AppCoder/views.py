@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Vino , Espumantes , Aceite , Personal
+from .models import Vino , Espumante , Aceite , Personal
+from .forms import VinoFormulario , EspumanteFormulario , AceiteFormulario , PersonalFormulario
 
 def vino (request,nombre,varietal,añada):
     vino = Vino(nombre=nombre, varietal=varietal,añada=añada)
@@ -15,12 +16,12 @@ def lista_vino(request):
 
 
 def espumante(request,nombre,varietal,añada):
-    espumante = Espumantes(nombre=nombre, varietal=varietal,añada=añada)
+    espumante = Espumante(nombre=nombre, varietal=varietal,añada=añada)
     espumante.save()
     return render (request,"espumante.html")
 
 def lista_espumante(request):
-    lista1 = Espumantes.objects.all()
+    lista1 = Espumante.objects.all()
     return render(request, "Lista_espumante.html", {"lista_espumante": lista1})
 
 
@@ -67,4 +68,82 @@ def equipo(request):
 
 def noticias(request):
     return render(request,"noticias.html")
+
+def vinoFormulario(request):
+    if request.method == 'POST':    
+        miFormulario = VinoFormulario(request.POST)
+        print(miFormulario)
+
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            vino = Vino(nombre=data['vino'], varietal=data['varietal'], añada=data['añada'])
+            vino.save()
+            return redirect("Vinos")
+    else:
+        miFormulario=VinoFormulario()
+
+    return render(request, "vinoFormulario.html", {"miFormulario":miFormulario})
+
+def busquedaVarietal(request):
+    return render(request, "busquedaVarietal.html")
+def buscar(request):
+    if request.GET["varietal"]:
+        varietal = request.GET['varietal']
+        vinos = Vino.objects.filter(varietal__icontains=varietal)
+        añada = Vino.objects.filter(varietal__icontains=varietal)
+
+        return render(request, "resultadoBusqueda.html", {"vinos":vinos, "varietal":varietal , "añada":añada})
+    else:
+
+        respuesta = "No enviaste datos"    
+
+    return HttpResponse(respuesta)
+
+
+
+def aceiteFormulario(request):
+    if request.method == 'POST':    
+        miFormulario = AceiteFormulario(request.POST)
+        print(miFormulario)
+
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            aceite = Aceite(nombre=data['aceite'], varietal=data['varietal'])
+            aceite.save()
+            return redirect("Aceites")
+    else:
+        miFormulario=AceiteFormulario()
+
+    return render(request, "aceiteFormulario.html", {"miFormulario":miFormulario})
+
+def espumanteFormulario(request):
+    if request.method == 'POST':    
+        miFormulario = EspumanteFormulario(request.POST)
+        print(miFormulario)
+
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            espumante = Espumante(nombre=data['espumante'], varietal=data['varietal'] , añada=data['añada'])
+            espumante.save()
+            return redirect("Espumantes")
+    else:
+        miFormulario=AceiteFormulario()
+
+    return render(request, "espumanteFormulario.html", {"miFormulario":miFormulario})
+
+def equipoFormulario(request):
+    if request.method == 'POST':    
+        miFormulario = PersonalFormulario(request.POST)
+        print(miFormulario)
+
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            personal = Personal(nombre=data['nombre'], apellido=data['apellido'] , cargo=data['cargo'],email=data['email'])
+            personal.save()
+            return redirect("Equipo")
+    else:
+        miFormulario=PersonalFormulario()
+
+    return render(request, "equipoFormulario.html", {"miFormulario":miFormulario})
+
 

@@ -1,0 +1,23 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+<p> Estamos buscando el: {{varietal}}</p>
+
+
+{% if vinos %}
+
+<ul>
+{% for vino in vinos  %}
+    
+    <li> {{vino.nombre}}</li>
+    <li> {{vino.varietal}}</li>
+    <li> {{vino.añada}}</li>
+{% endfor %}
+</ul>
+    
+{% endif %}
+
+{% endblock contenidoQueCambia %}

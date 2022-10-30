@@ -8,7 +8,7 @@ class Vino(models.Model):
     varietal = models.CharField(max_length=50)
     añada = models.IntegerField()
 
-class Espumantes(models.Model):
+class Espumante(models.Model):
     nombre = models.CharField(max_length=50)
     varietal = models.CharField(max_length=50)
     añada = models.IntegerField()
