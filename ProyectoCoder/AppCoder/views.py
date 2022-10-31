@@ -144,12 +144,13 @@ def buscarAceite(request):
         aceite = request.GET['aceite']
         varietal =Aceite.objects.filter(nombre__icontains=aceite)
 
-        return render(request, "resultadoBusquedaAceite.html", {"aceite":aceite, "varietal":varietal})
+        return render(request,"resultadoBusquedaAceite.html", {"aceite":aceite, "varietal":varietal})
     else:
 
-        respuesta2= "No asigno ningun aceite en la busqueda, por favor intentar de nuevo"    
+        respuesta="No asigno ningun aceite en la busqueda, por favor intentar de nuevo"    
 
-    return render(request, "resultadoBusquedaAceite.html", {"respuesta":respuesta2})
+    return render(request, "resultadoBusquedaAceite.html", {"respuesta":respuesta})
+
 
 def equipo(request):
 

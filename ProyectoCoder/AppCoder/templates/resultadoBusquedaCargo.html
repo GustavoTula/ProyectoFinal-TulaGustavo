@@ -6,11 +6,12 @@
 
 
 {% if equipo %}
+
 <p> Estamos buscando el: {{cargo}}</p>
 <p></p>
 <ul>
-    {% for personal in lista_personal  %}
-    <li>{{personal.nombre}} - {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li>
+    {% for personal in equipo  %}
+    <li>{{equipo.nombre}} - {{equipo.apellido}} - {{equipo.cargo}} - {{equipo.email}}</li>
     {% endfor %}
 </ul>
 
@@ -20,7 +21,7 @@
 
 {% endif %}
 
-<p style="color:red;">{{respuesta}}</p>
+<p style="color:red;">{{respuesta3}}</p>
 <p></p>
 <a href="{% url 'BusquedaCargo' %}">Buscas otro puesto?</a>
 <p></p>
