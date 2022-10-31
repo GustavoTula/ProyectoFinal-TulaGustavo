@@ -18,10 +18,13 @@
 <p>No se encuentra el varietal asigando , volver a intentar</p>
 
 {% endif %}
-<p style="color:red;">{{respuesta}}</p>
 
+<p style="color:red;">{{respuesta}}</p>
+<p></p>
 <a href="{% url 'BusquedaVarietal' %}">Buscas otro varietal?</a>
+<p></p>
 <h6>Si has finalizado puedes volver a la lista:</h6>
+<p></p>
 <a href="{% url 'Lista-Vinos' %}">Vinos</a>
 
 {% endblock contenidoQueCambia %}
