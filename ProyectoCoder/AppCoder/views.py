@@ -162,7 +162,7 @@ def equipo(request):
             data = miFormulario.cleaned_data
             personal = Personal(nombre=data['nombre'], apellido=data['apellido'] , cargo=data['cargo'],email=data['email'])
             personal.save()
-            return redirect("Lista-personal")
+            return redirect("Lista-Personal")
     else:
         miFormulario=PersonalFormulario()
 
