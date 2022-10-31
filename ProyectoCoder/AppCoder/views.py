@@ -82,9 +82,9 @@ def buscar(request):
         return render(request, "resultadoBusqueda.html", {"vinos":vinos, "varietal":varietal , "añada":añada})
     else:
 
-        respuesta = "No enviaste datos"    
+        respuesta = "No asigno ningun varietal en la busqueda, por favor intentar de nuevo"    
 
-    return HttpResponse(respuesta)
+    return render(request, "resultadoBusqueda.html", {"respuesta":respuesta})
 
 
 
@@ -104,8 +104,21 @@ def espumantes(request):
 
     return render(request, "espumantes.html", {"miFormulario":miFormulario})
 
+def busquedaAñada(request):
+    return render(request, "busquedaAñada.html")
 
+def buscarAñada(request):
+    if request.GET["añada"]:
+        añada = request.GET['añada']
+        espumantes = Espumante.objects.filter(añada__icontains=añada)
+        varietal = Espumante.objects.filter(añada__icontains=añada)
 
+        return render(request, "resultadoBusquedaAñada.html", {"espumantes":espumantes, "varietal":varietal , "añada":añada})
+    else:
+
+        respuesta1= "No enviaste datos"    
+
+    return HttpResponse(respuesta1)
 
 def aceites(request):
 
@@ -145,19 +158,4 @@ def equipo(request):
 
 def noticias(request):
     return render(request,"noticias.html")
-
-#def busquedaVarietal(request):
-    return render(request, "busquedaVarietal.html")
-#def buscar(request):
-    if request.GET["varietal"]:
-        varietal = request.GET['varietal']
-        vinos = Vino.objects.filter(varietal__icontains=varietal)
-        añada = Vino.objects.filter(varietal__icontains=varietal)
-
-        return render(request, "resultadoBusqueda.html", {"vinos":vinos, "varietal":varietal , "añada":añada})
-    else:
-
-        respuesta = "No enviaste datos"    
-
-    return HttpResponse(respuesta)
 

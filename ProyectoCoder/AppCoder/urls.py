@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import aceites, buscar, busquedaVarietal, equipo, inicio, lista_personal,  nosotros, noticias, personal, vino , lista_vino , espumante , lista_espumante , aceite , lista_aceite, vinos, espumantes 
+from .views import aceites, buscar, buscarAñada, busquedaAñada, busquedaVarietal, equipo, inicio, lista_personal,  nosotros, noticias, personal, vino , lista_vino , espumante , lista_espumante , aceite , lista_aceite, vinos, espumantes 
 
 #equipoFormulario, espumanteFormulario , aceiteFormulario , vinoFormulario
 urlpatterns = [
@@ -25,5 +25,7 @@ urlpatterns = [
     #path('equipoFormulario/', equipoFormulario, name="EquipoFormulario"),
     path('busquedaVarietal/', busquedaVarietal, name="BusquedaVarietal"),
     path('buscar/', buscar , name="Buscar"),
+    path('busquedaAñada/', busquedaAñada, name="BusquedaAñada"),
+    path('buscarAñada/', buscarAñada , name="BuscarAñada"),
    
 ]

@@ -4,7 +4,7 @@
 {% block contenidoQueCambia %}
 
 <h1>Vinos para olvidar las penas</h1>
-<h5> A continuacion vera reflejado los vinos en disposicion: </h5>
+<h5> A continuacion vera reflejado los vinos a disposicion: </h5>
 
 <ul>
     
@@ -13,5 +13,10 @@
     {% endfor %}
 
 </ul>
-<a href="{% url 'Vinos' %}">Agregar vino</a>      
+<a href="{% url 'Vinos' %}">Agregar vino</a>
+<p></p>
+<h5> Muy larga la lista? filtra por varietal en el siguiente link</h5>
+<p></p>
+<a href="{% url 'BusquedaVarietal' %}">Filtrar</a>
+
 {% endblock contenidoQueCambia %}

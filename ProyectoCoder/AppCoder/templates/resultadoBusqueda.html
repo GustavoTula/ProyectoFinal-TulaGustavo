@@ -3,11 +3,8 @@
 
 {% block contenidoQueCambia %}
 
-
-<p> Estamos buscando el: {{varietal}}</p>
-
-
 {% if vinos %}
+<p> Estamos buscando el: {{varietal}}</p>
 
 <ul>
 {% for vino in vinos  %}
@@ -16,7 +13,15 @@
 
 {% endfor %}
 </ul>
-    
+{% else %}
+
+<p>No se encuentra el varietal asigando , volver a intentar</p>
+
 {% endif %}
+<p style="color:red;">{{respuesta}}</p>
+
+<a href="{% url 'BusquedaVarietal' %}">Buscas otro varietal?</a>
+<h6>Si has finalizado puedes volver a la lista:</h6>
+<a href="{% url 'Lista-Vinos' %}">Vinos</a>
 
 {% endblock contenidoQueCambia %}

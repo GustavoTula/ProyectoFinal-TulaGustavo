@@ -1,0 +1,28 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+<p> Estamos buscando la: {{añada}}</p>
+
+
+{% if espumantes %}
+
+<ul>
+{% for espumante in espumantes  %}
+    
+    <li> {{espumante.nombre}} - {{espumante.varietal}} - {{espumante.añada}} </li>
+
+{% endfor %}
+</ul>
+
+{% else %}
+
+<p>No hay datos con esa añada,vuelve intentar</p>
+
+{% endif %}
+
+<a href="{% url 'BusquedaAñada' %}">Buscas otra añada?</a>
+
+{% endblock contenidoQueCambia %}
