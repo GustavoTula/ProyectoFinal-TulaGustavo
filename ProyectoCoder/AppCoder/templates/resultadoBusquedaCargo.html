@@ -1,0 +1,31 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+
+{% if equipo %}
+<p> Estamos buscando el: {{cargo}}</p>
+<p></p>
+<ul>
+    {% for personal in lista_personal  %}
+    <li>{{personal.nombre}} - {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li>
+    {% endfor %}
+</ul>
+
+{% else %}
+
+<p>No se encuentra el puesto asignado , volver a intentar</p>
+
+{% endif %}
+
+<p style="color:red;">{{respuesta}}</p>
+<p></p>
+<a href="{% url 'BusquedaCargo' %}">Buscas otro puesto?</a>
+<p></p>
+<h6>Si has finalizado puedes volver al equipo:</h6>
+<p></p>
+<a href="{% url 'Lista-Personal' %}">Lista de miembros</a>
+
+{% endblock contenidoQueCambia %}

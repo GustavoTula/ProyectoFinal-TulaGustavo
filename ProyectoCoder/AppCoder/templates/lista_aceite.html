@@ -3,7 +3,8 @@
 
 {% block contenidoQueCambia %}
 
-<h1>Un Aceite que deleita nuestras sentidos</h1>    
+<h1>Un Aceite que deleita nuestras sentidos</h1>  
+<p></p>  
 <h4> Lista de Aceites disponibles para consumir en el momento!: </h4>
 
 <ul>
@@ -13,6 +14,10 @@
     {% endfor %}
 
 </ul>
+<p></p>
 <a href="{% url 'Aceites' %}">Agregar Aceites</a>
-        
+<p></p>
+<h5> Muy larga la lista? filtra por varietal en el siguiente link:</h5>
+<p></p>
+<a href="{% url 'BusquedaAceite' %}">Filtrar</a>       
 {% endblock contenidoQueCambia %}

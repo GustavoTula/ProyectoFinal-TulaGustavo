@@ -6,8 +6,9 @@
 
 <h1>Gracias a tu buena toma de decisiones y la eficiencia de tu trabajo, 
 este equipo ha crecido y hemos impulsado a la empresa a nuevos niveles<h1>
+<p></p>
 <h3>Miembros que conforman este grandioso equipo:</h3>
-
+<p></p>
 <ul>
     
     {% for personal in lista_personal  %}
@@ -15,5 +16,10 @@ este equipo ha crecido y hemos impulsado a la empresa a nuevos niveles<h1>
     {% endfor %}
         
 </ul>
-<a href="{% url 'Equipo' %}">Agregar mas miembros</a>       
+<p></p>
+<a href="{% url 'Equipo' %}">Agregar mas miembros</a> 
+<p></p>
+<h5> Muy larga la lista? filtra por cargos en el siguiente link:</h5>
+<p></p>
+<a href="{% url 'BusquedaCargo' %}">Filtrar</a>     
 {% endblock contenidoQueCambia %}

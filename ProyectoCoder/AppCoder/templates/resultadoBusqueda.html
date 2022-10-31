@@ -3,9 +3,10 @@
 
 {% block contenidoQueCambia %}
 
+
 {% if vinos %}
 <p> Estamos buscando el: {{varietal}}</p>
-
+<p></p>
 <ul>
 {% for vino in vinos  %}
     
@@ -25,6 +26,6 @@
 <p></p>
 <h6>Si has finalizado puedes volver a la lista:</h6>
 <p></p>
-<a href="{% url 'Lista-Vinos' %}">Vinos</a>
+<a href="{% url 'Lista-Vinos' %}">Lista en cava</a>
 
 {% endblock contenidoQueCambia %}

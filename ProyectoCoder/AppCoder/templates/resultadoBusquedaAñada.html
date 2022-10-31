@@ -3,11 +3,9 @@
 
 {% block contenidoQueCambia %}
 
+{% if espumantes %}
 
 <p> Estamos buscando la: {{añada}}</p>
-
-
-{% if espumantes %}
 
 <ul>
 {% for espumante in espumantes  %}
@@ -22,7 +20,10 @@
 <p>No hay datos con esa añada,vuelve intentar</p>
 
 {% endif %}
-
+<p style="color:red;">{{respuesta}}</p>
+<p></p>
 <a href="{% url 'BusquedaAñada' %}">Buscas otra añada?</a>
+<p></p>
+<a href="{% url 'Lista-Espumantes' %}">Lista Espumante</a>
 
 {% endblock contenidoQueCambia %}

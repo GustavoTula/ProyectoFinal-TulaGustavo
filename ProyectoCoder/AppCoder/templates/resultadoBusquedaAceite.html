@@ -1,0 +1,31 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+<p></p>
+{% if aceites %}
+<p> Estamos buscando el: {{aceite}}</p>
+<ul>
+{% for aceite in aceites  %}
+    
+    <li>{{aceite.nombre}} - {{aceite.varietal}}</li>
+
+{% endfor %}
+</ul>
+{% else %}
+
+<p>No se encuentra el Aceite asigando , volver a intentar</p>
+
+{% endif %}
+
+<p style="color:red;">{{respuesta}}</p>
+<p></p>
+<a href="{% url 'BusquedaAceite' %}">Buscas otro Aceite?</a>
+<p></p>
+<h6>Si has finalizado puedes volver a la lista:</h6>
+<p></p>
+<a href="{% url 'Lista-Aceites' %}">Lista Aceites</a>
+
+{% endblock contenidoQueCambia %}

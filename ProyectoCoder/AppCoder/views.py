@@ -116,9 +116,9 @@ def buscarAñada(request):
         return render(request, "resultadoBusquedaAñada.html", {"espumantes":espumantes, "varietal":varietal , "añada":añada})
     else:
 
-        respuesta1= "No enviaste datos"    
+        respuesta1= "No asigno ninguna añada en la busqueda, por favor intentar de nuevo"    
 
-    return HttpResponse(respuesta1)
+    return render(request, "resultadoBusquedaAñada.html", {"respuesta":respuesta1})
 
 def aceites(request):
 
@@ -136,7 +136,20 @@ def aceites(request):
 
     return render(request, "aceites.html", {"miFormulario":miFormulario})
 
+def busquedaAceite(request):
+    return render(request, "busquedaAceite.html")
 
+def buscarAceite(request):
+    if request.GET["aceite"]:
+        aceite = request.GET['aceite']
+        varietal =Aceite.objects.filter(nombre__icontains=aceite)
+
+        return render(request, "resultadoBusquedaAceite.html", {"aceite":aceite, "varietal":varietal})
+    else:
+
+        respuesta2= "No asigno ningun aceite en la busqueda, por favor intentar de nuevo"    
+
+    return render(request, "resultadoBusquedaAceite.html", {"respuesta":respuesta2})
 
 def equipo(request):
 
@@ -153,6 +166,25 @@ def equipo(request):
         miFormulario=PersonalFormulario()
 
     return render(request, "equipo.html", {"miFormulario":miFormulario})
+
+def busquedaCargo(request):
+    return render(request, "busquedaCargo.html")
+
+def buscarCargo(request):
+    if request.GET["cargo"]:
+        cargo = request.GET['cargo']
+        nombre =Personal.objects.filter(cargo__icontains=cargo)
+        apellido =Personal.objects.filter(cargo__icontains=cargo)
+        email =Personal.objects.filter(cargo__icontains=cargo)
+
+        return render(request, "resultadoBusquedaCargo.html", {"nombre":nombre, "apellido":apellido,"cargo":cargo , "email":email})
+    else:
+
+        respuesta3= "No asigno ningun cargo en la busqueda, por favor intentar de nuevo"    
+
+    return render(request, "resultadoBusquedaCargo.html", {"respuesta":respuesta3})
+
+
 
 
 
