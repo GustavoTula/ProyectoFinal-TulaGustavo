@@ -14,7 +14,6 @@ def lista_vino(request):
 
 
 
-
 def espumante(request,nombre,varietal,añada):
     espumante = Espumante(nombre=nombre, varietal=varietal,añada=añada)
     espumante.save()
@@ -71,6 +70,17 @@ def vinos(request):
 
     return render(request, "vinos.html", {"miFormulario":miFormulario})
 
+def eliminarVinos(request, id):
+    if request.method == 'POST':
+         vino = Vino.objects.get(id=id)
+         vino.delete()
+
+         return redirect('ListaVinos')
+
+def listaVinos(request):
+    vinoss = Vino.objects.all()
+    return render(request, "listaVinos.html", {"listaVinos": vinoss})
+
 def busquedaVarietal(request):
     return render(request, "busquedaVarietal.html")
 def buscar(request):
@@ -104,6 +114,11 @@ def espumantes(request):
 
     return render(request, "espumantes.html", {"miFormulario":miFormulario})
 
+def listaEspumantes(request):
+
+    espumantess = Espumante.objects.all()
+    return render(request, "listaEquipo.html", {"Nombre":espumantess})
+
 def busquedaAñada(request):
     return render(request, "busquedaAñada.html")
 
@@ -136,13 +151,18 @@ def aceites(request):
 
     return render(request, "aceites.html", {"miFormulario":miFormulario})
 
+def listaAceites(request):
+
+    aceitess = Aceite.objects.all()
+    return render(request, "listaEquipo.html", {"Nombre":aceitess})
+
 def busquedaAceite(request):
     return render(request, "busquedaAceite.html")
 
 def buscarAceite(request):
     if request.GET["aceite"]:
         aceite = request.GET['aceite']
-        varietal =Aceite.objects.filter(aceite__icontains=aceite)
+        varietal =Aceite.objects.filter(nombre__icontains=aceite)
 
         return render(request,"resultadoBusquedaAceite.html", {"nombre":aceite, "varietal":varietal})
     else:
@@ -168,6 +188,11 @@ def equipo(request):
 
     return render(request, "equipo.html", {"miFormulario":miFormulario})
 
+def listaEquipo(request):
+
+    miembros = Personal.objects.all()
+    return render(request, "listaEquipo.html", {"Nombre":miembros})
+
 def busquedaCargo(request):
     return render(request, "busquedaCargo.html")
 
@@ -184,9 +209,6 @@ def buscarCargo(request):
         respuesta3= "No asigno ningun cargo en la busqueda, por favor intentar de nuevo"    
 
     return render(request, "resultadoBusquedaCargo.html", {"respuesta":respuesta3})
-
-
-
 
 
 def noticias(request):

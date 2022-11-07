@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import  aceites, buscar, buscarAceite, buscarAñada, buscarCargo, busquedaAceite, busquedaAñada, busquedaCargo, busquedaVarietal, equipo, inicio, lista_personal,  nosotros, noticias, personal, vino , lista_vino , espumante , lista_espumante , aceite , lista_aceite, vinos, espumantes 
+from .views import eliminarVinos, listaVinos, listaEspumantes, listaAceites, aceites, listaEquipo, buscar, buscarAceite, buscarAñada, buscarCargo, busquedaAceite, busquedaAñada, busquedaCargo, busquedaVarietal, equipo, inicio, lista_personal,  nosotros, noticias, personal, vino , lista_vino , espumante , lista_espumante , aceite , lista_aceite, vinos, espumantes 
 
-#equipoFormulario, espumanteFormulario , aceiteFormulario , vinoFormulario
+
 urlpatterns = [
     path('agrega-vino/<nombre>/<varietal>/<añada>', vino),
     path('lista-vino/', lista_vino, name="Lista-Vinos"),
@@ -19,10 +19,6 @@ urlpatterns = [
     path('aceites/', aceites, name="Aceites"),
     path('equipo/', equipo, name="Equipo"),
     path('noticias/', noticias, name="Noticias"),
-    #path('vinoFormulario/', vinoFormulario, name="VinoFormulario"),
-    #path('aceiteFormulario/', aceiteFormulario, name="AceiteFormulario"),
-    #path('espumanteFormulario/', espumanteFormulario, name="EspumanteFormulario"),
-    #path('equipoFormulario/', equipoFormulario, name="EquipoFormulario"),
     path('busquedaVarietal/', busquedaVarietal, name="BusquedaVarietal"),
     path('buscar/', buscar , name="Buscar"),
     path('busquedaAñada/', busquedaAñada, name="BusquedaAñada"),
@@ -31,5 +27,11 @@ urlpatterns = [
     path('buscarAceite/', buscarAceite , name="BuscarAceite"),
     path('busquedaCargo/', busquedaCargo, name="BusquedaCargo"),
     path('buscarCargo/', buscarCargo , name="BuscarCargo"),
+    path('listaEquipo/', listaEquipo , name="ListaEquipo"),
+    path('listaVinos/', listaVinos , name="ListaVinos"),
+    path('listaAceites/', listaAceites , name="ListaAceites"),
+    path('listaEspumantes/', listaEspumantes, name="listaEspumantes"),
+    path('eliminarVinos/<int:id>', eliminarVinos, name="EliminarVinos"),
+   
    
 ]

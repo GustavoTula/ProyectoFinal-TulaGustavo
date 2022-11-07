@@ -1,0 +1,23 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+    <h1>Quienes conforman nuestro personal a su disposicion: </h1>    
+    <ul>
+        
+        {% for personal in miembros %}
+
+        <li>
+            {{personal}}
+        </li>
+            
+        {% endfor %}
+            
+
+
+    </ul>
+   
+
+        
+{% endblock contenidoQueCambia %}

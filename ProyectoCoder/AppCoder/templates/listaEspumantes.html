@@ -1,0 +1,23 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+    <h1>Quienes conforman nuestro personal a su disposicion: </h1>    
+    <ul>
+        
+        {% for espumantes in espumantess %}
+
+        <li>
+            {{espumantes}}
+        </li>
+            
+        {% endfor %}
+            
+
+
+    </ul>
+   
+
+        
+{% endblock contenidoQueCambia %}

@@ -12,9 +12,11 @@
     {% for vino in lista_vino  %}
         <li>{{vino.nombre}} - {{vino.varietal}} - {{vino.añada}}</li>
     {% endfor %}
+    
+
 
 </ul>
-<a href="{% url 'Vinos' %}">Agregar vino</a>
+<a href="{% url 'Vinos' %}">Agregar Vino</a>
 <p></p>
 <h5> Muy larga la lista? filtra por varietal en el siguiente link:</h5>
 <p></p>
