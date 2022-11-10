@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import editarVinos, eliminarVinos, listaVinos, listaEspumantes, listaAceites, aceites, listaEquipo, buscar, buscarAceite, buscarAñada, buscarCargo, busquedaAceite, busquedaAñada, busquedaCargo, busquedaVarietal, equipo, inicio, lista_personal,  nosotros, noticias, personal, vino , lista_vino , espumante , lista_espumante , aceite , lista_aceite, vinos, espumantes 
+from .views import VinoDelete, VinoUpdate, VinoCreate, VinoDetail , VinoList, editarVinos, eliminarVinos, listaVinos, listaEspumantes, listaAceites, aceites, listaEquipo, buscar, buscarAceite, buscarAñada, buscarCargo, busquedaAceite, busquedaAñada, busquedaCargo, busquedaVarietal, equipo, inicio, lista_personal,  nosotros, noticias, personal, vino , lista_vino , espumante , lista_espumante , aceite , lista_aceite, vinos, espumantes 
 
 
 urlpatterns = [
@@ -33,6 +33,10 @@ urlpatterns = [
     path('listaEspumantes/', listaEspumantes, name="listaEspumantes"),
     path('eliminarVinos/<int:id>', eliminarVinos, name="EliminarVinos"),
     path('editarVinos/<int:id>', editarVinos, name="EditarVinos"),
-   
+    path('vinoList', VinoList.as_view(), name="VinoList"),
+    path('vinoDetail/<pk>', VinoDetail.as_view(), name="VinoDetail"),
+    path('vinoCreate/', VinoCreate.as_view(), name="VinoCreate"),
+    path('vinoUpdate/<pk>', VinoUpdate.as_view(), name="VinoUpdate"),
+    path('vinoDelete/<pk>', VinoDelete.as_view(), name="VinoDelete"),
    
 ]

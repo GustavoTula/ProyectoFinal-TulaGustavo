@@ -1,0 +1,16 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<form method="POST">{% csrf_token %}
+        
+    <p>Esta seguro de borrar este registro? "" {{object}} "" ?</p>
+    
+    <button type="submit">Confirmar</button>             
+    <button><a href="{% url 'VinoList' %}">Cancelar</a></button>
+
+</form>
+
+        
+{% endblock contenidoQueCambia %}

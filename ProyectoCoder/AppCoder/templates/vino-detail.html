@@ -1,0 +1,16 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+   <h1>Detalles a observar de:</h1>
+    
+   <p>Nombre del vino: <i>{{vino.nombre}}</i></p>
+   <p>Nombre del varietal: <i>{{vino.varietal}}</i></p>
+   <p>Nombre de la añada: <i>{{vino.añada}}</i></p>
+   <p>
+    <a href="{% url 'VinoList' %}">Regresar</a>
+   </p>
+        
+{% endblock contenidoQueCambia %}

@@ -2,6 +2,10 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Vino , Espumante , Aceite , Personal
 from .forms import VinoFormulario , EspumanteFormulario , AceiteFormulario , PersonalFormulario
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 
 def vino (request,nombre,varietal,añada):
     vino = Vino(nombre=nombre, varietal=varietal,añada=añada)
@@ -127,6 +131,30 @@ def buscar(request):
     return render(request, "resultadoBusqueda.html", {"respuesta":respuesta})
 
 
+class VinoList(ListView):
+    model = Vino
+    template_name = "vino-list.html"
+class VinoDetail(DetailView):
+    model = Vino
+    template_name = "vino-detail.html"
+class VinoCreate(CreateView):
+    model= Vino
+    template_name = "vino-create.html"
+    success_url = "/app-coder/vinoList"
+    fields = ['nombre' , 'varietal', 'añada']
+    
+
+class VinoUpdate(UpdateView):
+    model = Vino
+    template_name = "vino-update.html"
+    success_url = "/app-coder/vinoList"
+    fields = ['nombre' , 'varietal', 'añada']
+
+class VinoDelete(DeleteView):
+    model = Vino
+    template_name = "vino-delete.html"
+    success_url = "/app-coder/vinoList"
+
 
 def espumantes(request):
     
@@ -243,4 +271,5 @@ def buscarCargo(request):
 
 def noticias(request):
     return render(request,"noticias.html")
+
 
