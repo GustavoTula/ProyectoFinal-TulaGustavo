@@ -6,12 +6,11 @@
 
 
 {% if equipo %}
-
 <p> Estamos buscando el: {{cargo}}</p>
 <p></p>
 <ul>
     {% for personal in equipo  %}
-    <li>{{personal.nombre}} - {{personal.apellido}} - {{personal.cargo}} - {{equipo.email}}</li>
+    <li>{{personal.nombre}} - {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li>
     {% endfor %}
 </ul>
 

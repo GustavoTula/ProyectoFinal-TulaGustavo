@@ -1,0 +1,19 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h1>Vinos para olvidar las penas</h1>
+<h2>Podra editar los datos de los vinos en el siguiente formulario:</h2>
+
+<form action= "{% url 'EditarVinos' id %}" method="POST">{% csrf_token %}
+        
+    {{ miFormulario.as_p }}
+
+    <input type="submit" value="Actualizar"/>
+
+
+</form>
+
+<a href="{% url 'ListaVinos' %}">Vinos en Cava</a>        
+{% endblock contenidoQueCambia %}

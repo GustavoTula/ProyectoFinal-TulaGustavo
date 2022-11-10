@@ -77,6 +77,36 @@ def eliminarVinos(request, id):
 
          return redirect('ListaVinos')
 
+def editarVinos(request, id):
+
+    vino = Vino.objects.get(id=id)
+
+    if request.method == 'POST':
+         miFormulario = VinoFormulario(request.POST)
+         print(miFormulario)
+
+         if miFormulario.is_valid():
+        
+            data = miFormulario.cleaned_data
+
+            vino.nombre = data["vino"]
+            vino.varietal = data["varietal"]
+            vino.añada = data["añada"]
+
+            vino.save()
+
+            return redirect("ListaVinos")
+    else:
+        
+        miFormulario = VinoFormulario(initial={
+
+            "vino": vino.nombre, 
+            "varietal": vino.varietal, 
+            "añada": vino.añada,
+            
+            })
+    return render(request, "editarVinos.html", {"miFormulario":miFormulario, "id":vino.id})
+
 def listaVinos(request):
     vinoss = Vino.objects.all()
     return render(request, "listaVinos.html", {"listaVinos": vinoss})
@@ -164,7 +194,7 @@ def buscarAceite(request):
         aceite = request.GET['aceite']
         varietal =Aceite.objects.filter(nombre__icontains=aceite)
 
-        return render(request,"resultadoBusquedaAceite.html", {"nombre":aceite, "varietal":varietal})
+        return render(request,"resultadoBusquedaAceite.html", {"aceite":aceite, "varietal":varietal})
     else:
 
         respuesta="No asigno ningun aceite en la busqueda, por favor intentar de nuevo"    
@@ -203,7 +233,7 @@ def buscarCargo(request):
         apellido =Personal.objects.filter(cargo__icontains=cargo)
         email =Personal.objects.filter(cargo__icontains=cargo)
 
-        return render(request, "resultadoBusquedaCargo.html", {"nombre":nombre, "apellido":apellido,"cargo":cargo , "email":email})
+        return render(request, "resultadoBusquedaCargo.html", {"nombre":nombre, "apellido":apellido, "cargo":cargo , "email":email})
     else:
 
         respuesta3= "No asigno ningun cargo en la busqueda, por favor intentar de nuevo"    

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import eliminarVinos, listaVinos, listaEspumantes, listaAceites, aceites, listaEquipo, buscar, buscarAceite, buscarAñada, buscarCargo, busquedaAceite, busquedaAñada, busquedaCargo, busquedaVarietal, equipo, inicio, lista_personal,  nosotros, noticias, personal, vino , lista_vino , espumante , lista_espumante , aceite , lista_aceite, vinos, espumantes 
+from .views import editarVinos, eliminarVinos, listaVinos, listaEspumantes, listaAceites, aceites, listaEquipo, buscar, buscarAceite, buscarAñada, buscarCargo, busquedaAceite, busquedaAñada, busquedaCargo, busquedaVarietal, equipo, inicio, lista_personal,  nosotros, noticias, personal, vino , lista_vino , espumante , lista_espumante , aceite , lista_aceite, vinos, espumantes 
 
 
 urlpatterns = [
@@ -32,6 +32,7 @@ urlpatterns = [
     path('listaAceites/', listaAceites , name="ListaAceites"),
     path('listaEspumantes/', listaEspumantes, name="listaEspumantes"),
     path('eliminarVinos/<int:id>', eliminarVinos, name="EliminarVinos"),
+    path('editarVinos/<int:id>', editarVinos, name="EditarVinos"),
    
    
 ]
