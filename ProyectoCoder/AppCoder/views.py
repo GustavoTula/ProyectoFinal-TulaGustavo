@@ -5,7 +5,11 @@ from .forms import VinoFormulario , EspumanteFormulario , AceiteFormulario , Per
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
+from django.contrib.auth.forms import AuthenticationForm , UserCreationForm
+from django.contrib.auth import login , authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def vino (request,nombre,varietal,añada):
     vino = Vino(nombre=nombre, varietal=varietal,añada=añada)
@@ -51,13 +55,14 @@ def lista_personal(request):
     return render(request, "Lista_personal.html", {"lista_personal": lista3})
 
 
-
+@login_required
 def inicio(request):
     return render(request, "inicio.html")
-
+@login_required
 def nosotros(request):
     return render(request, "nosotros.html")
 
+@staff_member_required(login_url='/app-coder/login')
 def vinos(request):
 
     if request.method == 'POST':    
@@ -131,31 +136,31 @@ def buscar(request):
     return render(request, "resultadoBusqueda.html", {"respuesta":respuesta})
 
 
-class VinoList(ListView):
+class VinoList(LoginRequiredMixin, ListView): #Buscar mixin decoradores para staff
     model = Vino
     template_name = "vino-list.html"
-class VinoDetail(DetailView):
+class VinoDetail(LoginRequiredMixin, DetailView): #Buscar mixin decoradores para staff
     model = Vino
     template_name = "vino-detail.html"
-class VinoCreate(CreateView):
+class VinoCreate(LoginRequiredMixin, CreateView): #Buscar mixin decoradores para staff
     model= Vino
     template_name = "vino-create.html"
     success_url = "/app-coder/vinoList"
     fields = ['nombre' , 'varietal', 'añada']
     
 
-class VinoUpdate(UpdateView):
+class VinoUpdate(LoginRequiredMixin, UpdateView): #Buscar mixin decoradores para staff
     model = Vino
     template_name = "vino-update.html"
     success_url = "/app-coder/vinoList"
     fields = ['nombre' , 'varietal', 'añada']
 
-class VinoDelete(DeleteView):
+class VinoDelete(LoginRequiredMixin, DeleteView): #Buscar mixin decoradores para staff
     model = Vino
     template_name = "vino-delete.html"
     success_url = "/app-coder/vinoList"
 
-
+@staff_member_required(login_url='/app-coder/login')
 def espumantes(request):
     
     if request.method == 'POST':    
@@ -192,7 +197,7 @@ def buscarAñada(request):
         respuesta1= "No asigno ninguna añada en la busqueda, por favor intentar de nuevo"    
 
     return render(request, "resultadoBusquedaAñada.html", {"respuesta":respuesta1})
-
+@staff_member_required(login_url='/app-coder/login')
 def aceites(request):
 
     if request.method == 'POST':    
@@ -229,7 +234,7 @@ def buscarAceite(request):
 
     return render(request, "resultadoBusquedaAceite.html", {"respuesta":respuesta})
 
-
+@staff_member_required(login_url='/app-coder/login')
 def equipo(request):
 
     if request.method == 'POST':    
@@ -268,8 +273,55 @@ def buscarCargo(request):
 
     return render(request, "resultadoBusquedaCargo.html", {"respuesta":respuesta3})
 
-
+@login_required
 def noticias(request):
     return render(request,"noticias.html")
 
 
+def loginRequest(request):
+    if request.method == "POST":
+        miFormulario = AuthenticationForm(request, data = request.POST)
+
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+            usuario = data['username']
+            contrasenia = data['password']
+
+            user = authenticate(username=usuario, password=contrasenia)
+
+            if user is not None:
+                login(request, user)
+
+                return render(request, "inicio.html", {"mensaje":f"Bienvenido {usuario}"})
+            else:
+                return render(request, "inicio.html", {"mensaje":f"Error,datos incorrectos. Intente nuevamente"})
+        else:
+            return render(request, "inicio.html", {"mensaje":f"Los datos ingresados son inexistentes"})
+
+    else:
+        miFormulario = AuthenticationForm()
+
+        return render(request, "login.html", {'miFormulario': miFormulario})
+
+def register(request):
+    if request.method == 'POST':
+
+        miFormulario = UserCreationForm(request.POST)
+        #miFormulario = UserRegisterForm(request.POST)
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            username = data['username']
+            miFormulario.save()
+            return render(request, "inicio.html", {"mensaje":f"{username} creado exitosamente"})
+        else:
+            return render(request, "inicio.html", {"mensaje":f"Error,al crear {username},intentar nuevamente"})
+
+    else:
+        miFormulario=UserCreationForm()
+        #miFormulario = UserRegisterForm(request.POST)
+        return render(request, "register.html", {"miFormulario":miFormulario}) 
+    
+
+    
+    

@@ -1,5 +1,42 @@
 from django.urls import path
-from .views import VinoDelete, VinoUpdate, VinoCreate, VinoDetail , VinoList, editarVinos, eliminarVinos, listaVinos, listaEspumantes, listaAceites, aceites, listaEquipo, buscar, buscarAceite, buscarAñada, buscarCargo, busquedaAceite, busquedaAñada, busquedaCargo, busquedaVarietal, equipo, inicio, lista_personal,  nosotros, noticias, personal, vino , lista_vino , espumante , lista_espumante , aceite , lista_aceite, vinos, espumantes 
+from django.contrib.auth.views import LogoutView
+from .views import ( 
+    VinoDelete, 
+    VinoUpdate, 
+    VinoCreate, VinoDetail , 
+    VinoList, 
+    editarVinos, 
+    eliminarVinos, 
+    listaVinos, 
+    listaEspumantes, 
+    listaAceites, 
+    aceites, 
+    listaEquipo, 
+    buscar, 
+    buscarAceite, 
+    buscarAñada, 
+    buscarCargo, 
+    busquedaAceite, 
+    busquedaAñada, 
+    busquedaCargo, 
+    busquedaVarietal, 
+    equipo, 
+    inicio, 
+    lista_personal,
+    nosotros, 
+    noticias, 
+    personal, 
+    vino , 
+    lista_vino , 
+    espumante , 
+    lista_espumante , 
+    aceite , 
+    lista_aceite, 
+    vinos, 
+    espumantes,
+    loginRequest,
+    register,
+)
 
 
 urlpatterns = [
@@ -12,7 +49,7 @@ urlpatterns = [
     path('agrega-personal/<nombre>/<apellido>/<cargo>/<email>', personal),
     path('lista-personal/', lista_personal, name="Lista-Personal"),
 
-    path('', inicio, name= "Inicio"),
+    path('inicio', inicio, name= "Inicio"),
     path('nosotros/', nosotros, name="Nosotros"),
     path('vinos/', vinos, name="Vinos"),
     path('espumantes/', espumantes, name="Espumantes"),
@@ -35,8 +72,10 @@ urlpatterns = [
     path('editarVinos/<int:id>', editarVinos, name="EditarVinos"),
     path('vinoList', VinoList.as_view(), name="VinoList"),
     path('vinoDetail/<pk>', VinoDetail.as_view(), name="VinoDetail"),
-    path('vinoCreate/', VinoCreate.as_view(), name="VinoCreate"),
+    path('vinoCreate', VinoCreate.as_view(), name="VinoCreate"),
     path('vinoUpdate/<pk>', VinoUpdate.as_view(), name="VinoUpdate"),
     path('vinoDelete/<pk>', VinoDelete.as_view(), name="VinoDelete"),
-   
+    path('login', loginRequest, name="Login"),
+    path('register', register, name="Register"),
+    path('logout', LogoutView.as_view(template_name="logout.html"), name="Logout"),
 ]
