@@ -1,0 +1,16 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<form action="{% url 'EditRegister' %}"  method="POST">{% csrf_token %}
+        
+    <table>
+        {{miFormulario.as_table}}
+    </table>
+
+    <input type="submit" value="Editar">
+</form>
+
+        
+{% endblock contenidoQueCambia %}

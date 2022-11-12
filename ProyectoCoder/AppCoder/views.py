@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Vino , Espumante , Aceite , Personal
-from .forms import VinoFormulario , EspumanteFormulario , AceiteFormulario , PersonalFormulario
+from .forms import VinoFormulario , EspumanteFormulario , AceiteFormulario , PersonalFormulario, UserRegisterForm, UserEditForm
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -62,7 +62,7 @@ def inicio(request):
 def nosotros(request):
     return render(request, "nosotros.html")
 
-@staff_member_required(login_url='/app-coder/login')
+@staff_member_required(login_url='/app-coder/login') #CREAR UN HTML QUE INDIQUE QUE NO TIENE PERMISO DE MIRAR ESTA PESTAÑA SINO ES MIEMBRO
 def vinos(request):
 
     if request.method == 'POST':    
@@ -136,7 +136,7 @@ def buscar(request):
     return render(request, "resultadoBusqueda.html", {"respuesta":respuesta})
 
 
-class VinoList(LoginRequiredMixin, ListView): #Buscar mixin decoradores para staff
+class VinoList(LoginRequiredMixin, ListView): #Buscar mixin decoradores para staff members
     model = Vino
     template_name = "vino-list.html"
 class VinoDetail(LoginRequiredMixin, DetailView): #Buscar mixin decoradores para staff
@@ -307,8 +307,8 @@ def loginRequest(request):
 def register(request):
     if request.method == 'POST':
 
-        miFormulario = UserCreationForm(request.POST)
-        #miFormulario = UserRegisterForm(request.POST)
+        #miFormulario = UserCreationForm(request.POST)
+        miFormulario = UserRegisterForm(request.POST)
         if miFormulario.is_valid():
             data = miFormulario.cleaned_data
             username = data['username']
@@ -318,10 +318,29 @@ def register(request):
             return render(request, "inicio.html", {"mensaje":f"Error,al crear {username},intentar nuevamente"})
 
     else:
-        miFormulario=UserCreationForm()
-        #miFormulario = UserRegisterForm(request.POST)
+        #miFormulario=UserCreationForm()
+        miFormulario = UserRegisterForm()
         return render(request, "register.html", {"miFormulario":miFormulario}) 
     
 
+def editRegister(request):
+    usuario = request.user
+   
+
+    if request.method == 'POST':
+         miFormulario = UserEditForm(request.POST)
+         if miFormulario.is_valid():
+
+
+            data = miFormulario.cleaned_data
+
+            usuario.email = data['email']
+            usuario.password1 = data['password1']
+            usuario.password2 = data['password2']
+            usuario.save()
+            return render(request, "inicio.html")
+    else:
+
+        miFormulario=UserEditForm(initial={'email':usuario.email})
     
-    
+    return render(request, "editPerfil.html",{"miFormulario":miFormulario, "usuario":usuario})

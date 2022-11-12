@@ -36,6 +36,7 @@ from .views import (
     espumantes,
     loginRequest,
     register,
+    editRegister,
 )
 
 
@@ -78,4 +79,5 @@ urlpatterns = [
     path('login', loginRequest, name="Login"),
     path('register', register, name="Register"),
     path('logout', LogoutView.as_view(template_name="logout.html"), name="Logout"),
+    path('editRegister', editRegister, name="EditRegister"),
 ]
