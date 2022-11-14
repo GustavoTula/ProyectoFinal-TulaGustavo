@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import UserChangeForm , UserCreationForm
 from django.contrib.auth.models import User
 #from .views import UserCreationForm
 class VinoFormulario(forms.Form):
@@ -22,31 +22,50 @@ class PersonalFormulario(forms.Form):
     cargo = forms.CharField()
     email = forms.EmailField()
 
-class UserRegisterForm(UserChangeForm):
-    email = forms.EmailField()
+class UserRegisterForm(UserCreationForm):
+
+    password = forms.CharField(
+        help_text="",
+        widget=forms.HiddenInput(), required=False
+    )
+    username = forms.CharField()
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repetir la contraseña', widget=forms.PasswordInput)
+    email = forms.EmailField()
+    first_name = forms.CharField(label='Nombre')
+    last_name = forms.CharField(label='Apellido')
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1','password2']
+        fields = ['username', 'email', 'password1','password2','first_name','last_name']
         help_texts = {k: "" for k in fields}
 
-
+    def clean_password(self):
+        password2 = self.cleaned_data['password2']
+        if password2 != self.cleaned_data['password1']:
+            raise forms.ValidationError("Las contraseñas no coinciden!,verificar.")
+        return password2
 
 class UserEditForm(UserChangeForm):
+
+    password = forms.CharField(
+        help_text="",
+        widget=forms.HiddenInput(), required=False
+    )
+
     email = forms.EmailField(label="Modificar E-mail")
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repetir Contraseña',widget=forms.PasswordInput)
+    first_name = forms.CharField(label='Nombre')
+    last_name = forms.CharField(label='Apellido')
 
-    last_name = forms.CharField()
-    first_name = forms.CharField()
     class Meta:
         model = User
-        fields = ['email', 'password1', 'password2', 'last_name', 'first_name']
+        fields = ['email', 'password1', 'password2','first_name', 'last_name']
         help_texts= {k:"" for k in fields}
 
-
-
-
-        
+    def clean_password(self):
+        password2 = self.cleaned_data['password2']
+        if password2 != self.cleaned_data['password1']:
+            raise forms.ValidationError("Las contraseñas no coinciden!,verificar.")
+        return password2

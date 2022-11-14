@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Vino , Espumante , Aceite , Personal
+from .models import Vino , Espumante , Aceite , Personal, Avatar
 from .forms import VinoFormulario , EspumanteFormulario , AceiteFormulario , PersonalFormulario, UserRegisterForm, UserEditForm
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
@@ -57,7 +57,8 @@ def lista_personal(request):
 
 @login_required
 def inicio(request):
-    return render(request, "inicio.html")
+    avatar = Avatar.objects.get(user=request.user)
+    return render(request, "inicio.html", {"url": avatar.imagen.url})
 @login_required
 def nosotros(request):
     return render(request, "nosotros.html")
@@ -280,24 +281,28 @@ def noticias(request):
 
 def loginRequest(request):
     if request.method == "POST":
+
         miFormulario = AuthenticationForm(request, data = request.POST)
 
         if miFormulario.is_valid():
 
             data = miFormulario.cleaned_data
+            
             usuario = data['username']
-            contrasenia = data['password']
+            psw = data['password']
 
-            user = authenticate(username=usuario, password=contrasenia)
+            user = authenticate(username=usuario, password=psw)
 
-            if user is not None:
+            if user:
+
                 login(request, user)
+                return render(request, "inicio.html", {"mensaje": f'Bienvenido {usuario}'})
 
-                return render(request, "inicio.html", {"mensaje":f"Bienvenido {usuario}"})
             else:
+
                 return render(request, "inicio.html", {"mensaje":f"Error,datos incorrectos. Intente nuevamente"})
-        else:
-            return render(request, "inicio.html", {"mensaje":f"Los datos ingresados son inexistentes"})
+        
+        return render(request, "inicio.html", {"mensaje":f"Los datos ingresados son inexistentes"})
 
     else:
         miFormulario = AuthenticationForm()
@@ -307,40 +312,51 @@ def loginRequest(request):
 def register(request):
     if request.method == 'POST':
 
-        #miFormulario = UserCreationForm(request.POST)
         miFormulario = UserRegisterForm(request.POST)
+
         if miFormulario.is_valid():
-            data = miFormulario.cleaned_data
-            username = data['username']
+            username = miFormulario.cleaned_data['username']
+
             miFormulario.save()
+
             return render(request, "inicio.html", {"mensaje":f"{username} creado exitosamente"})
+
         else:
-            return render(request, "inicio.html", {"mensaje":f"Error,al crear {username},intentar nuevamente"})
+
+            return render(request, "inicio.html", {"mensaje":f"Error,al crear ,intentar nuevamente"})
 
     else:
-        #miFormulario=UserCreationForm()
+        
         miFormulario = UserRegisterForm()
         return render(request, "register.html", {"miFormulario":miFormulario}) 
     
 
 def editRegister(request):
+
     usuario = request.user
-   
 
     if request.method == 'POST':
-         miFormulario = UserEditForm(request.POST)
-         if miFormulario.is_valid():
 
+        miFormulario = UserEditForm(request.POST)
+
+        if miFormulario.is_valid():
 
             data = miFormulario.cleaned_data
 
+            usuario.first_name = data["first_name"]
+            usuario.last_name = data["last_name"]
             usuario.email = data['email']
-            usuario.password1 = data['password1']
-            usuario.password2 = data['password2']
+            usuario.set_password(data['password1'])
+            usuario.set_password(data['password2'])
+            
             usuario.save()
-            return render(request, "inicio.html")
+
+            return render(request, "inicio.html", {"mensaje": f'Datos actualizados correctamente'})
+        
+        return render(request, "editRegister.html",{"mensaje":f'Contraseñas no coinciden'})
+
     else:
 
-        miFormulario=UserEditForm(initial={'email':usuario.email})
+        miFormulario=UserEditForm(instance=request.user)
     
-    return render(request, "editPerfil.html",{"miFormulario":miFormulario, "usuario":usuario})
+        return render(request, "editRegister.html",{"miFormulario":miFormulario, "usuario":usuario})        

@@ -1,6 +1,7 @@
 from dataclasses import field
 from msilib.schema import Class
 from django.db import models
+from django.contrib.auth.models import User
 
 class Vino(models.Model):
 
@@ -31,3 +32,8 @@ class Personal(models.Model):
     def __str__(self):
 
         return (f'Nombre:{self.nombre} - Apellido: {self.apellido} - Cargo: {self.cargo} - Email: {self.email}')
+
+class Avatar(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='avatares', null=True, blank=True)
