@@ -1,6 +1,10 @@
+
 from django import forms
-from django.contrib.auth.forms import UserChangeForm , UserCreationForm
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import User
+from .models import Avatar
+
+
 #from .views import UserCreationForm
 class VinoFormulario(forms.Form):
     vino = forms.CharField(max_length=50)
@@ -22,6 +26,15 @@ class PersonalFormulario(forms.Form):
     cargo = forms.CharField()
     email = forms.EmailField()
 
+class AvatarFormulario(forms.ModelForm):
+    
+    class Meta:
+        model = Avatar
+        fields = ('imagen',)
+        
+
+        
+
 class UserRegisterForm(UserCreationForm):
 
     password = forms.CharField(
@@ -34,6 +47,8 @@ class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     first_name = forms.CharField(label='Nombre')
     last_name = forms.CharField(label='Apellido')
+    #avatar =forms.ImageField()
+    
 
     class Meta:
         model = User
@@ -69,3 +84,4 @@ class UserEditForm(UserChangeForm):
         if password2 != self.cleaned_data['password1']:
             raise forms.ValidationError("Las contraseñas no coinciden!,verificar.")
         return password2
+

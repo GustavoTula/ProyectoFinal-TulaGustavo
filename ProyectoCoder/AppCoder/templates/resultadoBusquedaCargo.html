@@ -5,11 +5,11 @@
 
 
 
-{% if equipo %}
+{% if nombre %}
 <p> Estamos buscando el: {{cargo}}</p>
 <p></p>
 <ul>
-    {% for personal in equipo  %}
+    {% for personal in nombre  %}
     <li>{{personal.nombre}} - {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li>
     {% endfor %}
 </ul>

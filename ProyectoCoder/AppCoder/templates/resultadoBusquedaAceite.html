@@ -2,11 +2,11 @@
 {% load static %}
 {% block contenidoQueCambia %}
 
-{% if aceites %}
+{% if varietal %}
 <p> Estamos buscando el: {{aceite}}</p>
 
 <ul>
-{% for aceite in aceites  %}
+{% for aceite in varietal  %}
     
 <li>{{aceite.nombre}} - {{aceite.varietal}}</li>
 

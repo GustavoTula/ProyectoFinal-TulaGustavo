@@ -1,15 +1,19 @@
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from .models import Vino , Espumante , Aceite , Personal, Avatar
-from .forms import VinoFormulario , EspumanteFormulario , AceiteFormulario , PersonalFormulario, UserRegisterForm, UserEditForm
+from django.shortcuts import redirect, render
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.forms import AuthenticationForm , UserCreationForm
-from django.contrib.auth import login , authenticate
-from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
+from .forms import (AceiteFormulario, EspumanteFormulario, PersonalFormulario,
+                    UserEditForm, UserRegisterForm, VinoFormulario, AvatarFormulario)
+from .models import Aceite, Avatar, Espumante, Personal, Vino
+
 
 def vino (request,nombre,varietal,añada):
     vino = Vino(nombre=nombre, varietal=varietal,añada=añada)
@@ -57,8 +61,10 @@ def lista_personal(request):
 
 @login_required
 def inicio(request):
-    avatar = Avatar.objects.get(user=request.user)
-    return render(request, "inicio.html", {"url": avatar.imagen.url})
+    
+    avatares = Avatar.objects.filter(user=request.user.id)
+    return render(request, "inicio.html", {"url":avatares[0].imagen.url})
+
 @login_required
 def nosotros(request):
     return render(request, "nosotros.html")
@@ -195,9 +201,9 @@ def buscarAñada(request):
         return render(request, "resultadoBusquedaAñada.html", {"espumantes":espumantes, "varietal":varietal , "añada":añada})
     else:
 
-        respuesta1= "No asigno ninguna añada en la busqueda, por favor intentar de nuevo"    
+        respuesta= "No asigno ninguna añada en la busqueda, por favor intentar de nuevo"    
 
-    return render(request, "resultadoBusquedaAñada.html", {"respuesta":respuesta1})
+    return render(request, "resultadoBusquedaAñada.html", {"respuesta1":respuesta})
 @staff_member_required(login_url='/app-coder/login')
 def aceites(request):
 
@@ -225,15 +231,15 @@ def busquedaAceite(request):
 
 def buscarAceite(request):
     if request.GET["aceite"]:
-        aceite = request.GET['aceite']
-        varietal =Aceite.objects.filter(nombre__icontains=aceite)
+        aceites = request.GET['aceite']
+        varietal =Aceite.objects.filter(nombre__icontains=aceites)
 
-        return render(request,"resultadoBusquedaAceite.html", {"aceite":aceite, "varietal":varietal})
+        return render(request,"resultadoBusquedaAceite.html", {"aceites":aceites, "varietal":varietal})
     else:
 
         respuesta="No asigno ningun aceite en la busqueda, por favor intentar de nuevo"    
 
-    return render(request, "resultadoBusquedaAceite.html", {"respuesta":respuesta})
+    return render(request, "resultadoBusquedaAceite.html", {"respuesta2":respuesta})
 
 @staff_member_required(login_url='/app-coder/login')
 def equipo(request):
@@ -262,17 +268,17 @@ def busquedaCargo(request):
 
 def buscarCargo(request):
     if request.GET["cargo"]:
-        cargo = request.GET['cargo']
-        nombre =Personal.objects.filter(cargo__icontains=cargo)
-        apellido =Personal.objects.filter(cargo__icontains=cargo)
-        email =Personal.objects.filter(cargo__icontains=cargo)
+        cargos = request.GET['cargo']
+        nombre =Personal.objects.filter(cargo__icontains=cargos)
+        apellido =Personal.objects.filter(cargo__icontains=cargos)
+        email =Personal.objects.filter(cargo__icontains=cargos)
 
-        return render(request, "resultadoBusquedaCargo.html", {"nombre":nombre, "apellido":apellido, "cargo":cargo , "email":email})
+        return render(request, "resultadoBusquedaCargo.html", {"nombre":nombre, "apellido":apellido, "cargo":cargos , "email":email})
     else:
 
-        respuesta3= "No asigno ningun cargo en la busqueda, por favor intentar de nuevo"    
+        respuesta= "No asigno ningun cargo en la busqueda, por favor intentar de nuevo"    
 
-    return render(request, "resultadoBusquedaCargo.html", {"respuesta":respuesta3})
+    return render(request, "resultadoBusquedaCargo.html", {"respuesta3":respuesta})
 
 @login_required
 def noticias(request):
@@ -290,7 +296,7 @@ def loginRequest(request):
             
             usuario = data['username']
             psw = data['password']
-
+            
             user = authenticate(username=usuario, password=psw)
 
             if user:
@@ -360,3 +366,22 @@ def editRegister(request):
         miFormulario=UserEditForm(instance=request.user)
     
         return render(request, "editRegister.html",{"miFormulario":miFormulario, "usuario":usuario})        
+
+def agregarAvatar(request):
+    if request.method == 'POST':
+
+        miFormulario=AvatarFormulario(request.POST, request.FILES)
+       
+        if miFormulario.is_valid():
+
+            u = User.objects.get(username=request.user)
+            avatar = Avatar(user=u, imagen=miFormulario.cleaned_data['imagen'])
+            avatar.save()
+            #miFormulario.save()
+            return redirect("Inicio")
+    else:
+        miFormulario=AvatarFormulario()
+
+    return render(request, "agregarAvatar.html", {"miFormulario":miFormulario})    
+    
+

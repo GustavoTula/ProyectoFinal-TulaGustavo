@@ -37,6 +37,7 @@ from .views import (
     loginRequest,
     register,
     editRegister,
+    agregarAvatar,
 )
 
 
@@ -50,7 +51,7 @@ urlpatterns = [
     path('agrega-personal/<nombre>/<apellido>/<cargo>/<email>', personal),
     path('lista-personal/', lista_personal, name="Lista-Personal"),
 
-    path('', inicio, name= "Inicio"),
+    path('inicio', inicio, name= "Inicio"),
     path('nosotros/', nosotros, name="Nosotros"),
     path('vinos/', vinos, name="Vinos"),
     path('espumantes/', espumantes, name="Espumantes"),
@@ -80,4 +81,5 @@ urlpatterns = [
     path('register', register, name="Register"),
     path('logout', LogoutView.as_view(template_name="logout.html"), name="Logout"),
     path('editRegister', editRegister, name="EditRegister"),
+    path('agregarAvatar', agregarAvatar, name="AgregarAvatar"),
 ]
