@@ -15,7 +15,7 @@
                 </a>
             </li>
             <div>
-               <button>
+               <button> |
                 <a href=" {% url 'VinoUpdate' vino.id %}">Editar</a> |
                 <a href=" {% url 'VinoDelete' vino.id %}">Eliminar</a>
                </button> 
@@ -26,5 +26,12 @@
             
    </ul>
 
-        
+   <p>Desea agregar algun vino al repertorio?</p>   
+   <button>
+       <a href=" {% url 'VinoCreate' %}">Adicionar</a>
+   </button>   
+   <p>Puede regresar al Inicio dando click a continuacion:</p> 
+    <button> 
+    <a href="{% url 'Inicio' %}">Regresar</a>     
+    </button> 
 {% endblock contenidoQueCambia %}

@@ -3,16 +3,15 @@
 
 {% block contenidoQueCambia %}
 
-<form method="POST">{% csrf_token %}
+<form action= "{% url 'PersonalCreate' %}" method="POST">{% csrf_token %}
         
     {{ form.as_p }}
 
-    <input type="submit" value="Enviar"/>
+    <input type="submit" value="Crear"/>
 
-    
 </form>
 <button>
-    <a href=" {% url 'VinoList' %}"> Regresar a lista</a>
+    <a href=" {% url 'PersonalList' %}"> Regresar a lista</a>
 </button>
         
 {% endblock contenidoQueCambia %}

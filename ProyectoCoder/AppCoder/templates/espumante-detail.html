@@ -1,0 +1,16 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+   <h1>Detalles a observar de:</h1>
+    
+   <p>Nombre: <i>{{espumante.nombre}}</i></p>
+   <p>Varietal: <i>{{espumante.varietal}}</i></p>
+   <p>Añada: <i>{{espumante.añada}}</i></p>
+   <p>
+    <a href="{% url 'EspumanteList' %}">Regresar</a>
+   </p>
+        
+{% endblock contenidoQueCambia %}

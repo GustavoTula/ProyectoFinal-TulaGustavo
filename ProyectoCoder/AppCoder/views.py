@@ -19,44 +19,31 @@ def vino (request,nombre,varietal,añada):
     vino = Vino(nombre=nombre, varietal=varietal,añada=añada)
     vino.save()
     return render(request, "vino.html")
-
 def lista_vino(request):
     lista= Vino.objects.all()
     return render(request, "Lista_vino.html", {"lista_vino": lista})
-
-
-
 def espumante(request,nombre,varietal,añada):
     espumante = Espumante(nombre=nombre, varietal=varietal,añada=añada)
     espumante.save()
     return render (request,"espumante.html")
-
 def lista_espumante(request):
     lista1 = Espumante.objects.all()
     return render(request, "Lista_espumante.html", {"lista_espumante": lista1})
-
-
-
-
 def aceite(request,nombre,varietal):
     aceite = Aceite(nombre=nombre, varietal=varietal)
     aceite.save()
     return render (request,"aceite.html")
-
 def lista_aceite(request):
     lista2 = Aceite.objects.all()
     return render(request, "Lista_aceite.html", {"lista_aceite": lista2})
-
-
-
 def personal(request,nombre,apellido,cargo,email):
     personal = Personal(nombre=nombre, apellido=apellido,cargo=cargo,email=email)
     personal.save()
     return render(request, "personal.html")
-
 def lista_personal(request):
     lista3 = Personal.objects.all()
     return render(request, "Lista_personal.html", {"lista_personal": lista3})
+
 
 
 @login_required
@@ -239,6 +226,29 @@ def buscarAñada(request):
 
     return render(request, "resultadoBusquedaAñada.html", {"respuesta1":respuesta})
 
+class EspumanteList(LoginRequiredMixin, ListView): #Buscar mixin decoradores para staff members
+    model = Espumante
+    template_name = "espumante-list.html"
+class EspumanteDetail(LoginRequiredMixin, DetailView): #Buscar mixin decoradores para staff
+    model = Espumante
+    template_name = "espumante-detail.html"
+class EspumanteCreate(LoginRequiredMixin, CreateView): #Buscar mixin decoradores para staff
+    model= Espumante
+    template_name = "espumante-create.html"
+    success_url = "/app-coder/espumanteList"
+    fields = ['nombre' , 'varietal', 'añada']
+class EspumanteUpdate(LoginRequiredMixin, UpdateView): #Buscar mixin decoradores para staff
+    model = Espumante
+    template_name = "espumante-update.html"
+    success_url = "/app-coder/espumanteList"
+    fields = ['nombre' , 'varietal', 'añada']
+class EspumanteDelete(LoginRequiredMixin, DeleteView): #Buscar mixin decoradores para staff
+    model = Espumante
+    template_name = "espumante-delete.html"
+    success_url = "/app-coder/espumanteList"
+
+
+
 @staff_member_required(login_url='/app-coder/login')
 def aceites(request):
 
@@ -310,6 +320,28 @@ def buscarAceite(request):
         respuesta="No asigno ningun aceite en la busqueda, por favor intentar de nuevo"    
 
     return render(request, "resultadoBusquedaAceite.html", {"respuesta2":respuesta})
+
+
+class AceiteList(LoginRequiredMixin, ListView): #Buscar mixin decoradores para staff members
+    model = Aceite
+    template_name = "aceite-list.html"
+class AceiteDetail(LoginRequiredMixin, DetailView): #Buscar mixin decoradores para staff
+    model = Aceite
+    template_name = "aceite-detail.html"
+class AceiteCreate(LoginRequiredMixin, CreateView): #Buscar mixin decoradores para staff
+    model= Aceite
+    template_name = "aceite-create.html"
+    success_url = "/app-coder/aceiteList"
+    fields = ['nombre' , 'varietal']
+class AceiteUpdate(LoginRequiredMixin, UpdateView): #Buscar mixin decoradores para staff
+    model = Aceite
+    template_name = "aceite-update.html"
+    success_url = "/app-coder/aceiteList"
+    fields = ['nombre' , 'varietal']
+class AceiteDelete(LoginRequiredMixin, DeleteView): #Buscar mixin decoradores para staff
+    model = Aceite
+    template_name = "aceite-delete.html"
+    success_url = "/app-coder/aceiteList"
 
 @staff_member_required(login_url='/app-coder/login')
 def equipo(request):
@@ -387,6 +419,27 @@ def buscarCargo(request):
         respuesta= "No asigno ningun cargo en la busqueda, por favor intentar de nuevo"    
 
     return render(request, "resultadoBusquedaCargo.html", {"respuesta3":respuesta})
+
+class PersonalList(LoginRequiredMixin, ListView): #Buscar mixin decoradores para staff members
+    model = Personal
+    template_name = "personal-list.html"
+class PersonalDetail(LoginRequiredMixin, DetailView): #Buscar mixin decoradores para staff
+    model = Personal
+    template_name = "personal-detail.html"
+class PersonalCreate(LoginRequiredMixin, CreateView): #Buscar mixin decoradores para staff
+    model= Personal
+    template_name = "personal-create.html"
+    success_url = "/app-coder/personalList"
+    fields = ['nombre' , 'apellido', 'cargo', 'email']
+class PersonalUpdate(LoginRequiredMixin, UpdateView): #Buscar mixin decoradores para staff
+    model = Personal
+    template_name = "personal-update.html"
+    success_url = "/app-coder/personalList"
+    fields = ['nombre' , 'apellido', 'cargo', 'email']
+class PersonalDelete(LoginRequiredMixin, DeleteView): #Buscar mixin decoradores para staff
+    model = Personal
+    template_name = "personal-delete.html"
+    success_url = "/app-coder/personalList"   
 
 @login_required
 def noticias(request):

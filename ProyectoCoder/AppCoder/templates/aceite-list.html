@@ -1,0 +1,37 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+   <h1>Lista de aceites a su disposicion:</h1>
+    
+   <ul>
+        
+        {% for aceite in object_list %}
+            <li>
+                <a href= " {% url 'AceiteDetail' aceite.id %}">
+                    {{aceite}}
+                </a>
+            </li>
+            <div>
+               <button> 
+                <a href=" {% url 'AceiteUpdate' aceite.id %}">Editar</a> |
+                <a href=" {% url 'AceiteDelete' aceite.id %}">Eliminar</a>
+               </button> 
+               
+            </div>
+            
+        {% endfor %}
+            
+   </ul>
+
+   <p>Desea agregar algun aceite al repertorio?</p>   
+   <button>
+       <a href=" {% url 'AceiteCreate' %}">Adicionar</a>
+   </button>    
+   <p>Puede regresar al Inicio dando click a continuacion:</p> 
+    <button> 
+    <a href="{% url 'Inicio' %}">Regresar</a>     
+    </button>  
+{% endblock contenidoQueCambia %}

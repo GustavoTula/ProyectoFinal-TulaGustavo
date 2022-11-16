@@ -1,0 +1,36 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+   <h1>Lista de espumantes a su disposicion:</h1>
+    
+   <ul>
+        
+        {% for espumante in object_list %}
+            <li>
+                <a href= " {% url 'EspumanteDetail' espumante.id %}">
+                    {{espumante}}
+                </a>
+            </li>
+            <div>
+               <button> 
+                <a href=" {% url 'EspumanteUpdate' espumante.id %}">Editar</a> |
+                <a href=" {% url 'EspumanteDelete' espumante.id %}">Eliminar</a>
+               </button> 
+               
+            </div>
+            
+        {% endfor %}
+            
+   </ul>
+   <p>Desea agregar algun espumante al repertorio?</p>   
+   <button>
+       <a href=" {% url 'EspumanteCreate' %}">Adicionar</a>
+   </button> 
+   <p>Puede regresar al Inicio dando click a continuacion:</p> 
+    <button> 
+    <a href="{% url 'Inicio' %}">Regresar</a>     
+    </button>      
+{% endblock contenidoQueCambia %}
