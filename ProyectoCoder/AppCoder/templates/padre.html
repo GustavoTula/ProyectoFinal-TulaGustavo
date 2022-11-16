@@ -23,21 +23,41 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-white text-uppercase fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
-                <a class="navbar-brand" href="{% url 'Nosotros' %}">Nosotros</a>
-                <a class="navbar-brand" href="{% url 'Vinos' %}">Vinos</a>
-                <a class="navbar-brand" href="{% url 'Espumantes' %}">Espumantes</a>
-                <a class="navbar-brand" href="{% url 'Aceites' %}">Aceites</a>
-                <a class="navbar-brand" href="{% url 'Equipo' %}">Equipo</a>
-                <a class="navbar-brand" href="{% url 'Noticias' %}">Noticias</a>
                 
-                {% if user.is_authenticated %}
-                    <p class="text-success">Bienvenido {{user.username}}!.</p>
+                {% if request.user.is_staff %}
+                    <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
+                    <a class="navbar-brand" href="{% url 'Nosotros' %}">Nosotros</a>
+                    <a class="navbar-brand" href="{% url 'Vinos' %}">Vinos</a>
+                    <a class="navbar-brand" href="{% url 'Espumantes' %}">Espumantes</a>
+                    <a class="navbar-brand" href="{% url 'Aceites' %}">Aceites</a>
+                    <a class="navbar-brand" href="{% url 'Equipo' %}">Equipo</a>
+                    <a class="navbar-brand" href="{% url 'Noticias' %}">Noticias</a>
+                    <div class="bg-muted clearfix">
+                    <p class="text-justify text-success">Bienvenido {{user.username}}!.</p>
+                    </div>
                     <a class="btn btn-primary" href="{% url 'Logout' %}">Logout</a>
                 {% else %}
-                    <p class="text-danger">Click Aqui >>> </p>
+
+                    {% if user.is_authenticated %}
+                    <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
+                    <a class="navbar-brand" href="{% url 'Nosotros' %}">Nosotros</a>
+                    <a class="navbar-brand" href="{% url 'ListaVinos' %}">Vinos</a>
+                    <a class="navbar-brand" href="{% url 'ListaEspumantes' %}">Espumantes</a>
+                    <a class="navbar-brand" href="{% url 'ListaAceites' %}">Aceites</a>
+                    <a class="navbar-brand" href="{% url 'ListaEquipo' %}">Equipo</a>
+                    <a class="navbar-brand" href="{% url 'Noticias' %}">Noticias</a>
+                    <div class="bg-muted clearfix">
+                    <p class="text-justify text-success">Bienvenido {{user.username}}!.</p>
+                    </div>
+                    <a class="btn btn-primary" href="{% url 'Logout' %}">Logout</a>
+                    {% else %}
+                    <a class="navbar-brand" href="{% url 'Nosotros' %}">Nosotros</a>
+                    <div class="bg-muted clearfix">
+                    <p class="text-justify text-danger">Click Aqui >>> </p>
+                    </div>
                     <a class="btn btn-primary" href="{% url 'Register' %}">Registrarse</a>
                     <a class="btn btn-primary" href="{% url 'Login' %}">Login</a>
+                    {% endif %}
                 {% endif %}
                     
             </div>

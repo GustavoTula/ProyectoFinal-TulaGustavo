@@ -1,8 +1,8 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -53,11 +53,11 @@ def inicio(request):
     avatares = Avatar.objects.filter(user=request.user.id)
     return render(request, "inicio.html", {"url":avatares[0].imagen.url})
 
-@login_required
+
 def nosotros(request):
     return render(request, "nosotros.html")
 
-@staff_member_required(login_url='/app-coder/login') #CREAR UN HTML QUE INDIQUE QUE NO TIENE PERMISO DE MIRAR ESTA PESTAÑA SINO ES MIEMBRO
+@staff_member_required#(login_url='/app-coder/login') #CREAR UN HTML QUE INDIQUE QUE NO TIENE PERMISO DE MIRAR ESTA PESTAÑA SINO ES MIEMBRO
 def vinos(request):
 
     if request.method == 'POST':    
@@ -73,14 +73,14 @@ def vinos(request):
         miFormulario=VinoFormulario()
 
     return render(request, "vinos.html", {"miFormulario":miFormulario})
-
+@user_passes_test(lambda u: u.is_superuser)
 def eliminarVinos(request, id):
-    if request.method == 'POST':
+     if request.method == 'POST':
          vino = Vino.objects.get(id=id)
          vino.delete()
 
-         return redirect('ListaVinos')
-
+         return redirect('ListaVinos')     
+@staff_member_required
 def editarVinos(request, id):
 
     vino = Vino.objects.get(id=id)
@@ -114,9 +114,10 @@ def editarVinos(request, id):
 def listaVinos(request):
     vinoss = Vino.objects.all()
     return render(request, "listaVinos.html", {"listaVinos": vinoss})
-
+@login_required
 def busquedaVarietal(request):
     return render(request, "busquedaVarietal.html")
+@login_required    
 def buscar(request):
     if request.GET["varietal"]:
         varietal = request.GET['varietal']
@@ -136,28 +137,28 @@ class StaffRequiredMixin(object):
     def dispatch(self, request, *args, **kwargs):
         return super(StaffRequiredMixin, self).dispatch(request, *args, **kwargs)
     
-class VinoList(LoginRequiredMixin, ListView): #Buscar mixin decoradores para staff members
+class VinoList(LoginRequiredMixin, ListView): 
     model = Vino
     template_name = "vino-list.html"
-class VinoDetail(LoginRequiredMixin, DetailView): #Buscar mixin decoradores para staff
+class VinoDetail(LoginRequiredMixin, DetailView): 
     model = Vino
     template_name = "vino-detail.html"
-class VinoCreate(StaffRequiredMixin, CreateView): #Buscar mixin decoradores para staff
+class VinoCreate(StaffRequiredMixin, CreateView): 
     model= Vino
     template_name = "vino-create.html"
     success_url = "/app-coder/vinoList"
     fields = ['nombre' , 'varietal', 'añada']
-class VinoUpdate(StaffRequiredMixin, UpdateView): #Buscar mixin decoradores para staff
+class VinoUpdate(StaffRequiredMixin, UpdateView): 
     model = Vino
     template_name = "vino-update.html"
     success_url = "/app-coder/vinoList"
     fields = ['nombre' , 'varietal', 'añada']
-class VinoDelete(StaffRequiredMixin, DeleteView): #Buscar mixin decoradores para staff
+class VinoDelete(UserPassesTestMixin, DeleteView): 
     model = Vino
     template_name = "vino-delete.html"
     success_url = "/app-coder/vinoList"
 
-@staff_member_required(login_url='/app-coder/login')
+@staff_member_required#(login_url='/app-coder/login')
 def espumantes(request):
     
     if request.method == 'POST':    
@@ -173,14 +174,14 @@ def espumantes(request):
         miFormulario=EspumanteFormulario()
 
     return render(request, "espumantes.html", {"miFormulario":miFormulario})
-
+@user_passes_test(lambda u: u.is_superuser)
 def eliminarEspumantes(request, id):
     if request.method == 'POST':
          espumante = Espumante.objects.get(id=id)
          espumante.delete()
 
          return redirect('ListaEspumantes')
-
+@staff_member_required
 def editarEspumantes(request, id):
 
     espumante = Espumante.objects.get(id=id)
@@ -215,10 +216,10 @@ def editarEspumantes(request, id):
 def listaEspumantes(request):
     espumantess = Espumante.objects.all()
     return render(request, "listaEspumantes.html", {"listaEspumantes":espumantess})
-
+@login_required
 def busquedaAñada(request):
     return render(request, "busquedaAñada.html")
-
+@login_required
 def buscarAñada(request):
     if request.GET["añada"]:
         añada = request.GET['añada']
@@ -232,30 +233,30 @@ def buscarAñada(request):
 
     return render(request, "resultadoBusquedaAñada.html", {"respuesta1":respuesta})
 
-class EspumanteList(LoginRequiredMixin, ListView): #Buscar mixin decoradores para staff members
+class EspumanteList(LoginRequiredMixin, ListView): 
     model = Espumante
     template_name = "espumante-list.html"
-class EspumanteDetail(LoginRequiredMixin, DetailView): #Buscar mixin decoradores para staff
+class EspumanteDetail(LoginRequiredMixin, DetailView): 
     model = Espumante
     template_name = "espumante-detail.html"
-class EspumanteCreate(LoginRequiredMixin, CreateView): #Buscar mixin decoradores para staff
+class EspumanteCreate(StaffRequiredMixin, CreateView): 
     model= Espumante
     template_name = "espumante-create.html"
     success_url = "/app-coder/espumanteList"
     fields = ['nombre' , 'varietal', 'añada']
-class EspumanteUpdate(LoginRequiredMixin, UpdateView): #Buscar mixin decoradores para staff
+class EspumanteUpdate(StaffRequiredMixin, UpdateView): 
     model = Espumante
     template_name = "espumante-update.html"
     success_url = "/app-coder/espumanteList"
     fields = ['nombre' , 'varietal', 'añada']
-class EspumanteDelete(LoginRequiredMixin, DeleteView): #Buscar mixin decoradores para staff
+class EspumanteDelete(UserPassesTestMixin, DeleteView): 
     model = Espumante
     template_name = "espumante-delete.html"
     success_url = "/app-coder/espumanteList"
 
 
 
-@staff_member_required(login_url='/app-coder/login')
+@staff_member_required#(login_url='/app-coder/login')
 def aceites(request):
 
     if request.method == 'POST':    
@@ -271,14 +272,14 @@ def aceites(request):
         miFormulario=AceiteFormulario()
 
     return render(request, "aceites.html", {"miFormulario":miFormulario})
-
+@user_passes_test(lambda u: u.is_superuser)
 def eliminarAceites(request, id):
     if request.method == 'POST':
          aceite = Aceite.objects.get(id=id)
          aceite.delete()
 
          return redirect('ListaAceites')
-
+@staff_member_required
 def editarAceites(request, id):
 
     aceite = Aceite.objects.get(id=id)
@@ -311,10 +312,10 @@ def listaAceites(request):
 
     aceitess = Aceite.objects.all()
     return render(request, "listaAceites.html", {"listaAceites":aceitess})
-
+@login_required
 def busquedaAceite(request):
     return render(request, "busquedaAceite.html")
-
+@login_required
 def buscarAceite(request):
     if request.GET["aceite"]:
         aceites = request.GET['aceite']
@@ -328,28 +329,28 @@ def buscarAceite(request):
     return render(request, "resultadoBusquedaAceite.html", {"respuesta2":respuesta})
 
 
-class AceiteList(LoginRequiredMixin, ListView): #Buscar mixin decoradores para staff members
+class AceiteList(LoginRequiredMixin, ListView): 
     model = Aceite
     template_name = "aceite-list.html"
-class AceiteDetail(LoginRequiredMixin, DetailView): #Buscar mixin decoradores para staff
-    model = Aceite
+class AceiteDetail(LoginRequiredMixin, DetailView):
+    model = Aceite 
     template_name = "aceite-detail.html"
-class AceiteCreate(LoginRequiredMixin, CreateView): #Buscar mixin decoradores para staff
+class AceiteCreate(StaffRequiredMixin, CreateView): 
     model= Aceite
     template_name = "aceite-create.html"
     success_url = "/app-coder/aceiteList"
     fields = ['nombre' , 'varietal']
-class AceiteUpdate(LoginRequiredMixin, UpdateView): #Buscar mixin decoradores para staff
+class AceiteUpdate(StaffRequiredMixin, UpdateView): 
     model = Aceite
     template_name = "aceite-update.html"
     success_url = "/app-coder/aceiteList"
     fields = ['nombre' , 'varietal']
-class AceiteDelete(LoginRequiredMixin, DeleteView): #Buscar mixin decoradores para staff
+class AceiteDelete(UserPassesTestMixin, DeleteView): 
     model = Aceite
     template_name = "aceite-delete.html"
     success_url = "/app-coder/aceiteList"
 
-@staff_member_required(login_url='/app-coder/login')
+@staff_member_required#(login_url='/app-coder/login')
 def equipo(request):
 
     if request.method == 'POST':    
@@ -365,14 +366,14 @@ def equipo(request):
         miFormulario=PersonalFormulario()
 
     return render(request, "equipo.html", {"miFormulario":miFormulario})
-
+@user_passes_test(lambda u: u.is_superuser)
 def eliminarEquipo(request, id):
     if request.method == 'POST':
          personal = Personal.objects.get(id=id)
          personal.delete()
 
          return redirect('ListaEquipo')
-
+@staff_member_required
 def editarEquipo(request, id):
 
     personal = Personal.objects.get(id=id)
@@ -408,10 +409,10 @@ def editarEquipo(request, id):
 def listaEquipo(request):
     miembros = Personal.objects.all()
     return render(request, "listaEquipo.html", {"listaEquipo":miembros})
-
+@login_required
 def busquedaCargo(request):
     return render(request, "busquedaCargo.html")
-
+@login_required
 def buscarCargo(request):
     if request.GET["cargo"]:
         cargos = request.GET['cargo']
@@ -426,23 +427,23 @@ def buscarCargo(request):
 
     return render(request, "resultadoBusquedaCargo.html", {"respuesta3":respuesta})
 
-class PersonalList(LoginRequiredMixin, ListView): #Buscar mixin decoradores para staff members
+class PersonalList(LoginRequiredMixin, ListView): 
     model = Personal
     template_name = "personal-list.html"
-class PersonalDetail(LoginRequiredMixin, DetailView): #Buscar mixin decoradores para staff
+class PersonalDetail(LoginRequiredMixin, DetailView): 
     model = Personal
     template_name = "personal-detail.html"
-class PersonalCreate(LoginRequiredMixin, CreateView): #Buscar mixin decoradores para staff
+class PersonalCreate(StaffRequiredMixin, CreateView): 
     model= Personal
     template_name = "personal-create.html"
     success_url = "/app-coder/personalList"
     fields = ['nombre' , 'apellido', 'cargo', 'email']
-class PersonalUpdate(LoginRequiredMixin, UpdateView): #Buscar mixin decoradores para staff
+class PersonalUpdate(StaffRequiredMixin, UpdateView): 
     model = Personal
     template_name = "personal-update.html"
     success_url = "/app-coder/personalList"
     fields = ['nombre' , 'apellido', 'cargo', 'email']
-class PersonalDelete(LoginRequiredMixin, DeleteView): #Buscar mixin decoradores para staff
+class PersonalDelete(UserPassesTestMixin, DeleteView): 
     model = Personal
     template_name = "personal-delete.html"
     success_url = "/app-coder/personalList"   
@@ -503,7 +504,7 @@ def register(request):
         miFormulario = UserRegisterForm()
         return render(request, "register.html", {"miFormulario":miFormulario}) 
     
-
+@login_required
 def editRegister(request):
 
     usuario = request.user
@@ -533,7 +534,7 @@ def editRegister(request):
         miFormulario=UserEditForm(instance=request.user)
     
         return render(request, "editRegister.html",{"miFormulario":miFormulario, "usuario":usuario})        
-
+@login_required
 def agregarAvatar(request):
     if request.method == 'POST':
 
