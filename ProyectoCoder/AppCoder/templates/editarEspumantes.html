@@ -1,0 +1,19 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h1>Solo bebo champagne en dos ocasiones, cuando estoy enamorada y cuando no lo estoy</h1>
+<h2>Podra editar los datos de los vinos en el siguiente formulario:</h2>
+
+<form action= "{% url 'EditarEspumantes' id %}" method="POST">{% csrf_token %}
+        
+    {{ miFormulario.as_p }}
+
+    <input type="submit" value="Actualizar"/>
+
+
+</form>
+
+<a href="{% url 'ListaEspumantes' %}">Espumantes a su disposicion</a>        
+{% endblock contenidoQueCambia %}

@@ -14,11 +14,10 @@
         <div>
             <form action= "{% url 'EliminarVinos' vino.id %}" method="POST">{% csrf_token %}
             
-                <button type="submit">Eliminar</button>
+                <button type="submit">Eliminar</button> |
+                <button> <a href="{% url 'EditarVinos' vino.id %}">Modificar</a></button>
             </form>
-            <button>
-                <a href="{% url 'EditarVinos' vino.id %}">Modificar</a>
-            </button>
+            
     
         </div> 
         
@@ -28,7 +27,8 @@
 
     </ul>
    
-    <a href="{% url 'Vinos' %}">Agregar Vinos</a>   
+    <a href="{% url 'Vinos' %}">Agregar Vinos</a>  
+    <p></p> 
     <h5> Muy larga la lista? filtra por varietal en el siguiente link:</h5>
     <p></p>
     <a href="{% url 'BusquedaVarietal' %}">Filtrar</a> 

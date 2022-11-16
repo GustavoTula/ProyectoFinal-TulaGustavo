@@ -154,14 +154,11 @@ class VinoCreate(LoginRequiredMixin, CreateView): #Buscar mixin decoradores para
     template_name = "vino-create.html"
     success_url = "/app-coder/vinoList"
     fields = ['nombre' , 'varietal', 'añada']
-    
-
 class VinoUpdate(LoginRequiredMixin, UpdateView): #Buscar mixin decoradores para staff
     model = Vino
     template_name = "vino-update.html"
     success_url = "/app-coder/vinoList"
     fields = ['nombre' , 'varietal', 'añada']
-
 class VinoDelete(LoginRequiredMixin, DeleteView): #Buscar mixin decoradores para staff
     model = Vino
     template_name = "vino-delete.html"
@@ -184,10 +181,47 @@ def espumantes(request):
 
     return render(request, "espumantes.html", {"miFormulario":miFormulario})
 
-def listaEspumantes(request):
+def eliminarEspumantes(request, id):
+    if request.method == 'POST':
+         espumante = Espumante.objects.get(id=id)
+         espumante.delete()
 
+         return redirect('ListaEspumantes')
+
+def editarEspumantes(request, id):
+
+    espumante = Espumante.objects.get(id=id)
+
+    if request.method == 'POST':
+         miFormulario = EspumanteFormulario(request.POST)
+         print(miFormulario)
+
+         if miFormulario.is_valid():
+        
+            data = miFormulario.cleaned_data
+
+            espumante.nombre = data["espumante"]
+            espumante.varietal = data["varietal"]
+            espumante.añada = data["añada"]
+
+            espumante.save()
+
+            return redirect("ListaEspumantes")
+    else:
+        
+        miFormulario = EspumanteFormulario(initial={
+
+            "espumante": espumante.nombre, 
+            "varietal": espumante.varietal, 
+            "añada": espumante.añada,
+            
+            })
+    return render(request, "editarEspumantes.html", {"miFormulario":miFormulario, "id":espumante.id})
+
+
+def listaEspumantes(request):
     espumantess = Espumante.objects.all()
-    return render(request, "listaEquipo.html", {"Nombre":espumantess})
+    return render(request, "listaEspumantes.html", {"listaEspumantes":espumantess})
 
 def busquedaAñada(request):
     return render(request, "busquedaAñada.html")
@@ -204,6 +238,7 @@ def buscarAñada(request):
         respuesta= "No asigno ninguna añada en la busqueda, por favor intentar de nuevo"    
 
     return render(request, "resultadoBusquedaAñada.html", {"respuesta1":respuesta})
+
 @staff_member_required(login_url='/app-coder/login')
 def aceites(request):
 
@@ -221,10 +256,45 @@ def aceites(request):
 
     return render(request, "aceites.html", {"miFormulario":miFormulario})
 
+def eliminarAceites(request, id):
+    if request.method == 'POST':
+         aceite = Aceite.objects.get(id=id)
+         aceite.delete()
+
+         return redirect('ListaAceites')
+
+def editarAceites(request, id):
+
+    aceite = Aceite.objects.get(id=id)
+
+    if request.method == 'POST':
+         miFormulario = AceiteFormulario(request.POST)
+         print(miFormulario)
+
+         if miFormulario.is_valid():
+        
+            data = miFormulario.cleaned_data
+
+            aceite.nombre = data["aceite"]
+            aceite.varietal = data["varietal"]
+
+            aceite.save()
+
+            return redirect("ListaAceites")
+    else:
+        
+        miFormulario = AceiteFormulario(initial={
+
+            "aceite": aceite.nombre, 
+            "varietal": aceite.varietal,
+            
+            })
+    return render(request, "editarAceites.html", {"miFormulario":miFormulario, "id":aceite.id})
+
 def listaAceites(request):
 
     aceitess = Aceite.objects.all()
-    return render(request, "listaEquipo.html", {"Nombre":aceitess})
+    return render(request, "listaAceites.html", {"listaAceites":aceitess})
 
 def busquedaAceite(request):
     return render(request, "busquedaAceite.html")
@@ -258,10 +328,48 @@ def equipo(request):
 
     return render(request, "equipo.html", {"miFormulario":miFormulario})
 
-def listaEquipo(request):
+def eliminarEquipo(request, id):
+    if request.method == 'POST':
+         personal = Personal.objects.get(id=id)
+         personal.delete()
 
+         return redirect('ListaEquipo')
+
+def editarEquipo(request, id):
+
+    personal = Personal.objects.get(id=id)
+
+    if request.method == 'POST':
+         miFormulario = PersonalFormulario(request.POST)
+         print(miFormulario)
+
+         if miFormulario.is_valid():
+        
+            data = miFormulario.cleaned_data
+
+            personal.nombre = data["nombre"]
+            personal.apellido = data["apellido"]
+            personal.cargo = data["cargo"]
+            personal.email = data["email"]
+
+            personal.save()
+
+            return redirect("ListaEquipo")
+    else:
+        
+        miFormulario = PersonalFormulario(initial={
+
+            "nombre": personal.nombre, 
+            "apellido": personal.apellido, 
+            "cargo": personal.cargo,
+            "email": personal.email,
+            
+            })
+    return render(request, "editarEquipo.html", {"miFormulario":miFormulario, "id":personal.id})
+
+def listaEquipo(request):
     miembros = Personal.objects.all()
-    return render(request, "listaEquipo.html", {"Nombre":miembros})
+    return render(request, "listaEquipo.html", {"listaEquipo":miembros})
 
 def busquedaCargo(request):
     return render(request, "busquedaCargo.html")

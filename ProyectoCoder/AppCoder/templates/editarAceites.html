@@ -1,0 +1,19 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h1>Un Aceite que deleita nuestras sentidos</h1>  
+<h2>Podra editar los datos de los aceites en el siguiente formulario:</h2>
+
+<form action= "{% url 'EditarAceites' id %}" method="POST">{% csrf_token %}
+        
+    {{ miFormulario.as_p }}
+
+    <input type="submit" value="Actualizar"/>
+
+
+</form>
+
+<a href="{% url 'ListaAceites' %}">Verificar aceites a disposicion </a>        
+{% endblock contenidoQueCambia %}
