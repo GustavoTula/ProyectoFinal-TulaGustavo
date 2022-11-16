@@ -9,6 +9,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.utils.decorators import method_decorator
 
 from .forms import (AceiteFormulario, EspumanteFormulario, PersonalFormulario,
                     UserEditForm, UserRegisterForm, VinoFormulario, AvatarFormulario)
@@ -130,23 +131,28 @@ def buscar(request):
     return render(request, "resultadoBusqueda.html", {"respuesta":respuesta})
 
 
+class StaffRequiredMixin(object):
+    @method_decorator(staff_member_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(StaffRequiredMixin, self).dispatch(request, *args, **kwargs)
+    
 class VinoList(LoginRequiredMixin, ListView): #Buscar mixin decoradores para staff members
     model = Vino
     template_name = "vino-list.html"
 class VinoDetail(LoginRequiredMixin, DetailView): #Buscar mixin decoradores para staff
     model = Vino
     template_name = "vino-detail.html"
-class VinoCreate(LoginRequiredMixin, CreateView): #Buscar mixin decoradores para staff
+class VinoCreate(StaffRequiredMixin, CreateView): #Buscar mixin decoradores para staff
     model= Vino
     template_name = "vino-create.html"
     success_url = "/app-coder/vinoList"
     fields = ['nombre' , 'varietal', 'añada']
-class VinoUpdate(LoginRequiredMixin, UpdateView): #Buscar mixin decoradores para staff
+class VinoUpdate(StaffRequiredMixin, UpdateView): #Buscar mixin decoradores para staff
     model = Vino
     template_name = "vino-update.html"
     success_url = "/app-coder/vinoList"
     fields = ['nombre' , 'varietal', 'añada']
-class VinoDelete(LoginRequiredMixin, DeleteView): #Buscar mixin decoradores para staff
+class VinoDelete(StaffRequiredMixin, DeleteView): #Buscar mixin decoradores para staff
     model = Vino
     template_name = "vino-delete.html"
     success_url = "/app-coder/vinoList"

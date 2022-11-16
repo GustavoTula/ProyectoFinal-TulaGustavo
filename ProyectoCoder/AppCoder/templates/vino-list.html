@@ -15,21 +15,30 @@
                 </a>
             </li>
             <div>
-               <button> |
-                <a href=" {% url 'VinoUpdate' vino.id %}">Editar</a> |
-                <a href=" {% url 'VinoDelete' vino.id %}">Eliminar</a>
-               </button> 
-               
+                
+                {% if request.user.is_staff %}
+                <button> |
+                    <a href=" {% url 'VinoUpdate' vino.id %}">Editar</a> |
+                    
+                    {% if request.user.is_superuser %}
+                    <a href=" {% url 'VinoDelete' vino.id %}">Eliminar</a> |
+                    {% endif %}
+        
+                </button> 
+                {% endif %}
+                    
             </div>
             
         {% endfor %}
             
    </ul>
-
+   {% if request.user.is_staff %}
    <p>Desea agregar algun vino al repertorio?</p>   
    <button>
        <a href=" {% url 'VinoCreate' %}">Adicionar</a>
-   </button>   
+   </button>
+   <p></p>
+   {% endif %}  
    <p>Puede regresar al Inicio dando click a continuacion:</p> 
     <button> 
     <a href="{% url 'Inicio' %}">Regresar</a>     
