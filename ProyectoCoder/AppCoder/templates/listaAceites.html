@@ -4,15 +4,13 @@
 {% block contenidoQueCambia %}
 
     <h1>Un Aceite que deleita nuestras sentidos</h1>  
-    
+    <h4>Si desea quitar o editar algun item de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion: </h4>
     <ul> 
 
         {% for aceite in listaAceites %}
         <li>{{aceite.nombre}} - {{aceite.varietal}}</li> 
 
         {% if request.user.is_superuser %}
-        <p>Si desea quitar o editar algun item de la lista presionar en "Eliminar" o "Modificar" a continuacion: </p>
-    
          <div>
                 <form action= "{% url 'EliminarAceites' aceite.id %}" method="POST">{% csrf_token %}            
                     <button type="submit">Eliminar</button> |
@@ -23,7 +21,6 @@
         {% else %}   
                 {% if request.user.is_staff %}
                 <div>
-                    <p>Si desea editar algun item de la lista presionar en "Modificar" a continuacion:</p>
                     <button>|<a href="{% url 'EditarAceites' aceite.id %}">Modificar</a>|</button>
                 </div>
                 {% endif %}

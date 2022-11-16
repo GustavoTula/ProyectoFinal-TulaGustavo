@@ -4,7 +4,7 @@
 {% block contenidoQueCambia %}
 
     <h1>Nuestros vinos en cava: </h1>
-    
+    <h4>Si desea quitar o editar algun item de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion: </h4>
        
     <ul>
         
@@ -12,10 +12,9 @@
         <li>{{vino.nombre}} - {{vino.varietal}} - {{vino.añada}}</li>
        
             {% if request.user.is_superuser %}
-                <p>Si desea quitar o editar algun item de la lista presionar en "Eliminar" o "Modificar" a continuacion: </p>
+                
                 <div>
                     <form action= "{% url 'EliminarVinos' vino.id %}" method="POST">{% csrf_token %}
-            
                         <button type="submit">Eliminar</button> |
                         <button><a href="{% url 'EditarVinos' vino.id %}">Modificar</a></button>
         
@@ -23,8 +22,7 @@
                 </div>
             {% else %}   
                 {% if request.user.is_staff %}
-                <div>
-                    <p>Si desea editar algun item de la lista presionar en "Modificar" a continuacion:</p>
+                <div>  
                     <button>|<a href="{% url 'EditarVinos' vino.id %}">Modificar</a>|</button>
                 </div>
                 {% endif %}

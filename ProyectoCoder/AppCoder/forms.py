@@ -54,7 +54,7 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1','password2','first_name','last_name']
         help_texts = {k: "" for k in fields}
-
+        unique_together = ['username', 'email', 'password1','password2','first_name','last_name']
     def clean_password(self):
         password2 = self.cleaned_data['password2']
         if password2 != self.cleaned_data['password1']:
@@ -78,7 +78,7 @@ class UserEditForm(UserChangeForm):
         model = User
         fields = ['email', 'password1', 'password2','first_name', 'last_name']
         help_texts= {k:"" for k in fields}
-
+        unique_together = ['username', 'email', 'password1','password2','first_name','last_name']
     def clean_password(self):
         password2 = self.cleaned_data['password2']
         if password2 != self.cleaned_data['password1']:

@@ -4,15 +4,13 @@
 {% block contenidoQueCambia %}
 
     <h1>Quienes conforman nuestro personal a su disposicion: </h1>
-    
-       
-    
+    <p>Si desea quitar o editar algun miembro del personal de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion: </p>
+
     <ul>
         
         {% for personal in listaEquipo %}
         <li>{{personal.nombre}} - {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li>
                 {% if request.user.is_superuser %}
-                <p>Si desea quitar o editar algun miembro del personal de la lista presionar en "Eliminar" o "Modificar" a continuacion: </p>
                     <div>
                          <form action= "{% url 'EliminarEquipo' personal.id %}" method="POST">{% csrf_token %}
                          <button type="submit">Eliminar</button> |
@@ -22,7 +20,6 @@
                 {% else %}   
                     {% if request.user.is_staff %}
                     <div>
-                        <p>Si desea editar algun miembro del personal de la lista presionar en "Modificar" a continuacion:</p>
                         <button>|<a href="{% url 'EditarEquipo' personal.id %}">Modificar</a>|</button>
                     </div>
                     {% endif %}
