@@ -1,0 +1,32 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<div class="text-center">
+    
+    <h1> Contactanos!</h1>
+
+    {% if form.errors %}
+        <p style="color:red;">Por favor revisar este campo</p>
+    {% endif %}
+</div>        
+
+    <form action="{% url 'Contacto' %}" method="POST">{% csrf_token %}
+
+        <table class="Text-center">
+
+            {{ miFormulario.as_table}}
+
+        </table>
+        <p></p>
+        <input type="submit" value="Enviar">
+    </form>
+
+
+    
+    <p class="text-md-left">Quieres volver al inicio? el siguiente link te llevara.</p>
+    <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
+
+</div>
+{% endblock contenidoQueCambia %}

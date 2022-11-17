@@ -10,9 +10,12 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.utils.decorators import method_decorator
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 from .forms import (AceiteFormulario, EspumanteFormulario, PersonalFormulario,
-                    UserEditForm, UserRegisterForm, VinoFormulario, AvatarFormulario)
+                    UserEditForm, UserRegisterForm, VinoFormulario, AvatarFormulario,ContactoFormulario)
 from .models import Aceite, Avatar, Espumante, Personal, Vino
 
 
@@ -552,4 +555,26 @@ def agregarAvatar(request):
 
     return render(request, "agregarAvatar.html", {"miFormulario":miFormulario})    
     
+def contacto(request):
 
+    if request.method == "POST":
+        miFormulario = ContactoFormulario(request.POST)
+
+        if miFormulario.is_valid():
+
+            infForm=miFormulario.cleaned_data
+
+            send_mail(
+                
+                #infForm['nombre'],
+                infForm['asunto'],
+                infForm['mensaje'],
+                infForm.get('email',''),['vinotecawinemaker@gmail.com'],)
+
+            return render(request, "mensajeGracias.html", )
+
+    else:
+            
+        miFormulario=ContactoFormulario()
+ 
+    return render(request, "contactoFormulario.html", {"miFormulario":miFormulario})      

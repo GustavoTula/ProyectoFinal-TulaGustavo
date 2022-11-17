@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .models import Avatar
 
 
+
 #from .views import UserCreationForm
 class VinoFormulario(forms.Form):
     vino = forms.CharField(max_length=50)
@@ -85,3 +86,10 @@ class UserEditForm(UserChangeForm):
             raise forms.ValidationError("Las contraseñas no coinciden!,verificar.")
         return password2
 
+
+class ContactoFormulario(forms.Form):
+
+    #nombre=forms.CharField()
+    asunto=forms.CharField()
+    email=forms.EmailField()
+    mensaje=forms.CharField()

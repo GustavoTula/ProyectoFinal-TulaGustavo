@@ -60,6 +60,7 @@ from .views import (
     editarAceites,
     eliminarEquipo,
     editarEquipo,
+    contacto,
 )
 
 
@@ -135,4 +136,5 @@ urlpatterns = [
     path('editRegister', editRegister, name="EditRegister"),
     path('agregarAvatar', agregarAvatar, name="AgregarAvatar"),
 
-]
+    path('contacto/', contacto, name="Contacto"),
+]   
