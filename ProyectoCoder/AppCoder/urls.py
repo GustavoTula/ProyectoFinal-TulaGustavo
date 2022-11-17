@@ -122,16 +122,17 @@ urlpatterns = [
     path('aceiteUpdate/<pk>', AceiteUpdate.as_view(), name="AceiteUpdate"),
     path('aceiteDelete/<pk>', AceiteDelete.as_view(), name="AceiteDelete"),
 
-    path('login', loginRequest, name="Login"),
-    path('register', register, name="Register"),
-    path('logout', LogoutView.as_view(template_name="logout.html"), name="Logout"),
-    path('editRegister', editRegister, name="EditRegister"),
-    path('agregarAvatar', agregarAvatar, name="AgregarAvatar"),
 
     path('personalList/', PersonalList.as_view(), name="PersonalList"),
     path('personalDetail/<pk>', PersonalDetail.as_view(), name="PersonalDetail"),
     path('personalCreate/', PersonalCreate.as_view(), name="PersonalCreate"),
     path('personalUpdate/<pk>', PersonalUpdate.as_view(), name="PersonalUpdate"),
     path('personalDelete/<pk>', PersonalDelete.as_view(), name="PersonalDelete"),
+
+    path('login', loginRequest, name="Login"),
+    path('register', register, name="Register"),
+    path('logout', LogoutView.as_view(template_name="logout.html"), name="Logout"),
+    path('editRegister', editRegister, name="EditRegister"),
+    path('agregarAvatar', agregarAvatar, name="AgregarAvatar"),
 
 ]

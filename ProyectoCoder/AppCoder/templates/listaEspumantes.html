@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
-
+{% if listaEspumantes %}
     <h1>Solo bebo champagne en dos ocasiones, cuando estoy enamorada y cuando no lo estoy</h1>
     <h4>Si desea quitar o editar algun item de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion: </h4>
     <ul>
@@ -40,5 +40,10 @@
     <a href="{% url 'BusquedaAñada' %}">Filtrar</a> 
     <p></p>
     <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
-    <a href="{% url 'Inicio' %}">Inicio</a>    
+    <a href="{% url 'Inicio' %}">Inicio</a>  
+{% else %}
+    <h1>No hay informacion al respecto</h1>
+    <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
+    <a href="{% url 'Inicio' %}">Inicio</a> 
+{% endif %} 
 {% endblock contenidoQueCambia %}

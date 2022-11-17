@@ -50,8 +50,8 @@ def lista_personal(request):
 @login_required
 def inicio(request):
     
-    avatares = Avatar.objects.filter(user=request.user.id)
-    return render(request, "inicio.html", {"url":avatares[0].imagen.url})
+        avatares = Avatar.objects.filter(user=request.user.id)
+        return render(request, "inicio.html", {"url":avatares[0].imagen.url})
 
 
 def nosotros(request):
@@ -470,6 +470,7 @@ def loginRequest(request):
             if user:
 
                 login(request, user)
+                
                 return render(request, "inicio.html", {"mensaje": f'Bienvenido {usuario}'})
 
             else:
@@ -545,7 +546,6 @@ def agregarAvatar(request):
             u = User.objects.get(username=request.user)
             avatar = Avatar(user=u, imagen=miFormulario.cleaned_data['imagen'])
             avatar.save()
-            #miFormulario.save()
             return redirect("Inicio")
     else:
         miFormulario=AvatarFormulario()

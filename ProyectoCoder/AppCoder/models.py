@@ -41,7 +41,7 @@ class Personal(models.Model):
     apellido = models.CharField(max_length=50)
     cargo = models.CharField(max_length=50)
     email = models.EmailField()
-
+    #user_id = models.OneToOneField(User,on_delete=models.CASCADE)
     class Meta:
         verbose_name= "Los Miembro"
         ordering = ['nombre', 'apellido','cargo','email',]

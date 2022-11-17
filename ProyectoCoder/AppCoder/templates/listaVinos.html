@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
-
+{% if listaVinos %}
     <h1>Nuestros vinos en cava: </h1>
     <h4>Si desea quitar o editar algun item de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion: </h4>
        
@@ -41,6 +41,12 @@
     <p></p>
     <a href="{% url 'BusquedaVarietal' %}">Filtrar</a> 
     <p></p>
+
     <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
     <a href="{% url 'Inicio' %}">Inicio</a> 
+{% else %}
+    <h1>No hay informacion al respecto</h1>
+    <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
+    <a href="{% url 'Inicio' %}">Inicio</a> 
+{% endif %}
 {% endblock contenidoQueCambia %}
