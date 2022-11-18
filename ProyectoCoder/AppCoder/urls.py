@@ -74,7 +74,7 @@ urlpatterns = [
     path('agrega-personal/<nombre>/<apellido>/<cargo>/<email>', personal),
     path('lista-personal/', lista_personal, name="Lista-Personal"),
 
-    path('inicio', inicio, name= "Inicio"),
+    path('inicio/', inicio, name= "Inicio"),
     path('nosotros/', nosotros, name="Nosotros"),
     path('vinos/', vinos, name="Vinos"),
     path('espumantes/', espumantes, name="Espumantes"),

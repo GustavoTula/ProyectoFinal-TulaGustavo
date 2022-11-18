@@ -42,7 +42,7 @@ class UserRegisterForm(UserCreationForm):
         help_text="",
         widget=forms.HiddenInput(), required=False
     )
-    username = forms.CharField()
+    username = forms.CharField(label='Usuario')
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repetir la contraseña', widget=forms.PasswordInput)
     email = forms.EmailField()

@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'AppCoder',
+    'AppCore',
+    'channels',
+    'AppRoom',
+
 ]
 
 MIDDLEWARE = [
@@ -69,7 +73,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ProyectoCoder.wsgi.application'
+ASGI_APPLICATION = 'ProyectoCoder.Asgi.application'
 
+CHANNEL_LAYERS = {
+    'default':{
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -122,7 +133,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_URL = '/app-coder/login'
+LOGIN_URL = '/app-coder/inicio/'
+
 
 
 MEDIA_URL = '/media/'
