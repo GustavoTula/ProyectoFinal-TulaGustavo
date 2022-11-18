@@ -53,8 +53,8 @@ def lista_personal(request):
 @login_required
 def inicio(request):
     
-        avatares = Avatar.objects.filter(user=request.user.id)
-        return render(request, "inicio.html", {"url":avatares[0].imagen.url})
+        avatar = Avatar.objects.filter(user=request.user.id)
+        return render(request, "inicio.html", {"url":avatar[0].imagen.url})
 
 
 def nosotros(request):
@@ -156,7 +156,7 @@ class VinoUpdate(StaffRequiredMixin, UpdateView):
     template_name = "vino-update.html"
     success_url = "/app-coder/vinoList"
     fields = ['nombre' , 'varietal', 'añada']
-class VinoDelete(UserPassesTestMixin, DeleteView): 
+class VinoDelete(StaffRequiredMixin, DeleteView): 
     model = Vino
     template_name = "vino-delete.html"
     success_url = "/app-coder/vinoList"
@@ -252,7 +252,7 @@ class EspumanteUpdate(StaffRequiredMixin, UpdateView):
     template_name = "espumante-update.html"
     success_url = "/app-coder/espumanteList"
     fields = ['nombre' , 'varietal', 'añada']
-class EspumanteDelete(UserPassesTestMixin, DeleteView): 
+class EspumanteDelete(StaffRequiredMixin, DeleteView): 
     model = Espumante
     template_name = "espumante-delete.html"
     success_url = "/app-coder/espumanteList"
@@ -348,7 +348,7 @@ class AceiteUpdate(StaffRequiredMixin, UpdateView):
     template_name = "aceite-update.html"
     success_url = "/app-coder/aceiteList"
     fields = ['nombre' , 'varietal']
-class AceiteDelete(UserPassesTestMixin, DeleteView): 
+class AceiteDelete(StaffRequiredMixin, DeleteView): 
     model = Aceite
     template_name = "aceite-delete.html"
     success_url = "/app-coder/aceiteList"
@@ -446,7 +446,7 @@ class PersonalUpdate(StaffRequiredMixin, UpdateView):
     template_name = "personal-update.html"
     success_url = "/app-coder/personalList"
     fields = ['nombre' , 'apellido', 'cargo', 'email']
-class PersonalDelete(UserPassesTestMixin, DeleteView): 
+class PersonalDelete(StaffRequiredMixin, DeleteView): 
     model = Personal
     template_name = "personal-delete.html"
     success_url = "/app-coder/personalList"   

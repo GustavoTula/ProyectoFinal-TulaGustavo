@@ -48,9 +48,7 @@
                     <a class="navbar-brand" href="{% url 'ListaEquipo' %}">Equipo</a>
                     <a class="navbar-brand" href="{% url 'Noticias' %}">Noticias</a>
                     <a class="navbar-brand" href="{% url 'Contacto' %}">Contactanos!</a>
-                    <div class="bg-muted clearfix">
                     <p class="text-justify text-success">Bienvenido {{user.username}}!.</p>
-                    </div>
                     <a class="btn btn-primary" href="{% url 'Logout' %}">Logout</a>
                     {% else %}
                     <a class="navbar-brand" href="{% url 'Nosotros' %}">Nosotros</a>
