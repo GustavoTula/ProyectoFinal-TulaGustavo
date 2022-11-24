@@ -1,0 +1,22 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">Error: Sin Autorizacion</h4>
+    <p>No podemos darte acceso a esta seccion si no eres miembro del Staff</p>
+    <hr>
+    <p class="mb-0">Si lo eres pero no estas autentificado como tal, comunicarte con el Gerente o encargado de turno.</p>
+  </div>
+  <hr>
+  <h6><p><i>
+        Puedes volver al Inicio dando click a continuacion:
+    <p></p>
+    <button>
+        <a href="{% url 'Inicio' %}">Inicio</a>
+    </button>
+
+  </i></p></h6>
+
+{% endblock contenidoQueCambia %}

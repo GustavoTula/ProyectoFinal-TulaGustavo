@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.views import LogoutView
 from .views import ( 
     VinoDelete, 
@@ -132,6 +133,7 @@ urlpatterns = [
 
     path('login', loginRequest, name="Login"),
     path('register', register, name="Register"),
+    path('errorNoesMiemStaff',staff_member_required,name="errorNoEsMiemStaff"),
     path('logout', LogoutView.as_view(template_name="logout.html"), name="Logout"),
     path('editRegister', editRegister, name="EditRegister"),
     path('agregarAvatar', agregarAvatar, name="AgregarAvatar"),

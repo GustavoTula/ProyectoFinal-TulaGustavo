@@ -60,7 +60,7 @@ def inicio(request):
 def nosotros(request):
     return render(request, "nosotros.html")
 
-@staff_member_required#(login_url='/app-coder/login') #CREAR UN HTML QUE INDIQUE QUE NO TIENE PERMISO DE MIRAR ESTA PESTAÑA SINO ES MIEMBRO
+@staff_member_required(login_url="errorNoEsMiemStaff.html") 
 def vinos(request):
 
     if request.method == 'POST':    
@@ -83,7 +83,7 @@ def eliminarVinos(request, id):
          vino.delete()
 
          return redirect('ListaVinos')     
-@staff_member_required
+@staff_member_required(login_url="errorNoEsMiemStaff.html") 
 def editarVinos(request, id):
 
     vino = Vino.objects.get(id=id)
@@ -167,7 +167,7 @@ class VinoDelete(UserPassesTestMixin, DeleteView):
     template_name = "vino-delete.html"
     success_url = "/app-coder/vinoList"
 
-@staff_member_required#(login_url='/app-coder/login')
+@staff_member_required(login_url="errorNoEsMiemStaff.html") 
 def espumantes(request):
     
     if request.method == 'POST':    
@@ -190,7 +190,7 @@ def eliminarEspumantes(request, id):
          espumante.delete()
 
          return redirect('ListaEspumantes')
-@staff_member_required
+@staff_member_required(login_url="errorNoEsMiemStaff.html") 
 def editarEspumantes(request, id):
 
     espumante = Espumante.objects.get(id=id)
@@ -265,7 +265,7 @@ class EspumanteDelete(UserPassesTestMixin, DeleteView):
 
 
 
-@staff_member_required#(login_url='/app-coder/login')
+@staff_member_required(login_url="errorNoEsMiemStaff.html") 
 def aceites(request):
 
     if request.method == 'POST':    
@@ -288,7 +288,7 @@ def eliminarAceites(request, id):
          aceite.delete()
 
          return redirect('ListaAceites')
-@staff_member_required
+@staff_member_required(login_url="errorNoEsMiemStaff.html") 
 def editarAceites(request, id):
 
     aceite = Aceite.objects.get(id=id)
@@ -359,7 +359,7 @@ class AceiteDelete(UserPassesTestMixin, DeleteView):
     template_name = "aceite-delete.html"
     success_url = "/app-coder/aceiteList"
 
-@staff_member_required#(login_url='/app-coder/login')
+@staff_member_required(login_url="errorNoEsMiemStaff.html") 
 def equipo(request):
 
     if request.method == 'POST':    
@@ -382,7 +382,7 @@ def eliminarEquipo(request, id):
          personal.delete()
 
          return redirect('ListaEquipo')
-@staff_member_required
+@staff_member_required(login_url="errorNoEsMiemStaff.html") 
 def editarEquipo(request, id):
 
     personal = Personal.objects.get(id=id)
