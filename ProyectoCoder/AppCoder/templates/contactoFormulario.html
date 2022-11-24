@@ -5,28 +5,31 @@
 
 <div class="text-center">
     
-    <h1> Contactanos!</h1>
+    <h3> Contactanos!</h3>
+    <p></p>
+    <h4>¡Estaremos respondiendo en la brevedad!</h4>
 
     {% if form.errors %}
         <p style="color:red;">Por favor revisar este campo</p>
     {% endif %}
-</div>        
+       
 
     <form action="{% url 'Contacto' %}" method="POST">{% csrf_token %}
+        {{ miFormulario.as_p}}
 
-        <table class="Text-center">
-
-            {{ miFormulario.as_table}}
-
-        </table>
-        <p></p>
         <input type="submit" value="Enviar">
     </form>
 
-
+</div> 
     
-    <p class="text-md-left">Quieres volver al inicio? el siguiente link te llevara.</p>
-    <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
+    <h6 class="text-md-left">Quieres volver al inicio? el siguiente link te llevara.</h6>
+    <p></p>
+    <button>
+        <h6><a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a></h6>
+    </button>
+    
 
 </div>
+
+
 {% endblock contenidoQueCambia %}

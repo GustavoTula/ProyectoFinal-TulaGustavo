@@ -1,0 +1,21 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<div class="Text-center">
+
+    <h1>Usuario creado Exitosamente! Disfruta el recorrido en nuestra Vinoteca</h1>
+    <p></p>
+    <p></p>
+    <h5>Ya casi estamos! para poder recorrer nuestra Web es necesario que inicies sesion!</h5>
+    <p></p>
+    <h5>Has Click en el siguiente boton para hacerlo rapidamente! </h5>
+    <p></p>
+    <Button>
+    <a href="{% url 'Login' %}">Iniciar Sesion</a>
+    </Button>
+</div>
+
+
+{% endblock contenidoQueCambia %}

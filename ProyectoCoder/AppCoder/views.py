@@ -71,7 +71,7 @@ def vinos(request):
             data = miFormulario.cleaned_data
             vino = Vino(nombre=data['vino'], varietal=data['varietal'], añada=data['añada'])
             vino.save()
-            return redirect("Lista-Vinos")
+            return render(request, "vinoFormCreado.html")
     else:
         miFormulario=VinoFormulario()
 
@@ -139,6 +139,12 @@ class StaffRequiredMixin(object):
     @method_decorator(staff_member_required)
     def dispatch(self, request, *args, **kwargs):
         return super(StaffRequiredMixin, self).dispatch(request, *args, **kwargs)
+
+class UserPassesTestMixin(object):
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return super(UserPassesTestMixin,self).dispatch(request, *args, **kwargs)
     
 class VinoList(LoginRequiredMixin, ListView): 
     model = Vino
@@ -156,7 +162,7 @@ class VinoUpdate(StaffRequiredMixin, UpdateView):
     template_name = "vino-update.html"
     success_url = "/app-coder/vinoList"
     fields = ['nombre' , 'varietal', 'añada']
-class VinoDelete(StaffRequiredMixin, DeleteView): 
+class VinoDelete(UserPassesTestMixin, DeleteView): 
     model = Vino
     template_name = "vino-delete.html"
     success_url = "/app-coder/vinoList"
@@ -172,7 +178,7 @@ def espumantes(request):
             data = miFormulario.cleaned_data
             espumante = Espumante(nombre=data['espumante'], varietal=data['varietal'] , añada=data['añada'])
             espumante.save()
-            return redirect("Lista-Espumantes")
+            return render(request, "espumanteFormCreado.html")
     else:
         miFormulario=EspumanteFormulario()
 
@@ -252,7 +258,7 @@ class EspumanteUpdate(StaffRequiredMixin, UpdateView):
     template_name = "espumante-update.html"
     success_url = "/app-coder/espumanteList"
     fields = ['nombre' , 'varietal', 'añada']
-class EspumanteDelete(StaffRequiredMixin, DeleteView): 
+class EspumanteDelete(UserPassesTestMixin, DeleteView): 
     model = Espumante
     template_name = "espumante-delete.html"
     success_url = "/app-coder/espumanteList"
@@ -270,7 +276,7 @@ def aceites(request):
             data = miFormulario.cleaned_data
             aceite = Aceite(nombre=data['aceite'], varietal=data['varietal'])
             aceite.save()
-            return redirect("Lista-Aceites")
+            return render(request, "aceiteFormCreado.html")
     else:
         miFormulario=AceiteFormulario()
 
@@ -348,7 +354,7 @@ class AceiteUpdate(StaffRequiredMixin, UpdateView):
     template_name = "aceite-update.html"
     success_url = "/app-coder/aceiteList"
     fields = ['nombre' , 'varietal']
-class AceiteDelete(StaffRequiredMixin, DeleteView): 
+class AceiteDelete(UserPassesTestMixin, DeleteView): 
     model = Aceite
     template_name = "aceite-delete.html"
     success_url = "/app-coder/aceiteList"
@@ -364,7 +370,7 @@ def equipo(request):
             data = miFormulario.cleaned_data
             personal = Personal(nombre=data['nombre'], apellido=data['apellido'] , cargo=data['cargo'],email=data['email'])
             personal.save()
-            return redirect("Lista-Personal")
+            return render(request, "personalFormCreado.html")
     else:
         miFormulario=PersonalFormulario()
 
@@ -446,7 +452,7 @@ class PersonalUpdate(StaffRequiredMixin, UpdateView):
     template_name = "personal-update.html"
     success_url = "/app-coder/personalList"
     fields = ['nombre' , 'apellido', 'cargo', 'email']
-class PersonalDelete(StaffRequiredMixin, DeleteView): 
+class PersonalDelete(UserPassesTestMixin, DeleteView): 
     model = Personal
     template_name = "personal-delete.html"
     success_url = "/app-coder/personalList"   
@@ -474,7 +480,7 @@ def loginRequest(request):
 
                 login(request, user)
                 
-                return render(request, "inicio.html", {"mensaje": f'Bienvenido {usuario}'})
+                return render(request, "crearAvatar.html", {"mensaje": f'Bienvenido {usuario}'})
 
             else:
 
@@ -497,11 +503,11 @@ def register(request):
 
             miFormulario.save()
 
-            return render(request, "inicio.html", {"mensaje":f"{username} creado exitosamente"})
+            return render(request, "registroCreado.html", {"mensaje":f"{username} creado exitosamente"})
 
         else:
 
-            return render(request, "inicio.html", {"mensaje":f"Error,al crear ,intentar nuevamente"})
+            return render(request, "registroErroneo.html", {"mensaje":f"Error,al crear ,intentar nuevamente"})
 
     else:
         
@@ -566,7 +572,6 @@ def contacto(request):
 
             send_mail(
                 
-                #infForm['nombre'],
                 infForm['asunto'],
                 infForm['mensaje'],
                 infForm.get('email',''),['vinotecawinemaker@gmail.com'],)

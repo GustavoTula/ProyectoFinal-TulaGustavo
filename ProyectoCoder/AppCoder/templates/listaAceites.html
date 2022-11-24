@@ -4,13 +4,14 @@
 {% block contenidoQueCambia %}
 
 {% if listaAceites %}
-    
-    <h1>Un Aceite que deleita nuestras sentidos</h1>  
-    <h4>Si desea quitar o editar algun item de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion: </h4>
+    <div class="text-center">
+        <h2>Un Aceite que deleita nuestras sentidos</h2>  
+        <h5>Si desea quitar o editar algun item de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion: </h5>
+    </div>
     <ul> 
-
+    <p></p>   
         {% for aceite in listaAceites %}
-        <li>{{aceite.nombre}} - {{aceite.varietal}}</li> 
+        <h6><li>{{aceite.nombre}} - {{aceite.varietal}}</li></h6>
 
         {% if request.user.is_superuser %}
          <div>
@@ -36,19 +37,22 @@
 
     </ul>
     {% if request.user.is_staff %}
-    <a href="{% url 'Aceites' %}">Agregar Vinos</a>  
+    <h5>Puedes agregar algun aceite haciendo click a continuacion:</h5>
+    <h6><a href="{% url 'Aceites' %}">Agregar Vinos</a></h6> 
     <p></p> 
     {% endif %}
     
     <h5> Muy larga la lista? filtra por varietal en el siguiente link:</h5>
     <p></p>
-    <a href="{% url 'BusquedaAceite' %}">Filtrar</a> 
+    <h6><a href="{% url 'BusquedaAceite' %}">Filtrar</a></h6> 
     <p></p>
     <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
-    <a href="{% url 'Inicio' %}">Inicio</a> 
+    <h6><a href="{% url 'Inicio' %}">Inicio</a></h6> 
 {% else %}
-    <h1>No hay informacion al respecto</h1>
+    <div class="text-center">
+        <h1>No hay informacion al respecto</h1>
+    </div>
     <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
-    <a href="{% url 'Inicio' %}">Inicio</a>     
+    <h6><a href="{% url 'Inicio' %}">Inicio</a></h6>
 {% endif %}    
 {% endblock contenidoQueCambia %}

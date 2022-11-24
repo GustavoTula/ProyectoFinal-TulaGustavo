@@ -3,17 +3,24 @@
 
 {% block contenidoQueCambia %}
 
-<h1>Vinos para olvidar las penas</h1>
-<h2>Podra agregar vinos a su cava con el siguiente formulario:</h2>
+<div class="text-center">
+    <h3>Vinos para olvidar las penas.</h3>
+    <p></p>
+    <h4><i> Podra agregar vinos a su cava con el siguiente formulario:</i></h4>
 
-<form action= "{% url 'Vinos' %}" method="POST">{% csrf_token %}
+    <form action= "{% url 'Vinos' %}" method="POST">{% csrf_token %}
         
-    {{ miFormulario.as_p }}
+        {{ miFormulario.as_p }}
 
-    <input type="submit" value="Enviar"/>
+        <input type="submit" value="Enviar"/>
 
 
-</form>
+    </form>
+</div>    
 
-<a href="{% url 'ListaVinos' %}">Vinos en Cava</a>        
+<h6>Podrá mirar la lista previamente para verificar los agregados.- </h6>
+<button>
+    <h6><a href="{% url 'ListaVinos' %}">Vinos en Cava</a></h6>    
+</button>
+    
 {% endblock contenidoQueCambia %}

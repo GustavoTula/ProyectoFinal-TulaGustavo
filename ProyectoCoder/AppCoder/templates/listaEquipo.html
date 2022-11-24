@@ -4,14 +4,17 @@
 {% block contenidoQueCambia %}
 
 {% if listaEquipo %}
+        <div class="text-center">
+            <h2>Quienes conforman nuestro personal a su disposicion: </h2>
+            <h5>Si desea quitar o editar algun miembro del personal de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion:</h5>
+        </div>
+        
     
-    <h1>Quienes conforman nuestro personal a su disposicion: </h1>
-    <p>Si desea quitar o editar algun miembro del personal de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion: </p>
-
+    
     <ul>
         
         {% for personal in listaEquipo %}
-        <li>{{personal.nombre}} - {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li>
+        <h6><li>{{personal.nombre}} - {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li></h6>
                 {% if request.user.is_superuser %}
                     <div>
                          <form action= "{% url 'EliminarEquipo' personal.id %}" method="POST">{% csrf_token %}
@@ -33,19 +36,22 @@
 
     </ul>
     {% if request.user.is_staff %}
-    <a href="{% url 'Equipo' %}">Agregar mas miembros</a>  
+    <h5>Puedes agregar algun miembro haciendo click a continuacion:</h5>
+    <h6><a href="{% url 'Equipo' %}">Agregar mas miembros</a></h6>  
     <p></p> 
     {% endif %}
     
     <h5> Muy larga la lista? filtra por cargo en el siguiente link:</h5>
     <p></p>
-    <a href="{% url 'BusquedaCargo' %}">Filtrar</a> 
+    <h6><a href="{% url 'BusquedaCargo' %}">Filtrar</a></h6>
     <p></p>
     <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
-    <a href="{% url 'Inicio' %}">Inicio</a>    
+    <h6><a href="{% url 'Inicio' %}">Inicio</a></h6>   
 {% else %}
-    <h1>No hay informacion al respecto</h1>
+    <div class="text-center">
+        <h1>No hay informacion al respecto</h1>
+    </div>
     <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
-    <a href="{% url 'Inicio' %}">Inicio</a>     
+    <h6><a href="{% url 'Inicio' %}">Inicio</a></h6>     
 {% endif %}     
 {% endblock contenidoQueCambia %}

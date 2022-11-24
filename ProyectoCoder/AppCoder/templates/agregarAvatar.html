@@ -3,17 +3,26 @@
 
 {% block contenidoQueCambia %}
 
-<h1>Vinos-Espumantes-Aceites, todo en un solo lugar</h1>
-<p></p>
-<h2>Bienvenidos a la vinoteca mas diversa de Mendoza!</h2>
-<p></p>
-<h3>Cargar Avatar</h3>
-<form method="POST" enctype="multipart/form-data">
+
+<div class="text-center">
+    <h4>Importante! Sino cargas un AVATAR no podras navegar por nuestra WEB</h4>
+    <p></p>
+</div>
+
+<div class="text-left">
+
+    <h5>Cargar Avatar</h5>
+    <form method="POST" enctype="multipart/form-data">
 
     {% csrf_token %}
-    {{miFormulario.as_p}}
-
-    <input type="submit" value="Actualizar"/>
-</form>
+    <div>
+        <ul>
+            {{miFormulario.as_p}}
+        </ul>
+    </div>
     
+
+    <input type="submit" value="Confirmar nuevo Avatar"/>
+    </form>
+</div>   
 {% endblock contenidoQueCambia %}

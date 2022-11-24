@@ -91,7 +91,7 @@ urlpatterns = [
     path('busquedaCargo/', busquedaCargo, name="BusquedaCargo"),
     path('buscarCargo/', buscarCargo , name="BuscarCargo"),
 
-    path('listaEquipo/', listaEquipo , name="ListaEquipo"),
+    
     path('listaVinos/', listaVinos , name="ListaVinos"),
     path('listaAceites/', listaAceites , name="ListaAceites"),
     path('listaEspumantes/', listaEspumantes, name="ListaEspumantes"),

@@ -3,13 +3,16 @@
 
 {% block contenidoQueCambia %}
 {% if listaVinos %}
-    <h1>Nuestros vinos en cava: </h1>
-    <h4>Si desea quitar o editar algun item de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion: </h4>
+    <div class="text-center">
+        <h2>Nuestros vinos en cava: </h2>
+        <h5>Si desea quitar o editar algun item de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion: </h5>
+    </div>
+        
        
     <ul>
         
         {% for vino in listaVinos  %}
-        <li>{{vino.nombre}} - {{vino.varietal}} - {{vino.añada}}</li>
+        <h6><li>{{vino.nombre}} - {{vino.varietal}} - {{vino.añada}}</li></h6>
        
             {% if request.user.is_superuser %}
                 
@@ -33,20 +36,24 @@
 
     </ul>
     {% if request.user.is_staff %}
-    <a href="{% url 'Vinos' %}">Agregar Vinos</a>   
+    <h5>Puedes agregar algun vino haciendo click a continuacion:</h5>
+    <h6><a href="{% url 'Vinos' %}">Agregar Vinos</a>  </h6>
     <p></p> 
     {% endif %}
 
     <h5> Muy larga la lista? filtra por varietal en el siguiente link:</h5>
     <p></p>
-    <a href="{% url 'BusquedaVarietal' %}">Filtrar</a> 
+    <h6><a href="{% url 'BusquedaVarietal' %}">Filtrar</a> </h6>
     <p></p>
 
     <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
-    <a href="{% url 'Inicio' %}">Inicio</a> 
+    <h6><a href="{% url 'Inicio' %}">Inicio</a></h6>
 {% else %}
-    <h1>No hay informacion al respecto</h1>
+    <div class="text-center">
+        <h1>No hay informacion al respecto</h1>
+    </div>
+    <p></p>
     <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
-    <a href="{% url 'Inicio' %}">Inicio</a> 
+    <h6><a href="{% url 'Inicio' %}">Inicio</a></h6>
 {% endif %}
 {% endblock contenidoQueCambia %}

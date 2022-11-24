@@ -3,18 +3,23 @@
 
 {% block contenidoQueCambia %}
 
+<div class="text-center alert alert-warning" role="alert">
+    <h2 class="alert-heading">Edicion de Usuario</h2>
+    <hr>
+    <h4><p>Modifica a placer los datos que creas convenientes</p></h4>
+    
+</div>  
+
 <form method="POST">{% csrf_token %}
+    
+        <table>
+            {{miFormulario.as_table}}
+
+            {{mensaje}}
+        </table>
         
-    <table>
-
-        {{miFormulario.as_table}}
-
-        {{mensaje}}
-
-    </table>
-
-    <input type="submit" value="Actualizar">
+        
+        <input type="submit" value="Actualizar">
 </form>
-
         
 {% endblock contenidoQueCambia %}

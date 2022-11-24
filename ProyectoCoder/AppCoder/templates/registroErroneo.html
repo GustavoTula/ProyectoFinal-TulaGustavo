@@ -1,0 +1,20 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h1>Vinos-Espumantes-Aceites, todo en un solo lugar</h1>
+<p></p>
+<h2>Bienvenidos a la vinoteca mas diversa de Mendoza!</h2>
+<p></p>
+<p></p>
+
+<h5>Ups! lamentablemente hubo un error al intentar crear un usuario</h5>
+<p></p>
+<h5>Puedes volver a intentar desde el siguiente Link</h5>
+<Button>
+    <a href="{% url 'Register' %}">Volver a registrarse</a>
+</Button>
+
+
+{% endblock contenidoQueCambia %}

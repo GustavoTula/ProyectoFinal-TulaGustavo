@@ -3,21 +3,28 @@
 
 {% block contenidoQueCambia %}
 
-<h1>Un Aceite que deleita nuestras sentidos</h1>    
+<div class="text-center">
+    <h3>Un Aceite que deleita nuestras sentidos</h3>    
+    <p></p>
+    <h4><i> Para acompañar cualquier comida, como se dice:
+    Casa del padre, viña del abuelo y olivar del bisabuelo.</i></h4>
+    <p></p>   
+    <h4><i>Sume sabor a sus comidas con aceites de calidad en el siguiente formulario: </i></h4> 
 
-<h2>Para acompañar cualquier comida, como se dice:
-Casa del padre, viña del abuelo y olivar del bisabuelo</h2>   
-<h3>Sume sabor a sus comidas con aceites de calidad en el siguiente formulario: </h3> 
-
-<form action= "{% url 'Aceites' %}" method="POST">{% csrf_token %}
+    <form action= "{% url 'Aceites' %}" method="POST">{% csrf_token %}
         
-    {{ miFormulario.as_p }}
+        {{ miFormulario.as_p }}
 
     <input type="submit" value="Enviar"/>
+    </form>
+
+</div>   
+<h6>Podrá mirar la lista previamente para verificar los agregados.- </h6>
+<button>
+    <h6><a href="{% url 'ListaAceites' %}">Verificar aceites</a></h6>    
+</button>
 
 
-</form>
-<a href="{% url 'ListaAceites' %}">Verificar aceites en disposicion</a>
         
 {% endblock contenidoQueCambia %}
 

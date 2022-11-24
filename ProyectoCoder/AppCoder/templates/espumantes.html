@@ -2,24 +2,31 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
+<div class="text-center">
 
-<h1>Solo bebo champagne en dos ocasiones, cuando estoy enamorada y cuando no lo estoy</h1>
-<h4>Sume a su coleccion de espumantes a traves del siguiente formulario:</h4>
+    <h3>Sólo las personas poco creativas fallan al encontrar una razón para tomar espumantes.</h3>
+    <p></p>
+    <h4><i>Sume a su coleccion de espumantes a traves del siguiente formulario:</i></h4>
+    
+    
+    <form action= "{% url 'Espumantes' %}" method="POST">{% csrf_token %}
+            
+        {{ miFormulario.as_p }}
+    
+        <input type="submit" value="Enviar"/>
+    
+    
+    </form>
 
+</div>
 
-<form action= "{% url 'Espumantes' %}" method="POST">{% csrf_token %}
-        
-    {{ miFormulario.as_p }}
-
-    <input type="submit" value="Enviar"/>
-
-
-</form>
 
     
+<h6>Podrá mirar la lista previamente para verificar los agregados.- </h6>
+<button>
+    <h6><a href="{% url 'ListaEspumantes' %}">Espumantes disponibles</a></h6>    
+</button>
 
-
-<a href="{% url 'ListaEspumantes' %}">Espumantes disponibles</a>
 
         
 {% endblock contenidoQueCambia %}

@@ -3,17 +3,18 @@
 
 {% block contenidoQueCambia %}
 
-<div class="text-center">
+<div class="text-center ">
     
     {% if user.is_authenticated %}
-    <h1>Vinos-Espumantes-Aceites, todo en un solo lugar</h1>
+    <h2>Vinos-Espumantes-Aceites, todo en un solo lugar</h2>
     <p></p>
-    <p>Bienvenidos a la vinoteca mas diversa de Mendoza!</p>
+    <h4>- Bienvenidos a la vinoteca mas diversa de Mendoza! -</h4>
     <p></p>
     <h4>{{mensaje}}</h4>
     <p></p>
     <img height="160px" src="{{url}}" alt="avatar">
-    <h3>Que bueno verte {{user.username}}</h3>
+    <p></p>
+    <h4 style="color:aquamarine">Que bueno verte {{user.username}}</h4>
     {% else %}
     <h1>Vinos-Espumantes-Aceites, todo en un solo lugar</h1>
     <p></p>
@@ -23,23 +24,34 @@
 </div>
 <p></p>
 <p></p>
-
-<h5> 
-    Quieres ver una lista rapida y opciones concretas?
-    Toca el siguiente boton! 
-</h5>
-    <div>
+<hr>
+<div class="text-center">
+    <h6><i> 
+        Quieres ver una lista rapida y opciones concretas?
+        Toca el siguiente boton! 
+    </h6></i>
+        <div>
         
-         <button>
-            <li><a href="{% url 'VinoList' %}">Variedades de Vinos!</a></li> 
-            <li><a href="{% url 'EspumanteList' %}">Espumantes burbujeantes!</a> </li>
-            <li><a href="{% url 'AceiteList' %}">Aceites esenciales!</a> </li>
-            <li><a href="{% url 'PersonalList' %}">Miembros del Staff!</a> </li>
-         </button>
+            <button>
+                <span class="d-block p-2 bg-sucess text-dark">
+                    <h5><li><i><a class="" href="{% url 'VinoList' %}">Variedades de Vinos!</a></i></li></h5>
+                    <h5><li><i><a href="{% url 'EspumanteList' %}">Espumantes Burbujeantes!</a></i></li></h5>
+                    <h5><li><i><a href="{% url 'AceiteList' %}">Aceites Esenciales!</a></i></li></h5>
+                    <h5><li><i><a href="{% url 'PersonalList' %}">Miembros del Staff!</a></i></li></h5>
+                </span>
+            </button>
 
-    </div>
+        </div>
+
+</div>
+<h4 style="color:red">Atencion!</h4>
+<h6><i>Puedes editar los datos de tu usuario a continuacion:</i></h6>
+<button>
+    <h6><i><a href="{% url 'EditRegister' %}">Editar Usuario</a></i></h6>
+</button>
 
 
-
-        
+<div style="text-align: right;">
+    <iframe width="1" height="1" src="https://www.youtube.com/embed/WWAee9b4L2M?start=1&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 {% endblock contenidoQueCambia %}

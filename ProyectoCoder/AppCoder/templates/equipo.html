@@ -3,21 +3,27 @@
 
 {% block contenidoQueCambia %}
 
+<div class="text-center">
 
-<h1>Tu equipo ve en ti una persona de confianza 
-que nos motiva a seguir trabajando por nuestros objetivos, gracias.<h1>
-<h3>Añadir al grupo de trabajo a quienes correspondan: </h3>
+        <h3>Llegar juntos es el principio. Mantenerse juntos, es el progreso. Trabajar juntos es el éxito.<h3>
+         <p></p>               
+        <h4><i> Añadir al grupo de trabajo a quienes correspondan: </i></h4>
 
 
-<form action= "{% url 'Equipo' %}" method="POST">{% csrf_token %}
+        <form action= "{% url 'Equipo' %}" method="POST">{% csrf_token %}
+                
+                {{ miFormulario.as_p }}
         
-        {{ miFormulario.as_p }}
-    
-        <input type="submit" value="Enviar"/>
-    
-    
- </form>
+                <input type="submit" value="Enviar"/>
+        
+        
+        </form>
+</div>
+<h6>Podrá mirar la lista previamente para verificar el staff.- </h6>
+<button>
+    <h6><a href="{% url 'ListaEquipo' %}">Verificar personal</a></h6>    
+</button>
 
-<a href="{% url 'ListaEquipo' %}">Verificar personal</a>
+
 
 {% endblock contenidoQueCambia %}

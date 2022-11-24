@@ -1,0 +1,29 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+
+<div class="text-center">
+    <div class=" alert alert-success" role="alert">
+        <h2 class="alert-heading">Creacion Exitosa!</h2>
+        <h3>RECUERDA: Podras editar cualquier dato que hayas formulado anteriormente!</h3>
+        <hr>
+        <h6 class="mb-0"><i>Si te arrepientes del alta del producto, comunicarte con el Gerente en la brevedad</h6></i>
+     </div>
+</div>
+
+
+<h6>Puedes seguir agregando Vinos haciendo click a continuacion:</h6>
+<button>
+    <a href="{% url 'Vinos' %}">Agregar Vino</a>
+</button>
+<p></p>
+<h6>O puedes optar por revisar la lista disponible:</h6>
+<button>
+    <a href="{% url 'Lista-Vinos' %}">Disponibilidad</a>
+</button>
+<p></p>
+
+
+{% endblock contenidoQueCambia %}

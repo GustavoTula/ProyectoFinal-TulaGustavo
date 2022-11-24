@@ -27,14 +27,14 @@ class PersonalFormulario(forms.Form):
     cargo = forms.CharField()
     email = forms.EmailField()
 
+
+
 class AvatarFormulario(forms.ModelForm):
     
     class Meta:
         model = Avatar
         fields = ('imagen',)
-        
 
-        
 
 class UserRegisterForm(UserCreationForm):
 
@@ -88,8 +88,9 @@ class UserEditForm(UserChangeForm):
 
 
 class ContactoFormulario(forms.Form):
-
-    #nombre=forms.CharField()
-    asunto=forms.CharField()
+    
+    asunto=forms.CharField(max_length="50")
     email=forms.EmailField()
     mensaje=forms.CharField()
+    
+    

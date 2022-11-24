@@ -3,12 +3,14 @@
 
 {% block contenidoQueCambia %}
 {% if listaEspumantes %}
-    <h1>Solo bebo champagne en dos ocasiones, cuando estoy enamorada y cuando no lo estoy</h1>
-    <h4>Si desea quitar o editar algun item de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion: </h4>
+    <div class="text-center">
+        <h2>Sólo las personas poco creativas fallan al encontrar una razón para tomar espumantes.</h2>
+        <h5>Si desea quitar o editar algun item de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion: </h5>
+    </div>    
     <ul>
         
         {% for espumante in listaEspumantes %}
-        <li>{{espumante.nombre}} - {{espumante.varietal}} - {{espumante.añada}}</li>
+        <h6><li>{{espumante.nombre}} - {{espumante.varietal}} - {{espumante.añada}}</li></h6>
         
             {% if request.user.is_superuser %}
                     <div>
@@ -31,19 +33,22 @@
 
     </ul>
     {% if request.user.is_staff %}
-    <a href="{% url 'Espumantes' %}">Agregar Vinos</a>  
+    <h5>Puedes agregar algun espumante haciendo click a continuacion:</h5>
+    <h6><a href="{% url 'Espumantes' %}">Agregar Espumantes</a></h6>
     {% endif %} 
     <p></p>
     
     <h5> Muy larga la lista? filtra por varietal en el siguiente link:</h5>
     <p></p>
-    <a href="{% url 'BusquedaAñada' %}">Filtrar</a> 
+    <h6><a href="{% url 'BusquedaAñada' %}">Filtrar</a></h6>
     <p></p>
     <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
     <a href="{% url 'Inicio' %}">Inicio</a>  
 {% else %}
-    <h1>No hay informacion al respecto</h1>
+    <div class="text-center">
+        <h1>No hay informacion al respecto</h1>
+    </div>
     <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
-    <a href="{% url 'Inicio' %}">Inicio</a> 
+    <h6><a href="{% url 'Inicio' %}">Inicio</a></h6>
 {% endif %} 
 {% endblock contenidoQueCambia %}

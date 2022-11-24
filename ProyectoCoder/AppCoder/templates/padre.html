@@ -3,7 +3,6 @@
     <head>
 
         {% load static %} 
-
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -18,9 +17,11 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-    </head>
+        
+    </head> 
     <body id="page-top">
         <!-- Navigation-->
+        
         <nav class="navbar navbar-expand-lg bg-secondary text-capitalize fixed-top" id="mainNav">
             <div class="container">
                 
@@ -36,7 +37,7 @@
                     <div class="bg-muted clearfix">
                     <p class="text-justify text-info">Bienvenido {{user.username}}!.</p>
                     </div>
-                    <a class="btn btn-primary" href="{% url 'Logout' %}">Logout</a>
+                    <a class="btn btn-primary" href="{% url 'Logout' %}">Cerrar Sesion</a>
                 {% else %}
 
                     {% if user.is_authenticated %}
@@ -49,7 +50,7 @@
                     <a class="navbar-brand" href="{% url 'Noticias' %}">Noticias</a>
                     <a class="navbar-brand" href="{% url 'Contacto' %}">Contactanos!</a>
                     <p class="text-justify text-success">Bienvenido {{user.username}}!.</p>
-                    <a class="btn btn-primary" href="{% url 'Logout' %}">Logout</a>
+                    <a class="btn btn-primary" href="{% url 'Logout' %}">Cerrar Sesion</a>
                     {% else %}
                     <a class="navbar-brand" href="{% url 'Nosotros' %}">Nosotros</a>
                     <a class="navbar-brand" href="{% url 'Contacto' %}">Contactanos!</a>
@@ -57,14 +58,15 @@
                     <p class="text-justify text-danger">Click Aqui >>> </p>
                     </div>
                     <a class="btn btn-primary" href="{% url 'Register' %}">Registrarse</a>
-                    <a class="btn btn-primary" href="{% url 'Login' %}">Login</a>
+                    <a class="btn btn-primary" href="{% url 'Login' %}">Iniciar Sesion</a>
                     {% endif %}
                 {% endif %}
                     
             </div>
         </nav>
         <!-- Masthead-->
-        <header class="masthead bg-primary text-white text-center">
+        <header class="masthead bg-dark text-white text-center">
+            <img src="https://www.vinetur.com/imagenes/2021/agosto/3/bodega.jpg" width="800" height="400" alt="">
             <div class="container d-flex align-items-center flex-column">
     
                 <!-- Masthead Heading-->
@@ -76,7 +78,7 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Variedad - Calidad - Sommeliers dedicados</p>
+                <p class="masthead-subheading text-danger font-weight-light mb-0">Variedad - Calidad - Sommeliers dedicados</p>
             </div>
         </header>
 
@@ -90,7 +92,7 @@
                 <div class="row">
                     <!-- Footer Location-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h2 class="text-uppercase mb-4">Donde Encontrarnos</h2>
+                        <h2 class="text-capitalize mb-0">Donde Encontrarnos</h2>
                         <p class="lead mb-0">
                             Argentina,Mendoza - Maipu
                             <br />
@@ -99,16 +101,15 @@
                     </div>
                     <!-- Footer Social Icons-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h1 class="text-uppercase mb-4">Proyecto Final Coder 1° Entrega</h1>
-                        <a href=https://youtu.be/dslGyj311kY>Link View/Readme Proyecto</a>
+                        <h1 class="text-capitalize mb-0">Proyecto Final Coder 1° Entrega</h1>
+                        <a href=https://youtu.be/dslGyj311kY><p class="text-danger text-uppercase">Link View/Readme Proyecto</p></a>
                     </div>
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
-                        <h2 class="text-uppercase mb-4">Sobre los futuros Freelancer</h2>
+                        <h2 class="text-capitalize mb-0">Sobre los futuros Freelancer</h2>
                         <p class="lead mb-0">
                             Agradecemos a todos ustedes miembros de la comision 34630
-                            <a href="https://plataforma.coderhouse.com/cursos/34630/python/companeros">Comunidad</a>
-                            .
+                            <a href="https://plataforma.coderhouse.com/cursos/34630/python/companeros"><p class="text-success text-uppercase">Comunidad</p></a>
                         </p>
                     </div>
                 </div>

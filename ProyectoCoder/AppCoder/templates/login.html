@@ -3,13 +3,18 @@
 
 {% block contenidoQueCambia %}
 
-<form action="{% url 'Login' %}" method="POST"> {% csrf_token %}
+<div class="Text-center">
+    <h4>Bienvenido! completa los campos para Iniciar Sesion</h4>
+
+
+    <form action="{% url 'Login' %}" method="POST"> {% csrf_token %}
         
-    {{miFormulario.as_p}}
-
-    <input type="submit" value="Iniciar Sesion">
-
-</form>
+        {{ miFormulario.as_p}}
+    
+        <input type="submit" value="Entrar">
+    
+    </form>
+</div>
 
         
 {% endblock contenidoQueCambia %}
