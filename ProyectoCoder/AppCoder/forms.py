@@ -3,14 +3,44 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import User
 from .models import Avatar
+import datetime
 
 
 
 #from .views import UserCreationForm
 class VinoFormulario(forms.Form):
-    vino = forms.CharField(max_length=50)
-    varietal = forms.CharField()
-    añada = forms.IntegerField()
+    vino = forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "comment-text",
+                "placeholder":"Marca/Etiqueta",
+                "required": "false",
+            }
+        )
+    )
+    varietal = forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "Varietal": "Varietales",
+                "placeholder":"Tipo de uva/s utilizado",
+                "required": "false",
+            }      
+        )
+    )
+    añada = forms.IntegerField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "Añada":"Añada",
+                "placeholder":"Año cosecha del vino",
+                "required":"false"  
+            }
+        )
+    )
 
 class AceiteFormulario(forms.Form):
     aceite = forms.CharField(max_length=50)
@@ -91,6 +121,23 @@ class ContactoFormulario(forms.Form):
     
     asunto=forms.CharField(max_length="50")
     email=forms.EmailField()
-    mensaje=forms.CharField()
+    mensaje=forms.CharField(
+        label="Mensaje",
+        required=False,
+        max_length="500",
+        min_length="10",
+        strip=True,
+        widget=forms.Textarea(
+            attrs={
+                "class":"comment-text",
+                "placeholder":"Escribe aqui tus comentarios...",
+                "required":"True",
+                "cols": "30",
+                "rows":"5",
+             }
+        )
+    )
     
-    
+class DateForm(forms.Form):
+    day = forms.DateField(initial=datetime.date.today) 
+      
