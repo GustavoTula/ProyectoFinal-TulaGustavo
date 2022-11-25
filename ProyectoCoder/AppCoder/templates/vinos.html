@@ -4,9 +4,9 @@
 {% block contenidoQueCambia %}
 
 <div class="text-center">
-    <h3>Vinos para olvidar las penas.</h3>
+    <h3 style="color:darkred">Vinos para olvidar las penas.</h3>
     <p></p>
-    <h4><i> Podra agregar vinos a su cava con el siguiente formulario:</i></h4>
+    <h4 style="color:firebrick"><i><u> Podra agregar vinos a su cava con el siguiente formulario:</u></i></h4>
 
     <form action= "{% url 'Vinos' %}" method="POST">{% csrf_token %}
         
@@ -18,9 +18,9 @@
     </form>
 </div>    
 
-<h6>Podrá mirar la lista previamente para verificar los agregados.- </h6>
+<h6><u> Podrá mirar la lista previamente para verificar los agregados.</u></h6>
 <button>
-    <h6><a href="{% url 'ListaVinos' %}">Vinos en Cava</a></h6>    
+    <h6><a style="color: crimson;" href="{% url 'ListaVinos' %}">Vinos en Cava</a></h6>    
 </button>
     
 {% endblock contenidoQueCambia %}

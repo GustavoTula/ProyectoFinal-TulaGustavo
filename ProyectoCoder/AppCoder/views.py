@@ -535,7 +535,7 @@ def editRegister(request):
             
             usuario.save()
 
-            return render(request, "inicio.html", {"mensaje": f'Datos actualizados correctamente'})
+            return render(request, "editRealizado.html", {"mensaje": f'Datos actualizados correctamente'})
         
         return render(request, "editRegister.html",{"mensaje":f'Contraseñas no coinciden'})
 

@@ -4,13 +4,13 @@
 {% block contenidoQueCambia %}
 
 
-   <h1>Detalles a observar de:</h1>
+   <h4>Detalles a observar de:</h4>
     
-   <p>Nombre: <i>{{vino.nombre}}</i></p>
-   <p>Varietal: <i>{{vino.varietal}}</i></p>
-   <p>Añada: <i>{{vino.añada}}</i></p>
+   <h6><i><p>Nombre: <i>{{vino.nombre}}</p></i></h6>
+   <h6><i><p>Varietal: <i>{{vino.varietal}}</i></p></i></h6>
+   <h6><i><p>Añada: <i>{{vino.añada}}</i></p></i></h6>
    <p>
-    <a href="{% url 'VinoList' %}">Regresar</a>
+      <h6><a href="{% url 'VinoList' %}">Regresar</a></h6>
    </p>
         
 {% endblock contenidoQueCambia %}

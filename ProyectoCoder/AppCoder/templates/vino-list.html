@@ -4,27 +4,28 @@
 {% block contenidoQueCambia %}
 
 
-   <h1>Lista de vinos a su disposicion:</h1>
-    
-   <ul>
-        
+    <h2 class="text-center" style="color:darkred"> - Lista de vinos a su disposicion -</h2>
+    <p></p>
+   <ul>    
         {% for vino in object_list %}
             <li>
-                <a href= " {% url 'VinoDetail' vino.id %}">
+                <h6><i><a href= " {% url 'VinoDetail' vino.id %}">
                     {{vino}}
-                </a>
+                </a></i></h6>
             </li>
             <div>
                 
                 {% if request.user.is_staff %}
-                <button> |
-                    <a href=" {% url 'VinoUpdate' vino.id %}">Editar</a> |
-                    
+                <button>
+                    <p><a style="color:crimson;" href=" {% url 'VinoUpdate' vino.id %}">Editar</a></p>
+                </button>
                     {% if request.user.is_superuser %}
-                    <a href=" {% url 'VinoDelete' vino.id %}">Eliminar</a> |
+                    <button>
+                        <p><a style="color:crimson;"  href=" {% url 'VinoDelete' vino.id %}">Eliminar</a></p>
+                    </button>
                     {% endif %}
         
-                </button> 
+                
                 {% endif %}
                     
             </div>
@@ -33,14 +34,14 @@
             
    </ul>
    {% if request.user.is_staff %}
-   <p>Desea agregar algun vino al repertorio?</p>   
+   <h6><i><u><p>Desea agregar algun vino al repertorio?.</p></u></i></h6>   
    <button>
-       <a href=" {% url 'VinoCreate' %}">Adicionar</a>
+       <h6><a href=" {% url 'VinoCreate' %}">Adicionar</a></h6>
    </button>
    <p></p>
    {% endif %}  
-   <p>Puede regresar al Inicio dando click a continuacion:</p> 
+   <h6><i><u><p>Puede regresar al Inicio dando click a continuacion.</p></u></i></h6> 
     <button> 
-    <a href="{% url 'Inicio' %}">Regresar</a>     
+        <h6><a href="{% url 'Inicio' %}">Regresar</a></h6>    
     </button> 
 {% endblock contenidoQueCambia %}

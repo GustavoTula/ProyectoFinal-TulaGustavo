@@ -1,0 +1,23 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+<div class="text-center">
+
+    <div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Edicion Exitosa</h4>
+    <h6><i><p>Todos los datos han sido modificados correctamente!</p></i></h6>
+    <hr>
+    <p class="mb-0"> - Cualquier cosa que necesites estamos para ayudarte -</p>
+  </div>
+
+  <div>
+        <h6><i> Puedes volver a Iniciar sesion a continuacion:</i></h6>
+        <button>
+            <a href="{% url 'Login' %}">Iniciar Sesion</a>
+        </button>
+        
+  </div>
+
+</div>
+{% endblock contenidoQueCambia %}

@@ -5,27 +5,31 @@
 
 
 {% if vinos %}
-<p> Estamos buscando el: {{varietal}}</p>
-<p></p>
-<ul>
-{% for vino in vinos  %}
+    <h5 style="color:crimson"><p> Estamos buscando el: {{varietal}}</p></h5>
+    <p></p>
+    <ul>
+    {% for vino in vinos  %}
     
-    <li> {{vino.nombre}} - {{vino.varietal}} - {{vino.añada}} </li>
+        <h6><i><li> {{vino.nombre}} - {{vino.varietal}} - {{vino.añada}} </li></i></h6>
 
-{% endfor %}
-</ul>
+    {% endfor %}
+    </ul>
 {% else %}
 
-<p>No se encuentra el varietal asigando , volver a intentar</p>
+    <div class="text-center">
+        <h4><i><p style="color:red;">{{respuesta}}</p></h4></i>
+        <h3><i><p>No se encuentra el varietal asignado , volver a intentar...</p></i></h3>
+        
 
+    </div>
 {% endif %}
 
-<p style="color:red;">{{respuesta}}</p>
-<p></p>
-<a href="{% url 'BusquedaVarietal' %}">Buscas otro varietal?</a>
-<p></p>
-<h6>Si has finalizado puedes volver a la lista:</h6>
-<p></p>
-<a href="{% url 'ListaVinos' %}">Lista en cava</a>
+    
+    <p></p>
+    <h6><a href="{% url 'BusquedaVarietal' %}">Buscas otro varietal?</a></h6>
+    <p></p>
+    <h6><i><u> Si has finalizado puedes volver a la lista:</i></h6></u>
+    <p></p>
+    <h6><a href="{% url 'ListaVinos' %}">Lista en cava</a></h6>
 
 {% endblock contenidoQueCambia %}

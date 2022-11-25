@@ -9,17 +9,12 @@
     <h4><p>Modifica a placer los datos que creas convenientes</p></h4>
     
 </div>  
-
-<form method="POST">{% csrf_token %}
-    
-        <table>
-            {{miFormulario.as_table}}
-
-            {{mensaje}}
-        </table>
-        
-        
+<div class="text-center">
+    <form method="POST">{% csrf_token %}
+        {{miFormulario.as_p}}
+        {{mensaje}}
         <input type="submit" value="Actualizar">
-</form>
-        
+    </form>      
+</div>
+
 {% endblock contenidoQueCambia %}
