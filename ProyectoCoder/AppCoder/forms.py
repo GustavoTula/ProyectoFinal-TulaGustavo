@@ -25,7 +25,7 @@ class VinoFormulario(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                "Varietal": "Varietales",
+                "class": "comment-text",
                 "placeholder":"Tipo de uva/s utilizado",
                 "required": "false",
             }      
@@ -35,7 +35,7 @@ class VinoFormulario(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                "Añada":"Añada",
+                "class": "comment-text",
                 "placeholder":"Año cosecha del vino",
                 "required":"false"  
             }
@@ -43,19 +43,111 @@ class VinoFormulario(forms.Form):
     )
 
 class AceiteFormulario(forms.Form):
-    aceite = forms.CharField(max_length=50)
-    varietal = forms.CharField()
+    aceite = forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "comment-text",
+                "placeholder":"Marca/Etiqueta",
+                "required": "false",
+            }
+        )
+    )
+    
+    varietal = forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "comment-text",
+                "placeholder":"Metodo de aceituna utilizada",
+                "required": "false",
+            }
+        )
+
+    )
 
 class EspumanteFormulario(forms.Form):
-    espumante = forms.CharField(max_length=50)
-    varietal = forms.CharField()
-    añada = forms.IntegerField()
+    espumante = forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "comment-text",
+                "placeholder":"Marca/Etiqueta",
+                "required": "false",
+            }
+        )
+    )
+    varietal = forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "comment-text",
+                "placeholder":"Tipo de uva/s utilizado",
+                "required": "false",
+            }      
+        )
+
+    )
+    añada = forms.IntegerField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "comment-text",
+                "placeholder":"Año cosecha del vino",
+                "required":"false"  
+            }
+        )
+    )
 
 class PersonalFormulario(forms.Form):
-    nombre = forms.CharField(max_length=50)
-    apellido = forms.CharField()
-    cargo = forms.CharField()
-    email = forms.EmailField()
+    nombre = forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "comment-text",
+                "placeholder":"Nuevo miembro...",
+                "required": "false",
+            }
+        )
+    )
+    apellido = forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "comment-text",
+                "placeholder":"Apellido...",
+                "required": "false",
+            }
+        )
+    )
+    cargo = forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "comment-text",
+                "placeholder":"Puesto de trabajo...",
+                "required": "false",
+            }
+        )
+    )
+    email = forms.EmailField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "comment-text",
+                "placeholder":"Correo electronico...",
+                "required": "false",
+            }
+        )
+    )
 
 
 
@@ -119,8 +211,31 @@ class UserEditForm(UserChangeForm):
 
 class ContactoFormulario(forms.Form):
     
-    asunto=forms.CharField(max_length="50")
-    email=forms.EmailField()
+    asunto=forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "comment-text",
+                "placeholder":"Motivo del correo...",
+                "required": "false",
+            }
+        )
+
+
+
+    )
+    email=forms.EmailField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "comment-text",
+                "placeholder":"Correo electronico...",
+                "required": "false",
+            }
+        )    
+    )
     mensaje=forms.CharField(
         label="Mensaje",
         required=False,
