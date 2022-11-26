@@ -5,54 +5,53 @@
 
 {% if listaAceites %}
     <div class="text-center">
-        <h2>Un Aceite que deleita nuestras sentidos</h2>  
-        <h5>Si desea quitar o editar algun item de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion: </h5>
+        <h2 style="color:darkolivegreen">Un Aceite que deleita nuestras sentidos</h2>  
+        <h5>
+            <small class="text-muted">
+                Si desea quitar o editar algun item de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion:            
+            </small>
+        </h5>    
     </div>
-    <ul> 
-    <p></p>   
+    <p></p>
+<div>       
+    <ul>    
         {% for aceite in listaAceites %}
-        <h6><li>{{aceite.nombre}} - {{aceite.varietal}}</li></h6>
-
-        {% if request.user.is_superuser %}
-         <div>
-                <form action= "{% url 'EliminarAceites' aceite.id %}" method="POST">{% csrf_token %}            
-                    <button type="submit">Eliminar</button> |
-                    <button> <a href="{% url 'EditarAceites' aceite.id %}">Modificar</a></button>
-                </form>
-        </div> 
-        
-        {% else %}   
+            <h6><i><li>{{aceite.nombre}} - {{aceite.varietal}}</li></i></h6>
+            {% if request.user.is_superuser %}
+                <div>
+                    <form action= "{% url 'EliminarAceites' aceite.id %}" method="POST">{% csrf_token %}            
+                        <button style="color:darkolivegreen" type="submit">Eliminar</button> |
+                        <button><a style="color:darkolivegreen" href="{% url 'EditarAceites' aceite.id %}">Modificar</a></button>
+                    </form>
+                </div> 
+            {% else %}   
                 {% if request.user.is_staff %}
                 <div>
-                    <button>|<a href="{% url 'EditarAceites' aceite.id %}">Modificar</a>|</button>
+                    <button><a href="{% url 'EditarAceites' aceite.id %}">Modificar</a></button>
                 </div>
                 {% endif %}
-
             {% endif %}
-
-
         {% endfor %}
-            
+    </u>        
+</div>
 
-
-    </ul>
     {% if request.user.is_staff %}
-    <h5>Puedes agregar algun aceite haciendo click a continuacion:</h5>
+    <h6><u>Puedes agregar algun aceite haciendo click a continuacion:</u></h6>
     <h6><a href="{% url 'Aceites' %}">Agregar Vinos</a></h6> 
     <p></p> 
     {% endif %}
     
-    <h5> Muy larga la lista? filtra por varietal en el siguiente link:</h5>
+    <h6><u>Muy larga la lista? filtra por varietal en el siguiente link:</u></h6>
     <p></p>
     <h6><a href="{% url 'BusquedaAceite' %}">Filtrar</a></h6> 
     <p></p>
-    <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
+    <h6><u>Volvamos al inicio si deseas seguir explorando opciones!</u></h6>
     <h6><a href="{% url 'Inicio' %}">Inicio</a></h6> 
 {% else %}
     <div class="text-center">
-        <h1>No hay informacion al respecto</h1>
+        <h1 style="color:red">No hay informacion al respecto</h1>
     </div>
-    <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
+    <h6><u>Volvamos al inicio si deseas seguir explorando opciones!</u></h6>
     <h6><a href="{% url 'Inicio' %}">Inicio</a></h6>
 {% endif %}    
 {% endblock contenidoQueCambia %}

@@ -5,7 +5,7 @@
 
 <form action= "{% url 'VinoCreate' %}" method="POST">{% csrf_token %}
         
-    {{ form.as_p }}
+    <li><i>{{ form.as_p }}</i></li>
 
     <input type="submit" value="Crear"/>
 

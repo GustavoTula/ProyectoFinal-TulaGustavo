@@ -3,40 +3,42 @@
 
 {% block contenidoQueCambia %}
 
-
-   <h1>Lista del personal a su disposicion:</h1>
-    
-   <ul>
-        
+    <h2 class="text-center" style="color:darkviolet"> - Lista del personal a su disposicion: -</h2>
+    <p></p>
+   <ul>      
         {% for personal in object_list %}
             <li>
-                <a href= " {% url 'PersonalDetail' personal.id %}">
+                <h6><i><a href= " {% url 'PersonalDetail' personal.id %}">
                     {{personal}}
-                </a>
+                </a></i></h6>
             </li>
             <div>
+
                 {% if request.user.is_staff %}
-               <button> |
-                    <a href=" {% url 'PersonalUpdate' personal.id %}">Editar</a> |
+                <button> |
+                    <p><a style="color:darkviolet" href=" {% url 'PersonalUpdate' personal.id %}">Editar</a></p>
+                </button>     
                     {% if request.user.is_superuser %}
-                    <a href=" {% url 'PersonalDelete' personal.id %}">Eliminar</a> |
+                    <button>
+                        <p><a style="color:darkviolet" href=" {% url 'PersonalDelete' personal.id %}">Eliminar</a></p>
+                    </button>
                     {% endif %}
-               </button> 
-               {% endif %}
+                {% endif %}
+
             </div>
             
         {% endfor %}
             
    </ul>
     {% if request.user.is_staff %}
-    <p>Desea agregar algun miembro al staff?</p>   
+    <h6><i><u><p>Desea agregar algun miembro al staff?</p></u></i></h6>    
     <button>
-        <a href=" {% url 'PersonalCreate' %}">Adicionar</a>
+        <a href=" {% url 'PersonalCreate' %}">Adicionar</a></h6>
     </button>
     <p></p>
     {% endif %}
-    <p>Puede regresar al Inicio dando click a continuacion:</p> 
+    <h6><i><u><p>Puede regresar al Inicio dando click a continuacion:</p></u></i></h6> 
     <button> 
-    <a href="{% url 'Inicio' %}">Regresar</a>     
+        <h6><a href="{% url 'Inicio' %}">Regresar</a></h6>       
     </button>    
 {% endblock contenidoQueCambia %}

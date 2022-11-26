@@ -5,13 +5,13 @@
 
 <form action= "{% url 'PersonalCreate' %}" method="POST">{% csrf_token %}
         
-    {{ form.as_p }}
+    <li><i>{{ form.as_p }}</i></li>
 
     <input type="submit" value="Crear"/>
 
 </form>
 <button>
-    <a href=" {% url 'PersonalList' %}"> Regresar a lista</a>
+    <h6><a href=" {% url 'PersonalList' %}"> Regresar a lista</a></h6>
 </button>
         
 {% endblock contenidoQueCambia %}

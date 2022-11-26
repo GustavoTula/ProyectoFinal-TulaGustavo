@@ -6,9 +6,8 @@
 
     <h3 style="color:cadetblue">Sólo las personas poco creativas fallan al encontrar una razón para tomar espumantes.</h3>
     <p></p>
-    <h4 style="color:darkcyan"><i>Sume a su coleccion de espumantes a traves del siguiente formulario:</i></h4>
-    
-    
+    <h4 style="color:darkcyan"><i><u>Sume a su coleccion de espumantes a traves del siguiente formulario:</u></i></h4>
+    <p></p>
     <form action= "{% url 'Espumantes' %}" method="POST">{% csrf_token %}
             
         {{ miFormulario.as_p }}
@@ -22,9 +21,9 @@
 
 
     
-<h6>Podrá mirar la lista previamente para verificar los agregados.- </h6>
+<h6><u> Podrá mirar la lista previamente para verificar los agregados.-</u></h6>
 <button>
-    <h6><a href="{% url 'ListaEspumantes' %}">Espumantes disponibles</a></h6>    
+    <h6><a style="color:cadetblue;" href="{% url 'ListaEspumantes' %}">Espumantes disponibles</a></h6>    
 </button>
 
 

@@ -14,21 +14,20 @@
 
     {% endfor %}
     </ul>
+
 {% else %}
 
     <div class="text-center">
         <h4><i><p style="color:red;">{{respuesta}}</p></h4></i>
         <h3><i><p>No se encuentra el varietal asignado , volver a intentar...</p></i></h3>
-        
-
     </div>
+
 {% endif %}
 
-    
     <p></p>
     <h6><a href="{% url 'BusquedaVarietal' %}">Buscas otro varietal?</a></h6>
     <p></p>
-    <h6><i><u> Si has finalizado puedes volver a la lista:</i></h6></u>
+    <h6><i><u> Si has finalizado puedes volver a la lista:</i></u></h6>
     <p></p>
     <h6><a href="{% url 'ListaVinos' %}">Lista en cava</a></h6>
 

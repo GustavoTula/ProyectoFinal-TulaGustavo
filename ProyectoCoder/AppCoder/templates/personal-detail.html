@@ -4,14 +4,14 @@
 {% block contenidoQueCambia %}
 
 
-   <h1>Detalles a observar de:</h1>
+   <h4>Detalles a observar de:</h4>
     
-   <p>Nombre: <i>{{personal.nombre}}</i></p>
-   <p>Apellido: <i>{{personal.apellido}}</i></p>
-   <p>Cargo: <i>{{personal.cargo}}</i></p>
-   <p>Email: <i>{{personal.email}}</i></p>
+   <h6><i><p>Nombre: <i>{{personal.nombre}}</i> </p></i></h6>
+   <h6><i><p>Apellido: <i>{{personal.apellido}}</i> </p></i></h6>
+   <h6><i><p>Cargo: <i>{{personal.cargo}}</i> </p></i></h6>
+   <h6><i><p>Email: <i>{{personal.email}}</i> </p></i></h6>
    <p>
-    <a href="{% url 'PersonalList' %}">Regresar</a>
+      <h6><a href="{% url 'PersonalList' %}">Regresar</a></h6>
    </p>
         
 {% endblock contenidoQueCambia %}

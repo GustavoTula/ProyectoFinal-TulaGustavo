@@ -4,10 +4,11 @@
 {% block contenidoQueCambia %}
 
 <div class="text-center">
+
     <h3 style="color:darkred">Vinos para olvidar las penas.</h3>
     <p></p>
     <h4 style="color:firebrick"><i><u> Podra agregar vinos a su cava con el siguiente formulario:</u></i></h4>
-
+    <p></p>
     <form action= "{% url 'Vinos' %}" method="POST">{% csrf_token %}
         
         {{ miFormulario.as_p }}

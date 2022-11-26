@@ -5,25 +5,29 @@
 
 {% if espumantes %}
 
-<p> Estamos buscando la: {{añada}}</p>
-
-<ul>
-{% for espumante in espumantes  %}
+    <h5 style="color:cadetblue"><p> Estamos buscando la: {{añada}}</p></h5>
+    <p></p>
+    <ul>
+    {% for espumante in espumantes  %}
     
-    <li> {{espumante.nombre}} - {{espumante.varietal}} - {{espumante.añada}} </li>
+        <h6><i><li> {{espumante.nombre}} - {{espumante.varietal}} - {{espumante.añada}}</li></i></h6>
 
-{% endfor %}
-</ul>
+    {% endfor %}
+    </ul>
 
 {% else %}
-
-<p>No hay datos con esa añada,vuelve intentar</p>
-
+    <div class="text-center">
+        <h4><i><p style="color:red;">{{respuesta1}}</p></i></h4>
+        <h3><i><p>No hay datos con esa añada,vuelve intentar</p></i></h3>
+    </div>
+  
 {% endif %}
-<p style="color:red;">{{respuesta1}}</p>
-<p></p>
-<a href="{% url 'BusquedaAñada' %}">Buscas otra añada?</a>
-<p></p>
-<a href="{% url 'ListaEspumantes' %}">Lista Espumante</a>
+
+    <p></p>
+    <h6><a href="{% url 'BusquedaAñada' %}">Buscas otra añada?</a></h6>
+    <p></p>
+    <h6><i><u> Si has finalizado puedes volver a la lista:</i></u></h6>
+    <p></p>
+    <h6><a href="{% url 'ListaEspumantes' %}">Lista Espumante</a></h6>
 
 {% endblock contenidoQueCambia %}

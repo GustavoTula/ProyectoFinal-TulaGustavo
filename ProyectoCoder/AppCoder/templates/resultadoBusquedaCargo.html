@@ -6,26 +6,30 @@
 
 
 {% if nombre %}
-<p> Estamos buscando el: {{cargo}}</p>
-<p></p>
-<ul>
+    <h5 style="color:blueviolet"><p> Estamos buscando el: {{cargo}}</p></h5>
+    <p></p>
+    <ul>
     {% for personal in nombre  %}
-    <li>{{personal.nombre}} - {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li>
+
+        <h6><i><li>{{personal.nombre}} - {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li></i></h6>
+
     {% endfor %}
-</ul>
+    </ul>
 
 {% else %}
 
-<p>No se encuentra el puesto asignado , volver a intentar</p>
+    <div class="text-center">
+        <h4><i><p style="color:red;">{{respuesta3}}</p></i></h4>
+        <h3><i><p>No se encuentra el puesto asignado , volver a intentar</p></i></h3>
+    </div>
 
 {% endif %}
 
-<p style="color:red;">{{respuesta3}}</p>
-<p></p>
-<a href="{% url 'BusquedaCargo' %}">Buscas otro puesto?</a>
-<p></p>
-<h6>Si has finalizado puedes volver al equipo:</h6>
-<p></p>
-<a href="{% url 'ListaEquipo' %}">Lista de miembros</a>
+    <p></p>
+    <h6><a href="{% url 'BusquedaCargo' %}">Buscas otro puesto?</a></h6>
+    <p></p>
+    <h6><i><u> Si has finalizado puedes volver al equipo:</u></i></h6>
+    <p></p>
+    <h6><a href="{% url 'ListaEquipo' %}">Lista de miembros</a></h6>
 
 {% endblock contenidoQueCambia %}

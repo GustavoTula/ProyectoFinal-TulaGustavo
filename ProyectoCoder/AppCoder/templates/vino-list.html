@@ -2,8 +2,7 @@
 {% load static %}
 
 {% block contenidoQueCambia %}
-
-
+   
     <h2 class="text-center" style="color:darkred"> - Lista de vinos a su disposicion -</h2>
     <p></p>
    <ul>    
@@ -17,17 +16,14 @@
                 
                 {% if request.user.is_staff %}
                 <button>
-                    <p><a style="color:crimson;" href=" {% url 'VinoUpdate' vino.id %}">Editar</a></p>
+                    <p><a style="color:crimson" href=" {% url 'VinoUpdate' vino.id %}">Editar</a></p>
                 </button>
                     {% if request.user.is_superuser %}
                     <button>
-                        <p><a style="color:crimson;"  href=" {% url 'VinoDelete' vino.id %}">Eliminar</a></p>
+                        <p><a style="color:crimson"  href=" {% url 'VinoDelete' vino.id %}">Eliminar</a></p>
                     </button>
                     {% endif %}
-        
-                
                 {% endif %}
-                    
             </div>
             
         {% endfor %}

@@ -5,14 +5,14 @@
 
 <form method="POST">{% csrf_token %}
         
-    {{ form.as_p }}
+    <li><i>{{ form.as_p }}</i></li>
 
     <input type="submit" value="Enviar"/>
 
     
 </form>
 <button>
-    <a href=" {% url 'EspumanteList' %}"> Regresar a lista</a>
+    <h6><a href=" {% url 'EspumanteList' %}"> Regresar a lista</a></h6>
 </button>
         
 {% endblock contenidoQueCambia %}

@@ -4,54 +4,60 @@
 {% block contenidoQueCambia %}
 
 {% if listaEquipo %}
-        <div class="text-center">
-            <h2>Quienes conforman nuestro personal a su disposicion: </h2>
-            <h5>Si desea quitar o editar algun miembro del personal de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion:</h5>
-        </div>
-        
-    
-    
+<div class="text-center">
+    <h2 style="color:blueviolet">Quienes conforman nuestro personal a su disposicion: </h2>
+        <h5>
+            <small class="text-muted">
+                 Si desea quitar o editar algun miembro del personal de la lista siempre y cuando tenga permisos, presionar en "Eliminar" o "Modificar" a continuacion:
+             </small>
+        </h5>        
+</div>
+<p></p>
+<div>
     <ul>
-        
         {% for personal in listaEquipo %}
-        <h6><li>{{personal.nombre}} - {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li></h6>
-                {% if request.user.is_superuser %}
-                    <div>
-                         <form action= "{% url 'EliminarEquipo' personal.id %}" method="POST">{% csrf_token %}
-                         <button type="submit">Eliminar</button> |
-                         <button> <a href="{% url 'EditarEquipo' personal.id %}">Modificar</a></button>
-                        </form>
-                    </div>    
-                {% else %}   
-                    {% if request.user.is_staff %}
-                    <div>
-                        <button>|<a href="{% url 'EditarEquipo' personal.id %}">Modificar</a>|</button>
-                    </div>
-                    {% endif %}
-    
-                {% endif %}        
+            <h6><i><li>{{personal.nombre}} - {{personal.apellido}} - {{personal.cargo}} - {{personal.email}}</li></i></h6>
+            {% if request.user.is_superuser %}
+                <div>
+                    <form action= "{% url 'EliminarEquipo' personal.id %}" method="POST">{% csrf_token %}
+                        <button style="color:blueviolet" type="submit">Eliminar</button> |
+                        <button><a style="color:blueviolet" href="{% url 'EditarEquipo' personal.id %}">Modificar</a></button>
+                    </form>
+                </div>    
+            {% else %}   
+                {% if request.user.is_staff %}
+                <div>
+                    <button>|<a href="{% url 'EditarEquipo' personal.id %}">Modificar</a>|</button>
+                </div>
+                {% endif %}
+            {% endif %}        
         {% endfor %}
-            
-
-
+    
     </ul>
+</div>    
+
     {% if request.user.is_staff %}
-    <h5>Puedes agregar algun miembro haciendo click a continuacion:</h5>
+    <h6><u>Puedes agregar algun miembro haciendo click a continuacion:</u></h6>
     <h6><a href="{% url 'Equipo' %}">Agregar mas miembros</a></h6>  
     <p></p> 
+
     {% endif %}
     
-    <h5> Muy larga la lista? filtra por cargo en el siguiente link:</h5>
+    <h6><u> Muy larga la lista? filtra por cargo en el siguiente link:</u></h6>
     <p></p>
     <h6><a href="{% url 'BusquedaCargo' %}">Filtrar</a></h6>
     <p></p>
-    <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
+    <h6><u>Volvamos al inicio si deseas seguir explorando opciones!</u></h6>
     <h6><a href="{% url 'Inicio' %}">Inicio</a></h6>   
+
 {% else %}
+
     <div class="text-center">
-        <h1>No hay informacion al respecto</h1>
+        <h1 style="color:red">No hay informacion al respecto</h1>
     </div>
-    <h5>Volvamos al inicio si deseas seguir explorando opciones!</h5>
-    <h6><a href="{% url 'Inicio' %}">Inicio</a></h6>     
+    <p></p>
+    <h6><u>Volvamos al inicio si deseas seguir explorando opciones!</u></h6>
+    <h6><a href="{% url 'Inicio' %}">Inicio</a></h6> 
+
 {% endif %}     
 {% endblock contenidoQueCambia %}

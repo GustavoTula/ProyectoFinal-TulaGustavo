@@ -3,24 +3,29 @@
 {% block contenidoQueCambia %}
 
 {% if varietal %}
-<p> Estamos buscando el: {{aceite}}</p>
-
-<ul>
-{% for aceite in varietal  %}
+    <h5 style="color:darkolivegreen"> <p> Estamos buscando el: {{aceite}}</p></h5>
+    <p></p>
+    <ul>
+    {% for aceite in varietal  %}
     
-<li>{{aceite.nombre}} - {{aceite.varietal}}</li>
+        <h6><i><li>{{aceite.nombre}} - {{aceite.varietal}}</li></i></h6>
 
-{% endfor %}
+    {% endfor %}
 
-</ul>
+    </ul>
 {% else %}
-<p>No hay datos con ese aceite,vuelve intentar</p>
+    <div class="text-center">
+        <h4><i><p style="color:red;">{{respuesta2}}</p></i></h4>
+        <h3><i><p>No hay datos con ese aceite,vuelve intentar</p></i></h3>
+    </div>
 {% endif %}
 
-<p style="color:red;">{{respuesta2}}</p>
-<p></p>
-<a href="{% url 'BusquedaAceite' %}">Buscas otra aceite?</a>
-<p></p>
-<a href="{% url 'ListaAceites' %}">Lista aceites</a>
+
+    <p></p>
+    <h6><a href="{% url 'BusquedaAceite' %}">Buscas otra aceite?</a></h6>
+    <p></p>
+    <h6><i><u> Si has finalizado puedes volver a la lista:</i></h6></u>
+    <p></p>
+    <h6><a href="{% url 'ListaAceites' %}">Lista aceites</a></h6>
 
 {% endblock contenidoQueCambia %}

@@ -4,25 +4,27 @@
 {% block contenidoQueCambia %}
 
 
-   <h1>Lista de espumantes a su disposicion:</h1>
-    
-   <ul>
-        
+   
+   <h2 class="text-center" style="color:cadetblue"> - Lista de espumantes a su disposicion -</h2>
+   <p></p>
+   <ul> 
         {% for espumante in object_list %}
             <li>
-                <a href= " {% url 'EspumanteDetail' espumante.id %}">
+                <h6><i><a href= " {% url 'EspumanteDetail' espumante.id %}">
                     {{espumante}}
-                </a>
+                </a></i></h6>
             </li>
             <div>
-                {% if request.user.is_staff %}
-                <button> |
-                    <a href=" {% url 'EspumanteUpdate' espumante.id %}">Editar</a> |
-                    {% if request.user.is_superuser %}
-                    <a href=" {% url 'EspumanteDelete' espumante.id %}">Eliminar</a> |
-                    {% endif %}
 
-                </button> 
+                {% if request.user.is_staff %}
+                <button>
+                    <p><a style="color:cadetblue" href=" {% url 'EspumanteUpdate' espumante.id %}">Editar</a></p>
+                </button>    
+                    {% if request.user.is_superuser %}
+                    <button>
+                        <p><a style="color:cadetblue" href=" {% url 'EspumanteDelete' espumante.id %}">Eliminar</a></p>
+                    </button>
+                    {% endif %}
                 {% endif %}
             </div>
             
@@ -30,14 +32,14 @@
             
    </ul>
    {% if request.user.is_staff %}
-   <p>Desea agregar algun espumante al repertorio?</p>   
+   <h6><i><u><p>Desea agregar algun espumante al repertorio?</p></u></i></h6>   
    <button>
-       <a href=" {% url 'EspumanteCreate' %}">Adicionar</a>
+        <h6><a href=" {% url 'EspumanteCreate' %}">Adicionar</a></h6>
    </button> 
    <p></p>
    {% endif %}
-   <p>Puede regresar al Inicio dando click a continuacion:</p> 
+   <h6><i><u><p>Puede regresar al Inicio dando click a continuacion:</p></u></i></h6> 
     <button> 
-    <a href="{% url 'Inicio' %}">Regresar</a>     
+        <h6><a href="{% url 'Inicio' %}">Regresar</a></h6>   
     </button>      
 {% endblock contenidoQueCambia %}

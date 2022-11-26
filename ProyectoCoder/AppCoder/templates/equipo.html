@@ -7,9 +7,8 @@
 
         <h3 style="color:blueviolet">Llegar juntos es el principio. Mantenerse juntos, es el progreso. Trabajar juntos es el éxito.<h3>
          <p></p>               
-        <h4 style="color:darkviolet"><i> Añadir al grupo de trabajo a quienes correspondan: </i></h4>
-
-
+        <h4 style="color:darkviolet"><i><u>Añadir al grupo de trabajo a quienes correspondan:</u></i></h4>
+        <p></p>
         <form action= "{% url 'Equipo' %}" method="POST">{% csrf_token %}
                 
                 {{ miFormulario.as_p }}
@@ -19,9 +18,9 @@
         
         </form>
 </div>
-<h6>Podrá mirar la lista previamente para verificar el staff.- </h6>
+<h6><u> Podrá mirar la lista previamente para verificar el staff.</u></h6>
 <button>
-    <h6><a href="{% url 'ListaEquipo' %}">Verificar personal</a></h6>    
+    <h6><a style="color:blueviolet" href="{% url 'ListaEquipo' %}">Verificar personal</a></h6>    
 </button>
 
 

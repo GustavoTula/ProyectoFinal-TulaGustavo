@@ -5,7 +5,7 @@
 
 <form method="POST">{% csrf_token %}
         
-    <p>Esta seguro de borrar este registro? "" {{object}} "" ?</p>
+    <h5 style="color:orangered"><p>Esta seguro de borrar este registro? "" {{object}} "" ?</p></h5>
     
     <h6><button type="submit">Confirmar</button></h6> |             
     <h6><button><a href="{% url 'VinoList' %}">Cancelar</a></button></h6>

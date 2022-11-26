@@ -5,7 +5,7 @@
 
 <form action="{% url 'BuscarAceite'  %}" method="GET">{% csrf_token %}
 
-    <h4>Estamos buscando el Aceite: </h4>
+    <h5><i><u> Estamos buscando el Aceite:</u></i></h5>
 
     <input type="text" name="aceite" id="aceite">
     <input type="submit" value="Buscar">
@@ -13,6 +13,6 @@
 
 </form>
 
-
+<h6><a href="{% url 'ListaAceites' %}">Volver a la lista Aceites</a></h6>
         
 {% endblock contenidoQueCambia %}
