@@ -73,7 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ProyectoCoder.wsgi.application'
-ASGI_APPLICATION = 'ProyectoCoder.Asgi.application'
+ASGI_APPLICATION = 'ProyectoCoder.asgi.application'
 
 CHANNEL_LAYERS = {
     'default':{

@@ -35,7 +35,7 @@
                     <a class="navbar-brand" href="{% url 'Noticias' %}">Noticias</a>
                     <a class="navbar-brand" href="{% url 'Contacto' %}">Contactanos!</a>
                         {% if avatar != None %}
-                        <img height="40px" src="{% url 'avatar.imagen.url' %}" alt="">
+                        <img height="40 px" src="{{avatar.imagen.url}}" id="avatar"/>
                         {% endif %}
                     <p class="text-justify text-success">Bienvenido {{user.username}}!.</p>    
                     <a class="btn btn-primary" href="{% url 'Logout' %}">Cerrar Sesion</a>
@@ -51,7 +51,7 @@
                     <a class="navbar-brand" href="{% url 'Noticias' %}">Noticias</a>
                     <a class="navbar-brand" href="{% url 'Contacto' %}">Contactanos!</a>
                         {% if avatar != None %}
-                        <img height="40px" src="{{ avatar.imagen.url }}" alt="">
+                        <img height="40 px" src="{{avatar.imagen.url}}" alt="">
                         {% endif %}
                     <p class="text-justify text-success">Bienvenido {{user.username}}!.</p>    
                     <a class="btn btn-primary" href="{% url 'Logout' %}">Cerrar Sesion</a>
