@@ -155,17 +155,17 @@ class VinoDetail(LoginRequiredMixin, DetailView):
 class VinoCreate(StaffRequiredMixin, CreateView): 
     model= Vino
     template_name = "vino-create.html"
-    success_url = "/app-coder/vinoList"
+    success_url = "/vinoList"
     fields = ['nombre' , 'varietal', 'añada']
 class VinoUpdate(StaffRequiredMixin, UpdateView): 
     model = Vino
     template_name = "vino-update.html"
-    success_url = "/app-coder/vinoList"
+    success_url = "/vinoList"
     fields = ['nombre' , 'varietal', 'añada']
 class VinoDelete(UserPassesTestMixin, DeleteView): 
     model = Vino
     template_name = "vino-delete.html"
-    success_url = "/app-coder/vinoList"
+    success_url = "/vinoList"
 
 @staff_member_required(login_url="errorNoEsMiemStaff.html") 
 def espumantes(request):
@@ -251,17 +251,17 @@ class EspumanteDetail(LoginRequiredMixin, DetailView):
 class EspumanteCreate(StaffRequiredMixin, CreateView): 
     model= Espumante
     template_name = "espumante-create.html"
-    success_url = "/app-coder/espumanteList"
+    success_url = "/espumanteList"
     fields = ['nombre' , 'varietal', 'añada']
 class EspumanteUpdate(StaffRequiredMixin, UpdateView): 
     model = Espumante
     template_name = "espumante-update.html"
-    success_url = "/app-coder/espumanteList"
+    success_url = "/espumanteList"
     fields = ['nombre' , 'varietal', 'añada']
 class EspumanteDelete(UserPassesTestMixin, DeleteView): 
     model = Espumante
     template_name = "espumante-delete.html"
-    success_url = "/app-coder/espumanteList"
+    success_url = "/espumanteList"
 
 
 
@@ -347,17 +347,17 @@ class AceiteDetail(LoginRequiredMixin, DetailView):
 class AceiteCreate(StaffRequiredMixin, CreateView): 
     model= Aceite
     template_name = "aceite-create.html"
-    success_url = "/app-coder/aceiteList"
+    success_url = "/aceiteList"
     fields = ['nombre' , 'varietal']
 class AceiteUpdate(StaffRequiredMixin, UpdateView): 
     model = Aceite
     template_name = "aceite-update.html"
-    success_url = "/app-coder/aceiteList"
+    success_url = "/aceiteList"
     fields = ['nombre' , 'varietal']
 class AceiteDelete(UserPassesTestMixin, DeleteView): 
     model = Aceite
     template_name = "aceite-delete.html"
-    success_url = "/app-coder/aceiteList"
+    success_url = "/aceiteList"
 
 @staff_member_required(login_url="errorNoEsMiemStaff.html") 
 def equipo(request):
@@ -445,17 +445,17 @@ class PersonalDetail(LoginRequiredMixin, DetailView):
 class PersonalCreate(StaffRequiredMixin, CreateView): 
     model= Personal
     template_name = "personal-create.html"
-    success_url = "/app-coder/personalList"
+    success_url = "/personalList"
     fields = ['nombre' , 'apellido', 'cargo', 'email']
 class PersonalUpdate(StaffRequiredMixin, UpdateView): 
     model = Personal
     template_name = "personal-update.html"
-    success_url = "/app-coder/personalList"
+    success_url = "/personalList"
     fields = ['nombre' , 'apellido', 'cargo', 'email']
 class PersonalDelete(UserPassesTestMixin, DeleteView): 
     model = Personal
     template_name = "personal-delete.html"
-    success_url = "/app-coder/personalList"   
+    success_url = "/personalList"   
 
 @login_required
 def noticias(request):
